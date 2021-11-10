@@ -12,10 +12,11 @@ public class User implements Serializable {
     private String password;
     private UserRole role;
     private Double amount;
+    private boolean blocked;
 
     public User(){}
 
-    public User(Integer id, String name, String lastName, String email, String password, UserRole role, Double amount) {
+    public User(Integer id, String name, String lastName, String email, String password, UserRole role, Double amount, boolean blocked) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
@@ -23,7 +24,9 @@ public class User implements Serializable {
         this.password = password;
         this.role = role;
         this.amount = amount;
+        this.blocked = blocked;
     }
+
 
     public Integer getId() {
         return id;
@@ -79,6 +82,14 @@ public class User implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean isBlocked() {
+        return blocked;
+    }
+
+    public void setBlocked(boolean blocked) {
+        this.blocked = blocked;
     }
 
     @Override

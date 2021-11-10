@@ -8,7 +8,9 @@ import com.z.shop.entity.Product;
 import com.z.shop.entity.User;
 import com.z.shop.entity.UserRole;
 import com.z.shop.service.ProductService;
+import com.z.shop.service.UserService;
 import com.z.shop.service.impl.ProductServiceImpl;
+import com.z.shop.service.impl.UserServiceImpl;
 
 import java.sql.SQLException;
 import java.util.Date;
@@ -68,21 +70,23 @@ public class Application {
 //        System.out.println(userDaoImpl.getUserByEmail("User4Email"));
 
 //            name, image, category, description, color, scale, price, adding_date
-//        ProductDaoImpl productDaoImpl = new ProductDaoImpl();
-//        Product product = new Product();
-//        for (int i = 0; i < 10; i++) {
-//
-//            product.setName("Name"+i);
-//            product.setImage("Image"+i);
-//            product.setCategory("Category"+i);
-//            product.setDescription("Description"+i);
-//            product.setColor("Color"+i);
-//            product.setScale("Scale"+i);
-//            product.setPrice(999.99);
-//            product.setAddingDate(new Date());
+//        ProductDaoImpl productDao = new ProductDaoImpl();
+        ProductService productService = ProductServiceImpl.getProductService();
+//        System.out.println(productService.readAll());
+        Product product = new Product();
+        for (int i = 0; i < 10; i++) {
 
-//           productDaoImpl.create(product);
-//        }
+            product.setName("Name"+i);
+            product.setImage("Image"+i);
+            product.setCategory("Category"+i);
+            product.setDescription("Description"+i);
+            product.setColor("Color"+i);
+            product.setScale("Scale"+i);
+            product.setPrice(999.99);
+            product.setAddingDate(new Date());
+
+           productService.create(product);
+        }
 //        System.out.println(productDaoImpl.readAll());
 //        System.out.println("=================================");
 //        System.out.println(productDaoImpl.read(3));
@@ -104,8 +108,8 @@ public class Application {
 //    }
 //        BucketDaoImpl bucketDao = new BucketDaoImpl();
 //        Bucket bucket = new Bucket();
-////        for (int i = 0; i < 10; i++) {
-//
+//////        for (int i = 0; i < 10; i++) {
+////
 //        bucket.setUserId(1);
 //        bucket.setProductId(1);
 //        bucket.setPurchaseDate(new Date());
@@ -142,12 +146,22 @@ public class Application {
 //        System.out.println(bucketDao.readAll());
 //           productDaoImpl.create(product);
 //        }
-        ProductService productService = ProductServiceImpl.getProductService();
-        Map<Integer, Product> integerProductMap = productService.readAllMap();
-
-        System.out.println(integerProductMap.get(3));
-        productService.delete(3);
-        System.out.println(productService.readAllMap());
+//        ProductService productService = ProductServiceImpl.getProductService();
+//        Map<Integer, Product> integerProductMap = productService.readAllMap();
+//
+//        System.out.println(integerProductMap.get(3));
+//        productService.delete(3);
+//        System.out.println(productService.readAllMap());
+//        User user = new User();
+//        user.setEmail("Один");
+//        user.setName("Один");
+//        user.setLastName("Один");
+//        user.setPassword("один");
+//        user.setRole(UserRole.USER);
+//        user.setAmount(99.99);
+//        UserService userService = UserServiceImpl.getUserService();
+//        userService.create(user);
+//        System.out.println(userService.read(user.getId()));
 
     }
 }

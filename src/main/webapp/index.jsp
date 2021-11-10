@@ -1,13 +1,17 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>JSP - Hello World</title>
+    <title>File Upload</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 <body>
-<h1><%= "Hello World! From Zenyk" %>
-</h1>
-<br/>
-<a href="hello-servlet">Hello Servlet</a>
+<form method="POST" action="upload" enctype="multipart/form-data" >
+    File:
+    <input type="file" name="file" id="file" /> <br/>
+    Destination:
+    <input type="text" value="/tmp" name="destination"/>
+    </br>
+    <input type="submit" value="Upload" name="upload" id="upload" />
+</form>
 </body>
 </html>

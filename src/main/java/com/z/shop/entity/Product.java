@@ -14,6 +14,8 @@ public class Product implements Serializable {
 
     private String category;
 
+    private Integer quantity;
+
     private String description;
 
     private String color;
@@ -41,7 +43,7 @@ public class Product implements Serializable {
         this.addingDate = addingDate;
     }
 
-    public Product(Integer id, String name, String image, String category, String description, String color, String scale, Double price, Date addingDate, boolean deleted) {
+    public Product(Integer id, String name, String image, String category, Integer quantity, String description, String color, String scale, Double price, Date addingDate, boolean deleted) {
         this.id = id;
         this.name = name;
         this.image = image;
@@ -52,6 +54,7 @@ public class Product implements Serializable {
         this.price = price;
         this.addingDate = addingDate;
         this.deleted = deleted;
+        this.quantity = quantity;
     }
 
     public Integer getId() {
@@ -108,6 +111,14 @@ public class Product implements Serializable {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
     }
 
     public Date getAddingDate() {

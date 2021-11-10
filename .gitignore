@@ -18,7 +18,9 @@
 .settings/
 .classpath
 .project
+
 target/
+image/
 
 #idea folder
 .idea/

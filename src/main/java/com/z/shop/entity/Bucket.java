@@ -11,14 +11,17 @@ public class Bucket implements Serializable {
     private Integer productId;
     private Date purchaseDate;
     private boolean deleted;
+    private String status;
 
-    public Bucket(){}
+    public Bucket() {
+    }
 
-    public Bucket(Integer id, Integer userId, Integer productId, Date purchaseDate) {
+    public Bucket(Integer id, Integer userId, Integer productId, Date purchaseDate, String status) {
         this.id = id;
         this.userId = userId;
         this.productId = productId;
         this.purchaseDate = purchaseDate;
+        this.status = status;
     }
 
     public Integer getId() {
@@ -61,6 +64,14 @@ public class Bucket implements Serializable {
         this.deleted = deleted;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -82,6 +93,6 @@ public class Bucket implements Serializable {
                 ", productId=" + productId +
                 ", purchaseDate=" + purchaseDate +
                 ", deleted=" + deleted +
-                '}'+System.lineSeparator();
+                '}' + System.lineSeparator();
     }
 }

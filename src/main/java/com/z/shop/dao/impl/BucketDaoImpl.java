@@ -2,7 +2,7 @@ package com.z.shop.dao.impl;
 
 import com.z.shop.dao.BucketDao;
 import com.z.shop.entity.Bucket;
-import com.z.shop.utils.ConnectionManager;
+import com.z.shop.utils.DBManager;
 import org.apache.log4j.Logger;
 
 import java.sql.*;
@@ -17,19 +17,20 @@ public class BucketDaoImpl implements BucketDao {
     private static final Lock CONNECTION_LOCK = new ReentrantLock();
 
     private static final String READ_ALL = "SELECT * FROM z_shop.buckets WHERE deleted = false";
-    private static final String CREATE = "INSERT INTO z_shop.buckets ( user_id, product_id, purchase_date) VALUES (?,?,?)";
+    private static final String CREATE = "INSERT INTO z_shop.buckets ( user_id, product_id, purchase_date, status) VALUES (?,?,?,?)";
     private static final String READ_BY_ID = "SELECT * FROM z_shop.buckets WHERE id =? AND deleted = false";
     private static final String DELETE_BY_ID = "UPDATE z_shop.buckets SET deleted = true WHERE id =?";
 
 
     @Override
     public Bucket create(Bucket bucket) {
-        try (Connection connection = ConnectionManager.getConnection();
+        try (Connection connection = DBManager.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(CREATE, Statement.RETURN_GENERATED_KEYS)) {
             int k = 0;
             preparedStatement.setInt(++k, bucket.getUserId());
             preparedStatement.setInt(++k, bucket.getProductId());
             preparedStatement.setDate(++k, new Date(bucket.getPurchaseDate().getTime()));
+            preparedStatement.setString(++k, bucket.getStatus());
             preparedStatement.executeUpdate();
 
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
@@ -44,18 +45,14 @@ public class BucketDaoImpl implements BucketDao {
     @Override
     public Bucket read(Integer id) {
         Bucket bucket = null;
-        try (Connection connection = ConnectionManager.getConnection();
+        try (Connection connection = DBManager.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(READ_BY_ID)) {
 
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             resultSet.next();
 
-            Integer userId = resultSet.getInt("user_id");
-            Integer productId = resultSet.getInt("product_id");
-            Date purchaseDate = resultSet.getDate("purchase_date");
-
-            bucket = new Bucket(id, userId, productId, purchaseDate);
+            bucket = getBucketFromResultSet(resultSet);
         } catch (SQLException e) {
             LOGGER.error(e);
         }
@@ -73,7 +70,7 @@ public class BucketDaoImpl implements BucketDao {
         PreparedStatement preparedStatement = null;
         CONNECTION_LOCK.lock();
         try {
-            connection = ConnectionManager.getConnection();
+            connection = DBManager.getConnection();
             connection.setAutoCommit(false);
             preparedStatement = connection.prepareStatement(DELETE_BY_ID);
             preparedStatement.setInt(1, id);
@@ -109,21 +106,29 @@ public class BucketDaoImpl implements BucketDao {
     @Override
     public List<Bucket> readAll() {
         List<Bucket> bucketRecords = new ArrayList<>();
-        try (Connection connection = ConnectionManager.getConnection();
+        try (Connection connection = DBManager.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(READ_ALL)) {
 
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Integer id = resultSet.getInt("id");
-                Integer userId = resultSet.getInt("user_id");
-                Integer productId = resultSet.getInt("product_id");
-                Date purchaseDate = resultSet.getDate("purchase_date");
 
-                bucketRecords.add(new Bucket(id, userId, productId, purchaseDate));
+                Bucket bucket = getBucketFromResultSet(resultSet);
+                bucketRecords.add(bucket);
             }
         } catch (SQLException e) {
             LOGGER.error(e);
         }
         return bucketRecords;
+    }
+
+    private Bucket getBucketFromResultSet(ResultSet resultSet) throws SQLException {
+        Integer id = resultSet.getInt("id");
+        Integer userId = resultSet.getInt("user_id");
+        Integer productId = resultSet.getInt("product_id");
+        Date purchaseDate = resultSet.getDate("purchase_date");
+        String status = resultSet.getString("status");
+
+        Bucket bucket = new Bucket(id, userId, productId, purchaseDate, status);
+        return bucket;
     }
 }

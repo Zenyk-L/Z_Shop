@@ -1,4 +1,4 @@
-DROP DATABASE  IF EXISTS z_shop;
+DROP DATABASE IF EXISTS z_shop;
 
 CREATE DATABASE IF NOT EXISTS z_shop;
 
@@ -12,9 +12,18 @@ CREATE TABLE users
     name      VARCHAR(25)        NOT NULL,
     last_name VARCHAR(25)        NOT NULL,
     password  VARCHAR(25)        NOT NULL,
-    role VARCHAR(20)        NOT NULL,
-    amount    DOUBLE(9, 2) DEFAULT 0.00
+    role      VARCHAR(20)        NOT NULL,
+    amount    DOUBLE(9, 2) DEFAULT 0.00,
+    blocked   BOOLEAN      DEFAULT FALSE
 );
+
+DROP TABLE IF EXISTS categories;
+CREATE TABLE categories
+(
+    id   BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    name VARCHAR(25)        NOT NULL UNIQUE
+);
+
 
 DROP TABLE IF EXISTS products;
 CREATE TABLE products
@@ -22,7 +31,8 @@ CREATE TABLE products
     id          BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     name        VARCHAR(25)        NOT NULL,
     image       BLOB,
-    category    VARCHAR(25)        NOT NULL,
+    category    VARCHAR(20)        NOT NULL,
+    quantity    INT UNSIGNED,
     description TEXT               NOT NULL,
     color       VARCHAR(20)        NOT NULL,
     scale       VARCHAR(20)        NOT NULL,
@@ -39,6 +49,7 @@ CREATE TABLE buckets
     product_id    BIGINT             NOT NULL,
     purchase_date TIMESTAMP default CURRENT_TIMESTAMP,
     deleted       BOOLEAN   DEFAULT FALSE,
+    status        VARCHAR(20)        NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE,
     FOREIGN KEY (product_id) REFERENCES products (id) ON DELETE CASCADE
 );
@@ -58,10 +69,16 @@ INSERT INTO products(name, category, description, color, scale, price)
 select *
 from products;
 
+UPDATE products SET products.image = 'MEDICINE.jpg' WHERE id % 5 = 0 ;
+DELETE FROM products where id = 25;
+
 INSERT INTO buckets(user_id, product_id)
     VALUE (1, 1);
 
 select *
 from buckets;
 
-SELECT * FROM z_shop.products WHERE deleted = 0 AND id =?
+SELECT *
+FROM z_shop.products
+WHERE deleted = 0
+  AND id = ?
