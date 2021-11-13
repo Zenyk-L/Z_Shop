@@ -1,7 +1,9 @@
 package com.z.shop.servlet;
 
 import com.z.shop.utils.DBManager;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+//import org.apache.log4j.Logger;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -13,7 +15,7 @@ import java.io.*;
 @MultipartConfig
 public class FileUploadServlet extends HttpServlet {
     private final static Logger LOGGER =
-            Logger.getLogger(FileUploadServlet.class.getCanonicalName());
+            LogManager.getLogger(FileUploadServlet.class.getCanonicalName());
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

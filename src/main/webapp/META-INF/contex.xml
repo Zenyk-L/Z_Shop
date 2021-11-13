@@ -48,7 +48,7 @@ Data source and connection pool configuration
 <!--              maxActive="10"-->
 <!--              maxIdle="4"/>-->
 
-    <resource name="jdbc/appname"
+    <Resource name="jdbc/appname"
               auth="Container"
               description="DB Connection"
               username="root"
@@ -57,7 +57,7 @@ Data source and connection pool configuration
               maxActive="100"
               maxIdle="30"
               maxWait="10000"
-              driverClassName="com.mysql.jdbc.Driver"
-              url="jdbc:mysql://localhost:3306/z_shop?useUnicode=yes&amp;characterEncoding=UTF-8">
-</resource>
+              driverClassName="com.mysql.cj.jdbc.Driver"
+              url="jdbc:mysql://localhost:3306/z_shop"/>
+
 </Context>

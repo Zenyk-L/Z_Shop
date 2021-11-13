@@ -23,7 +23,7 @@
 
 
 
-<form id="form" action="createProduct" method="POST"  enctype="multipart/form-data">
+<form id="form" action="createProduct" method="POST"  enctype="multipart/form-data" accept-charset="utf-8">
 
     <div class="form-group">
         <label >Product Name</label>
@@ -64,7 +64,7 @@
 
     <div class="form-group">
         <label >Product Price</label>
-        <input type="number" step="any" name="price" class="form-control productPrice"
+        <input type="number" step="0.01" name="price" class="form-control productPrice"
                placeholder="Enter product price" required>
     </div>
 

@@ -3,7 +3,8 @@ package com.z.shop.dao.impl;
 import com.z.shop.dao.BucketDao;
 import com.z.shop.entity.Bucket;
 import com.z.shop.utils.DBManager;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class BucketDaoImpl implements BucketDao {
-    private static final Logger LOGGER = Logger.getLogger(BucketDaoImpl.class);
+    private static final Logger LOGGER = LogManager.getLogger(BucketDaoImpl.class);
 
     private static final Lock CONNECTION_LOCK = new ReentrantLock();
 
@@ -24,7 +25,8 @@ public class BucketDaoImpl implements BucketDao {
 
     @Override
     public Bucket create(Bucket bucket) {
-        try (Connection connection = DBManager.getConnection();
+        DBManager dbManager = DBManager.getInstance();
+        try ( Connection connection = dbManager.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(CREATE, Statement.RETURN_GENERATED_KEYS)) {
             int k = 0;
             preparedStatement.setInt(++k, bucket.getUserId());
@@ -45,7 +47,8 @@ public class BucketDaoImpl implements BucketDao {
     @Override
     public Bucket read(Integer id) {
         Bucket bucket = null;
-        try (Connection connection = DBManager.getConnection();
+        DBManager dbManager = DBManager.getInstance();
+        try ( Connection connection = dbManager.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(READ_BY_ID)) {
 
             preparedStatement.setInt(1, id);
@@ -69,8 +72,8 @@ public class BucketDaoImpl implements BucketDao {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         CONNECTION_LOCK.lock();
-        try {
-            connection = DBManager.getConnection();
+        DBManager dbManager = DBManager.getInstance();
+        try {connection = dbManager.getConnection();
             connection.setAutoCommit(false);
             preparedStatement = connection.prepareStatement(DELETE_BY_ID);
             preparedStatement.setInt(1, id);
@@ -86,19 +89,9 @@ public class BucketDaoImpl implements BucketDao {
             }
             LOGGER.error(e);
         } finally {
-            close(preparedStatement);
-            close(connection);
+            DBManager.close(preparedStatement);
+            DBManager.close(connection);
             CONNECTION_LOCK.unlock();
-        }
-    }
-
-    private void close(AutoCloseable ac) {
-        if (ac != null) {
-            try {
-                ac.close();
-            } catch (Exception e) {
-                LOGGER.error(e);
-            }
         }
     }
 
@@ -106,7 +99,8 @@ public class BucketDaoImpl implements BucketDao {
     @Override
     public List<Bucket> readAll() {
         List<Bucket> bucketRecords = new ArrayList<>();
-        try (Connection connection = DBManager.getConnection();
+        DBManager dbManager = DBManager.getInstance();
+        try ( Connection connection = dbManager.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(READ_ALL)) {
 
             ResultSet resultSet = preparedStatement.executeQuery();

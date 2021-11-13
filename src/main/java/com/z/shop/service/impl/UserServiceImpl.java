@@ -1,9 +1,9 @@
 package com.z.shop.service.impl;
 
+import com.z.shop.service.UserService;
 import com.z.shop.dao.UserDao;
 import com.z.shop.dao.impl.UserDaoImpl;
 import com.z.shop.entity.User;
-import com.z.shop.service.UserService;
 
 import java.util.List;
 

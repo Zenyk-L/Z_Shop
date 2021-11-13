@@ -1,25 +1,29 @@
 package com.z.shop;
 
 import com.z.shop.dao.impl.BucketDaoImpl;
-import com.z.shop.dao.impl.ProductDaoImpl;
-import com.z.shop.dao.impl.UserDaoImpl;
-import com.z.shop.entity.Bucket;
 import com.z.shop.entity.Product;
-import com.z.shop.entity.User;
-import com.z.shop.entity.UserRole;
 import com.z.shop.service.ProductService;
-import com.z.shop.service.UserService;
 import com.z.shop.service.impl.ProductServiceImpl;
-import com.z.shop.service.impl.UserServiceImpl;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
+
+import java.sql.Date;
 import java.sql.SQLException;
-import java.util.Date;
-import java.util.Map;
 
 public class Application {
+    private static final Logger LOGGER = LogManager.getLogger(Application.class);
     BucketDaoImpl bucketDao = new BucketDaoImpl();
 
     public static void main(String[] args) throws SQLException {
+        ProductService productService = ProductServiceImpl.getProductService();
+        System.out.println(productService.readAll());
+        Product product = new Product(1,"авто", "bmv.jpg", "Car", 1, "спорт авто", "red", "big", 9999.99, new Date(new java.util.Date().getTime()), false);
+
+        productService.create(product);
+
+        System.out.println(productService.readAll());
+
 //        User user = new User();
 //        UserDaoImpl userDaoImpl = new UserDaoImpl();
 
@@ -68,25 +72,56 @@ public class Application {
 //
 //        userDaoImpl.delete(10);
 //        System.out.println(userDaoImpl.getUserByEmail("User4Email"));
+//        ProductDaoImpl productDao = new ProductDaoImpl();
 
+//        productDao.createTest();
 //            name, image, category, description, color, scale, price, adding_date
 //        ProductDaoImpl productDao = new ProductDaoImpl();
-        ProductService productService = ProductServiceImpl.getProductService();
+//        ProductService productService = ProductServiceImpl.getProductService();
+//////        System.out.println(productService.readAll());
+//        Product product = new Product();
+//        product.setName("Test_Create");
+//        product.setImage("Test Create.jpg");
+//        product.setCategory("Car");
+//
+//        product.setQuantity(99);
+//        product.setDescription("Test Description");
+//        product.setColor("test Green");
+//        product.setScale("test Large");
+//        product.setPrice(999.99);
+//        product.setAddingDate(new Date());
+//
 //        System.out.println(productService.readAll());
-        Product product = new Product();
-        for (int i = 0; i < 10; i++) {
-
-            product.setName("Name"+i);
-            product.setImage("Image"+i);
-            product.setCategory("Category"+i);
-            product.setDescription("Description"+i);
-            product.setColor("Color"+i);
-            product.setScale("Scale"+i);
-            product.setPrice(999.99);
-            product.setAddingDate(new Date());
-
-           productService.create(product);
-        }
+////        productService.create(product);
+////        System.out.println("Read 6" + productService.read(6));
+//
+//        product.setId(1);
+//        product.setName("NEW Test_Create");
+//        product.setImage("NEW Test Create.jpg");
+//        product.setCategory("Phone");
+//
+//        product.setQuantity(99);
+//        product.setDescription("NEW Test Description");
+//        product.setColor("NEW test Green");
+//        product.setScale("NEW test Large");
+//        product.setPrice(999.99);
+//        product.setAddingDate(new Date());
+////        productService.update(product);
+////        productService.delete(3);
+//        System.out.println(productService.readAll());
+//        for (int i = 0; i < 10; i++) {
+//
+//            product.setName("Name"+i);
+//            product.setImage("Image"+i);
+//            product.setCategory("Category"+i);
+//            product.setDescription("Description"+i);
+//            product.setColor("Color"+i);
+//            product.setScale("Scale"+i);
+//            product.setPrice(999.99);
+//            product.setAddingDate(new Date());
+//
+//           productService.create(product);
+//        }
 //        System.out.println(productDaoImpl.readAll());
 //        System.out.println("=================================");
 //        System.out.println(productDaoImpl.read(3));
@@ -161,7 +196,8 @@ public class Application {
 //        user.setAmount(99.99);
 //        UserService userService = UserServiceImpl.getUserService();
 //        userService.create(user);
-//        System.out.println(userService.read(user.getId()));
+//        LOGGER.info("User added");
+
 
     }
 }

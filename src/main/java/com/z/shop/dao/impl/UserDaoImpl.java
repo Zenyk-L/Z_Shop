@@ -4,7 +4,9 @@ import com.z.shop.dao.UserDao;
 import com.z.shop.entity.User;
 import com.z.shop.entity.UserRole;
 import com.z.shop.utils.DBManager;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+//import org.apache.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -14,11 +16,11 @@ import java.util.concurrent.locks.ReentrantLock;
 
 
 public class UserDaoImpl implements UserDao {
-    private static final Logger LOGGER = Logger.getLogger(UserDaoImpl.class);
+    private static final Logger LOGGER = LogManager.getLogger(UserDaoImpl.class);
 
     private static final Lock CONNECTION_LOCK = new ReentrantLock();
 
-    private static final String READ_ALL = "SELECT * FROM z_shop.users";
+    private static final String READ_ALL = "SELECT * FROM z_shop.user";
     private static final String CREATE = "INSERT INTO z_shop.users (email, name, last_name, password, role, amount, blocked) VALUES (?,?,?,?,?,?,?)";
     private static final String READ_BY_ID = "SELECT * FROM z_shop.users WHERE id =?";
     private static final String READ_BY_EMAIL = "SELECT * FROM z_shop.users WHERE email =?";
@@ -27,7 +29,8 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User create(User user) {
-        try (Connection connection = DBManager.getConnection();
+        DBManager dbManager = DBManager.getInstance();
+        try ( Connection connection = dbManager.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(CREATE, Statement.RETURN_GENERATED_KEYS)){
 
             int k = 0;
@@ -51,7 +54,8 @@ public class UserDaoImpl implements UserDao {
     @Override
     public User read(Integer id) {
         User user = null;
-        try (Connection connection = DBManager.getConnection();
+        DBManager dbManager = DBManager.getInstance();
+        try ( Connection connection = dbManager.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(READ_BY_ID)){
 
             preparedStatement.setInt(1, id);
@@ -70,8 +74,8 @@ public class UserDaoImpl implements UserDao {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         CONNECTION_LOCK.lock();
-        try {
-           connection = DBManager.getConnection();
+        DBManager dbManager = DBManager.getInstance();
+        try {connection = dbManager.getConnection();
             connection.setAutoCommit(false);
             preparedStatement = connection.prepareStatement(UPDATE_BY_ID);
 
@@ -96,26 +100,17 @@ public class UserDaoImpl implements UserDao {
             }
             LOGGER.error(e);
         } finally {
-            close(preparedStatement);
-            close(connection);
+            DBManager.close(preparedStatement);
+            DBManager.close(connection);
             CONNECTION_LOCK.unlock();
         }
         return user;
     }
 
-    private void close(AutoCloseable ac) {
-        if (ac != null) {
-            try {
-                ac.close();
-            } catch (Exception e) {
-                LOGGER.error(e);
-            }
-        }
-    }
-
     @Override
     public void delete(Integer id) {
-        try  (Connection connection = DBManager.getConnection();
+        DBManager dbManager = DBManager.getInstance();
+        try ( Connection connection = dbManager.getConnection();
               PreparedStatement preparedStatement = connection.prepareStatement(DELETE_BY_ID)){
             preparedStatement.setInt(1,id);
             preparedStatement.executeUpdate();
@@ -127,7 +122,8 @@ public class UserDaoImpl implements UserDao {
     @Override
     public List<User> readAll() {
         List<User> userRecords = new ArrayList<>();
-        try (Connection connection = DBManager.getConnection();
+        DBManager dbManager = DBManager.getInstance();
+        try ( Connection connection = dbManager.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(READ_ALL);
              ResultSet resultSet = preparedStatement.executeQuery()){
 
@@ -144,7 +140,8 @@ public class UserDaoImpl implements UserDao {
     @Override
     public User getUserByEmail(String email) {
         User user = null;
-        try (Connection connection = DBManager.getConnection();
+        DBManager dbManager = DBManager.getInstance();
+        try ( Connection connection = dbManager.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(READ_BY_EMAIL)){
 
             preparedStatement.setString(1, email);

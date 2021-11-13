@@ -1,7 +1,0 @@
-2021-11-07 21:29:50 ERROR UserDaoImpl:51 - Duplicate entry 'UserTwoEmail' for key 'users.email'
-2021-11-07 21:31:15 ERROR UserDaoImpl:51 - java.sql.SQLIntegrityConstraintViolationException: Duplicate entry 'UserTwoEmail' for key 'users.email'
-2021-11-07 23:54:12 ERROR ProductDaoImpl:46 - java.lang.ClassCastException: java.util.Date cannot be cast to java.sql.Date
-2021-11-08 00:29:14 ERROR ProductDaoImpl:147 - java.sql.SQLException: Incorrect integer value: 'TRUE' for column 'deleted' at row 1
-2021-11-08 01:02:57 ERROR ProductDaoImpl:144 - java.sql.SQLNonTransientConnectionException: Can't call rollback when autocommit=true
-2021-11-08 01:02:57 ERROR ProductDaoImpl:147 - java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'TINYINT(1) WHERE id =1' at line 1
-2021-11-08 16:12:01 ERROR UserDaoImpl:45 - java.sql.SQLIntegrityConstraintViolationException: Duplicate entry 'Один' for key 'users.email'

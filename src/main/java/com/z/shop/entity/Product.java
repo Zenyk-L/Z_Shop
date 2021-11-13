@@ -150,12 +150,12 @@ public class Product implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return Objects.equals(id, product.id) && Objects.equals(name, product.name) && Objects.equals(category, product.category) && Objects.equals(description, product.description) && Objects.equals(color, product.color) && Objects.equals(scale, product.scale) && Objects.equals(price, product.price) && Objects.equals(addingDate, product.addingDate);
+        return deleted == product.deleted && Objects.equals(id, product.id) && Objects.equals(name, product.name) && Objects.equals(image, product.image) && Objects.equals(category, product.category) && Objects.equals(quantity, product.quantity) && Objects.equals(description, product.description) && Objects.equals(color, product.color) && Objects.equals(scale, product.scale) && Objects.equals(price, product.price) && Objects.equals(addingDate, product.addingDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, category, description, color, scale, price, addingDate);
+        return Objects.hash(id, name, image, category, quantity, description, color, scale, price, addingDate, deleted);
     }
 
     @Override
@@ -163,13 +163,15 @@ public class Product implements Serializable {
         return "Product{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", image='" + image + '\'' +
                 ", category='" + category + '\'' +
+                ", quantity=" + quantity +
                 ", description='" + description + '\'' +
                 ", color='" + color + '\'' +
                 ", scale='" + scale + '\'' +
                 ", price=" + price +
                 ", addingDate=" + addingDate +
                 ", deleted=" + deleted +
-                '}'+System.lineSeparator();
+                '}'+ System.lineSeparator();
     }
 }

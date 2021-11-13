@@ -4,7 +4,9 @@ import com.z.shop.entity.Product;
 import com.z.shop.service.ProductService;
 import com.z.shop.service.impl.ProductServiceImpl;
 import com.z.shop.utils.DBManager;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+//import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -20,8 +22,8 @@ import java.util.Date;
 @MultipartConfig
 public class CreateProduct extends HttpServlet {
 
-    private final static Logger LOGGER =
-            Logger.getLogger(FileUploadServlet.class.getCanonicalName());
+    private static final Logger LOGGER = LogManager.getLogger(CreateProduct.class);
+
     private ProductService productService = ProductServiceImpl.getProductService();
 
     @Override
@@ -47,6 +49,7 @@ public class CreateProduct extends HttpServlet {
         product.setAddingDate(new Date());
 
         productService.create(product);
+
         response.sendRedirect("createProduct.jsp");
     }
 
@@ -58,7 +61,15 @@ public class CreateProduct extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         // Create path components to save the file
+
+        // // setting absolute path
         String path = DBManager.URL_TO_IMAGE_FOLDER;
+
+        // setting relative path
+        String prefix = getServletContext().getRealPath("/");
+        String[] targets = prefix.split("target");
+        path = targets[0] + "src/main/webapp/image";
+
 
         final Part filePart = request.getPart("file");
         String fileName = "";
@@ -105,7 +116,7 @@ public class CreateProduct extends HttpServlet {
         return fileName;
     }
 
-//    extract from part type of file, and return generated unique file name with type original file
+//    extract from part file type of file, and return generated unique file name with type original file
 
     private String getUniqueFileName(final Part part) {
         final String partHeader = part.getHeader("content-disposition");
