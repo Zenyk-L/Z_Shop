@@ -91,7 +91,7 @@ from product;
 delete from product where  id = 6;
 
 select *
-from category_description;
+from category;
 
 select p.name,
        p.image,

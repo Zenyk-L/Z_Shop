@@ -49,7 +49,7 @@
 
                     <div class="d-flex">
                         <a href="#" class="btn btn-primary"> + add to bucket</a>
-                        <a href="/deleteProduct ${product.id}" class="btn btn-danger ms-auto"> Delete </a>
+                        <a href="/deleteProduct?productId=${product.id}" class="btn btn-danger ms-auto"> Delete </a>
                     </div>
                 </div>
             </div>

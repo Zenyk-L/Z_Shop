@@ -18,7 +18,7 @@ public class GetAllProducts extends HttpServlet {
 
     private static final Logger LOGGER = LogManager.getLogger(GetAllProducts.class);
 
-    ProductService productService = ProductServiceImpl.getProductService();
+    private ProductService productService = ProductServiceImpl.getProductService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
