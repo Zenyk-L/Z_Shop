@@ -1,7 +1,10 @@
 package com.z.shop.servlet;
 
+import com.z.shop.entity.Category;
 import com.z.shop.entity.Product;
+import com.z.shop.service.CategoryService;
 import com.z.shop.service.ProductService;
+import com.z.shop.service.impl.CategoryServiceImpl;
 import com.z.shop.service.impl.ProductServiceImpl;
 import com.z.shop.utils.DBManager;
 import org.apache.logging.log4j.LogManager;
@@ -17,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import java.io.*;
 import java.util.Date;
+import java.util.List;
 
 @WebServlet(name = "CreateProduct", value = "/createProduct")
 @MultipartConfig
@@ -25,11 +29,14 @@ public class CreateProduct extends HttpServlet {
     private static final Logger LOGGER = LogManager.getLogger(CreateProduct.class);
 
     private ProductService productService = ProductServiceImpl.getProductService();
+    private CategoryService categoryService = CategoryServiceImpl.getCategoryServiceImpl();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Product product = new Product();
+        List<String> categories = categoryService.getAllCategoriesNames();
         request.setAttribute("product", product);
+        request.setAttribute("categories", categories);
         request.getRequestDispatcher("createProduct.jsp").forward(request, response);
     }
 
@@ -37,9 +44,14 @@ public class CreateProduct extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        String selectCategoryValue = request.getParameter("category");
+        if ("add".equals(selectCategoryValue)) {
+            selectCategoryValue=request.getParameter("newCategory");
+            categoryService.createByName(selectCategoryValue);
+        }
         Product product = new Product();
         product.setName(request.getParameter("name"));
-        product.setCategory(request.getParameter("category"));
+        product.setCategory(selectCategoryValue);
         product.setImage(processRequest(request, response));
         product.setQuantity(Integer.valueOf(request.getParameter("quantity")));
         product.setDescription(request.getParameter("description"));

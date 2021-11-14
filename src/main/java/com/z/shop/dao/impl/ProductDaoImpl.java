@@ -3,7 +3,6 @@ package com.z.shop.dao.impl;
 import com.z.shop.dao.ProductDao;
 import com.z.shop.entity.Product;
 import com.z.shop.utils.DBManager;
-//import org.apache.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -17,6 +16,8 @@ public class ProductDaoImpl implements ProductDao {
     private static final Logger LOGGER = LogManager.getLogger(ProductDaoImpl.class);
 
     private static final Lock CONNECTION_LOCK = new ReentrantLock();
+    private static DBManager dbManager = DBManager.getInstance();
+
     private static String CREATE = "INSERT INTO product(name, image, category_id, quantity, description, color, scale, price, adding_date)"+
             " VALUE (?, ?, (SELECT id from category where name = ?), ?, ?, ?, ?, ?, ?)";
 
@@ -25,8 +26,6 @@ public class ProductDaoImpl implements ProductDao {
             "JOIN category c ON p.category_id = c.id WHERE p.deleted = false";
 
 
-
-//            "INSERT INTO z_shop.product (name, image, category, quantity, description, color, scale, price, adding_date) VALUES (?,?,?,?,?,?,?,?,?)";
 
 
     private static String READ_BY_ID = "SELECT p.id, p.name, p.image, c.name AS category, p.quantity, p.description, p.color, p.scale, p.price, p.adding_date, p.deleted "+
@@ -40,7 +39,6 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public Product create(Product product) {
-        DBManager dbManager = DBManager.getInstance();
         try ( Connection connection = dbManager.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(CREATE, Statement.RETURN_GENERATED_KEYS)) {
             int k = 0;
@@ -68,7 +66,7 @@ public class ProductDaoImpl implements ProductDao {
     @Override
     public Product read(Integer id) {
         Product product = null;
-        DBManager dbManager = DBManager.getInstance();
+
         try ( Connection connection = dbManager.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(READ_BY_ID)) {
 
@@ -84,14 +82,13 @@ public class ProductDaoImpl implements ProductDao {
         return product;
     }
 
-//"UPDATE product SET name =?, image=?, category_id=(SELECT id from category where name = ?), quantity=?, description=?, color=?, scale=?, price=? WHERE id = ?";
     @Override
     public Product update(Product product) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 
         CONNECTION_LOCK.lock();
-        DBManager dbManager = DBManager.getInstance();
+
         try {connection = dbManager.getConnection();
             connection.setAutoCommit(false);
             preparedStatement = connection.prepareStatement(UPDATE_BY_ID);
@@ -132,7 +129,6 @@ public class ProductDaoImpl implements ProductDao {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         CONNECTION_LOCK.lock();
-        DBManager dbManager = DBManager.getInstance();
         try { connection = dbManager.getConnection();
             connection.setAutoCommit(false);
             preparedStatement = connection.prepareStatement(DELETE_BY_ID);
@@ -159,7 +155,6 @@ public class ProductDaoImpl implements ProductDao {
     @Override
     public List<Product> readAll() {
         List<Product> productRecords = new ArrayList<>();
-        DBManager dbManager = DBManager.getInstance();
         try ( Connection connection = dbManager.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(READ_ALL))  {
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -176,7 +171,7 @@ public class ProductDaoImpl implements ProductDao {
         return productRecords;
     }
 
-    private Product getProductFromResultSet(ResultSet resultSet) throws SQLException {
+    private static Product getProductFromResultSet(ResultSet resultSet) throws SQLException {
         Integer id = resultSet.getInt("id");
         String name = resultSet.getString("name");
         String image = resultSet.getString("image");

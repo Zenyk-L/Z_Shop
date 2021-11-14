@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 public class ProductServiceImpl implements ProductService {
 
-    public  static ProductService productServiceImpl;
+    private  static ProductService productServiceImpl;
 
     private ProductDao productDao;
 

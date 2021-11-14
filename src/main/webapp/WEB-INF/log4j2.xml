@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="debug" strict="true"
+               name="XMLConfigTest" packages="org.apache.logging.log4j.test">
+    <Filter type="ThresholdFilter" level="trace" />
+
+    <Appenders>
+        <Console name="STDOUT">
+            <Layout type="PatternLayout" pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n" />
+        </Console>
+        <File name="File" fileName="D:\\Zenyk\\EPAM\\Final_Project\\Z_Shop\\server.error.log" append="true"><!--${sys:logFile}-->
+            <PatternLayout>
+                <Pattern>%d{HH:mm:ss.SSS} [%t] %-5level - %msg%n</Pattern>
+            </PatternLayout>
+        </File>
+        <RollingFile name="rollingFile"
+                     fileName="D:\\Zenyk\\EPAM\\Final_Project\\Z_Shop\\server.logs.log"
+                     filePattern="D:\\Zenyk\\EPAM\\Final_Project\\Z_Shop\\$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log.gz">
+            <PatternLayout>
+                <Pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval = "1" />
+                <SizeBasedTriggeringPolicy
+                        size="250 MB" />
+            </Policies>
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <Root level="INFO">
+            <AppenderRef ref="STDOUT" />
+            <AppenderRef ref="rollingFile" />
+            <AppenderRef ref="File" level="ERROR"/>
+        </Root>
+    </Loggers>
+
+</Configuration>

@@ -86,12 +86,14 @@ INSERT INTO product(name, image, category_id, quantity, description, color, scal
     ('Xiaomi', 'xiaomi.jpg', 1, 20, 'sensor phone', 'blue', 'middle', 199.99);
 
 select *
-from product;
+from z_shop_test.category;
 
 delete from product where  id = 6;
 
 select *
-from category;
+from category_description;
+
+INSERT INTO category (name) VALUE ('Tank')
 
 select p.name,
        p.image,
