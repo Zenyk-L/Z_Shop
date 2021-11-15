@@ -39,8 +39,17 @@
                        <%-- <img src="${pageContext.request.contextPath}/image/IT.jpg">--%>
                 <div class="card-body">
                     <h5 class="card-title">Name: ${product.name}</h5>
-                    <h6 class="card-title">Category: ${product.category}</h6>
-                    <p class="card-text">Description: ${product.description}</p>
+                    <h6 class="card-title" hidden >Category: ${product.category}</h6>
+                    <h6 class="card-title" hidden>Category:${param.lang}</h6>
+
+                    <c:forEach items="${categories}" var="categ">
+                        <c:if test="${product.category == categ.name}">
+<%--                            <h6 class="card-title" id="categoryName"  onclick="fillName(${categ},${param.lang})">Category: ${categ.translations[param.lang]} </h6>--%>
+                            <h6 class="card-title" id="categoryName" >Category: ${categ.translations[param.lang]} </h6>
+
+                        </c:if>
+                    </c:forEach>
+                    <p class="card-text">Description: ${product.description} </p>
                     <p class="card-text">Color: ${product.color}</p>
                     <p class="card-text">Scale: ${product.scale}</p>
                     <p class="card-text">Added: ${product.addingDate}</p>
@@ -60,6 +69,12 @@
 </div>
 
 <br/>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+
+</script>
 
 </body>
 </html>

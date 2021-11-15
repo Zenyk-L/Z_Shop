@@ -55,10 +55,10 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
 
-    @Override
-    public List<String> getAllCategoriesNames() {
-        List<Category> categories = readAll();
-        List<String> categoryNames = categories.stream().map(c -> c.getName()).collect(Collectors.toList());
-        return categoryNames;
-    }
+//    @Override
+//    public List<String> getAllCategoriesNames() {
+//        List<Category> categories = readAll();
+//        List<String> categoryNames = categories.stream().map(c -> c.getName()).collect(Collectors.toList());
+//        return categoryNames;
+//    }
 }

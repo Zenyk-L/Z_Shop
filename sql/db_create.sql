@@ -20,11 +20,14 @@ CREATE TABLE user
 DROP TABLE IF EXISTS language;
 CREATE TABLE language
 (
-    id         BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    short_name VARCHAR(30)        NOT NULL UNIQUE,
+    id         BIGINT  PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    short_name VARCHAR(30)         NOT NULL UNIQUE,
     full_name  VARCHAR(30)        NOT NULL UNIQUE,
-    deleted    BOOLEAN DEFAULT FALSE
+    deleted    BOOLEAN DEFAULT FALSE,
+    UNIQUE(short_name)
 );
+
+ALTER TABLE language DROP PRIMARY KEY, ADD UNIQUE KEY short_name;
 
 DROP TABLE IF EXISTS category;
 CREATE TABLE category
@@ -39,10 +42,10 @@ CREATE TABLE category_description
 (
     id            BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     category_id   BIGINT             NOT NULL,
-    language_id   BIGINT             NOT NULL,
+    language_id   VARCHAR(30)             NOT NULL,
     category_name VARCHAR(30)        NOT NULL UNIQUE,
     deleted       BOOLEAN DEFAULT FALSE,
-    FOREIGN KEY (language_id) REFERENCES language (id) ON DELETE CASCADE,
+    FOREIGN KEY (language_id) REFERENCES language (short_name)  ON DELETE CASCADE,
     FOREIGN KEY (category_id) REFERENCES category (id) ON DELETE CASCADE
 );
 
@@ -78,22 +81,28 @@ CREATE TABLE order
     FOREIGN KEY (product_id) REFERENCES product (id) ON DELETE CASCADE
 );
 
-INSERT INTO language (short_name, full_name) VALUE ('ua', 'Українська'), ('pl', 'Polska');
+INSERT INTO language (short_name, full_name) VALUE ('en', 'English'), ('ua', 'Українська'), ('pl', 'Polska');
 INSERT INTO category(name) VALUE ('Phone'), ('Car');
-INSERT INTO category_description(category_id, language_id, category_name) value /*(1, 1, 'Телефон'), (1, 2, 'Telefon'),*/ (2, 1, 'Авто'), (1, 2, 'Auto');
+INSERT INTO category_description(category_id, language_id, category_name) value (1, 'en', 'Phone'), (2, 'en', 'Car'); //, (1, 'ua', 'Телефон'), (1, 'pl', 'Telefon'), (2, 'ua', 'Авто'), (2, 'pl', 'Auto');
 INSERT INTO product(name, image, category_id, quantity, description, color, scale, price)
     VALUE ('Nokia', 'nokia.jpg', 1, 15, 'button phone', 'black', 'small', 9.99),
     ('Xiaomi', 'xiaomi.jpg', 1, 20, 'sensor phone', 'blue', 'middle', 199.99);
 
-select *
-from z_shop_test.category;
+INSERT INTO product(name, category_id, description, color, scale, price) value ('a',1, 'description', 'blue', 'middle', 199.99), ('b',1,'description', 'blue', 'middle', 199.99), ('c',1,'description', 'blue', 'middle', 199.99)
+    , ('d',1,'description', 'blue', 'middle', 199.99), ('а',1,'description', 'blue', 'middle', 199.99), ('б',1,'description', 'blue', 'middle', 199.99), ('в',1,'description', 'blue', 'middle', 199.99), ('г',1,'description', 'blue', 'middle', 199.99);
 
-delete from product where  id = 6;
+select *
+from product;
+
+delete from category where  id = 3;
 
 select *
 from category_description;
 
-INSERT INTO category (name) VALUE ('Tank')
+INSERT INTO category_description (category_id, language_id, category_name) VALUE (23,'en','Cat');
+
+SELECT c.id, c.name, cd.language_id, cd.category_name FROM  category c  RIGHT JOIN category_description cd on c.id = cd.category_id WHERE c.deleted = false AND cd.deleted = false;
+SELECT c.id, c.name, cd.language_id, cd.category_name FROM  category c  LEFT JOIN category_description cd on c.id = cd.category_id WHERE  c.deleted = false ;
 
 select p.name,
        p.image,

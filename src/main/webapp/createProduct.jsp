@@ -37,14 +37,17 @@
 
     <div class="form-group">
         <label>Category</label>
-        <select name="category" id="selectCat" >
+        <select name="category" id="selectCat" class="form-control productName">
             <c:forEach items="${categories}" var="category">
-                <option value="${category}">${category}</option>
+                <option value="${category.name}">${category.name}</option>
             </c:forEach>
             <option id="addCategory" value="add">+ add category</option>
         </select>
-        <input type="text" name="newCategory" class="form-control productName" style="display:none"
-               placeholder="Enter product category" required>
+
+        <c:forEach items="${languages}" var="language">
+        <input type="text" name="newLanguage_${language.shortName}" class="form-control productName" style="display:none"
+               placeholder="Enter product category on ${language.fullName}" required>
+        </c:forEach>
     </div>
     <div class="form-group">
         <label>Quantity</label>
@@ -92,7 +95,7 @@
             console.log($('#selectCat option:selected').text());
             console.log($('#selectCat option:selected').val());
             if($('#selectCat option:selected').text() == '+ add category'){
-                $("input[name=newCategory]").css("display", "block");
+                $("input[name^=newLanguage]").css("display", "block");
                 $("#selectCat").hide();
             }
         })

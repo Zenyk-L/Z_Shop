@@ -55,4 +55,13 @@ public class ProductServiceImpl implements ProductService {
     public Map<Integer, Product> readAllMap() {
         return readAll().stream().collect(Collectors.toMap(Product::getId, Function.identity()));
     }
+
+//    @Override
+//    public List<Product> findByName(String searchingName) {
+//        return readAll().stream().filter(product -> product.getName().equalsIgnoreCase(searchingName)).collect(Collectors.toList());
+//    }
+    @Override
+    public List<Product> findByName(String searchingName) {
+        return readAll().stream().filter(product -> product.getName().toLowerCase().matches("(.*)"+searchingName.toLowerCase()+"(.*)")).collect(Collectors.toList());
+    }
 }

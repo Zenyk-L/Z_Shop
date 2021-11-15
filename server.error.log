@@ -74,3 +74,12 @@
 21:11:14.159 [http-nio-8080-exec-11] ERROR - encoding request null
 21:11:14.673 [http-nio-8080-exec-9] ERROR - encoding request null
 02:46:49.472 [http-nio-8080-exec-3] ERROR - java.sql.SQLIntegrityConstraintViolationException: Column 'category_id' cannot be null
+12:04:29.327 [http-nio-8080-exec-8] ERROR - java.sql.SQLIntegrityConstraintViolationException: Column 'name' cannot be null
+12:04:29.444 [http-nio-8080-exec-8] ERROR - java.sql.SQLIntegrityConstraintViolationException: Column 'category_id' cannot be null
+20:29:52.534 [http-nio-8080-exec-5] ERROR - java.sql.SQLException: Column 'id' not found.
+20:32:13.472 [http-nio-8080-exec-1] ERROR - java.sql.SQLException: Column 'id' not found.
+20:32:24.812 [http-nio-8080-exec-3] ERROR - java.sql.SQLException: Column 'id' not found.
+20:32:25.871 [http-nio-8080-exec-5] ERROR - java.sql.SQLException: Column 'id' not found.
+20:33:17.780 [http-nio-8080-exec-4] ERROR - java.sql.SQLException: Column 'id' not found.
+20:59:00.159 [http-nio-8080-exec-1] ERROR - java.sql.SQLException: Column 'id' not found.
+21:00:16.407 [http-nio-8080-exec-1] ERROR - java.sql.SQLException: Column 'id' not found.

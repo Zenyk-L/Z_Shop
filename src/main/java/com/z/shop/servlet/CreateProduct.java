@@ -1,15 +1,17 @@
 package com.z.shop.servlet;
 
 import com.z.shop.entity.Category;
+import com.z.shop.entity.Language;
 import com.z.shop.entity.Product;
 import com.z.shop.service.CategoryService;
+import com.z.shop.service.LanguageService;
 import com.z.shop.service.ProductService;
 import com.z.shop.service.impl.CategoryServiceImpl;
+import com.z.shop.service.impl.LanguageServiceImpl;
 import com.z.shop.service.impl.ProductServiceImpl;
 import com.z.shop.utils.DBManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-//import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -19,8 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import java.io.*;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @WebServlet(name = "CreateProduct", value = "/createProduct")
 @MultipartConfig
@@ -30,25 +31,44 @@ public class CreateProduct extends HttpServlet {
 
     private ProductService productService = ProductServiceImpl.getProductService();
     private CategoryService categoryService = CategoryServiceImpl.getCategoryServiceImpl();
+    private LanguageService languageService = LanguageServiceImpl.getLanguageServiceImpl();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Product product = new Product();
-        List<String> categories = categoryService.getAllCategoriesNames();
+
+        List<Category> categories = categoryService.readAll();
+        List<Language> languages = languageService.readAll();
         request.setAttribute("product", product);
         request.setAttribute("categories", categories);
+        request.setAttribute("languages", languages);
         request.getRequestDispatcher("createProduct.jsp").forward(request, response);
     }
 
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         String selectCategoryValue = request.getParameter("category");
         if ("add".equals(selectCategoryValue)) {
-            selectCategoryValue=request.getParameter("newCategory");
-            categoryService.createByName(selectCategoryValue);
+            selectCategoryValue=request.getParameter("newLanguage_en");
+            Category category = new Category();
+            category.setName(selectCategoryValue);
+
+            Map<String, String> categoryTranslations = new HashMap<>();
+            Iterator<Language> languageIterator = languageService.readAll().iterator();
+
+            while(languageIterator.hasNext()){
+                String shortName = languageIterator.next().getShortName();
+                System.out.println("newLanguage_"+shortName);
+                System.out.println(request.getParameter("newLanguage_"+shortName));
+                categoryTranslations.put(shortName,request.getParameter("newLanguage_"+shortName));
+            }
+            category.setTranslations(categoryTranslations);
+            categoryService.create(category);
+
         }
+
+
         Product product = new Product();
         product.setName(request.getParameter("name"));
         product.setCategory(selectCategoryValue);
@@ -59,6 +79,7 @@ public class CreateProduct extends HttpServlet {
         product.setScale(request.getParameter("scale"));
         product.setPrice(Double.valueOf(request.getParameter("price")));
         product.setAddingDate(new Date());
+
 
         productService.create(product);
 
