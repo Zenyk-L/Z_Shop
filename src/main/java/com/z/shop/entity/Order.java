@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
-public class Bucket implements Serializable {
+public class Order implements Serializable {
 
     private Integer id;
     private Integer userId;
@@ -13,10 +13,10 @@ public class Bucket implements Serializable {
     private boolean deleted;
     private String status;
 
-    public Bucket() {
+    public Order() {
     }
 
-    public Bucket(Integer id, Integer userId, Integer productId, Date purchaseDate, String status) {
+    public Order(Integer id, Integer userId, Integer productId, Date purchaseDate, String status) {
         this.id = id;
         this.userId = userId;
         this.productId = productId;
@@ -76,8 +76,8 @@ public class Bucket implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Bucket bucket = (Bucket) o;
-        return Objects.equals(id, bucket.id) && Objects.equals(userId, bucket.userId) && Objects.equals(productId, bucket.productId) && Objects.equals(purchaseDate, bucket.purchaseDate);
+        Order order = (Order) o;
+        return Objects.equals(id, order.id) && Objects.equals(userId, order.userId) && Objects.equals(productId, order.productId) && Objects.equals(purchaseDate, order.purchaseDate);
     }
 
     @Override

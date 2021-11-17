@@ -83,3 +83,24 @@
 20:33:17.780 [http-nio-8080-exec-4] ERROR - java.sql.SQLException: Column 'id' not found.
 20:59:00.159 [http-nio-8080-exec-1] ERROR - java.sql.SQLException: Column 'id' not found.
 21:00:16.407 [http-nio-8080-exec-1] ERROR - java.sql.SQLException: Column 'id' not found.
+13:35:23.519 [http-nio-8080-exec-1] ERROR - java.sql.SQLSyntaxErrorException: Table 'z_shop.product' doesn't exist
+13:35:31.989 [http-nio-8080-exec-3] ERROR - java.sql.SQLSyntaxErrorException: Table 'z_shop.product' doesn't exist
+13:40:59.846 [http-nio-8080-exec-6] ERROR - java.sql.SQLSyntaxErrorException: Unknown column 'c.name' in 'field list'
+13:41:08.818 [http-nio-8080-exec-7] ERROR - java.sql.SQLSyntaxErrorException: Unknown column 'c.name' in 'field list'
+13:41:10.424 [http-nio-8080-exec-8] ERROR - java.sql.SQLSyntaxErrorException: Unknown column 'c.name' in 'field list'
+13:41:11.276 [http-nio-8080-exec-9] ERROR - java.sql.SQLSyntaxErrorException: Unknown column 'c.name' in 'field list'
+13:41:11.930 [http-nio-8080-exec-10] ERROR - java.sql.SQLSyntaxErrorException: Unknown column 'c.name' in 'field list'
+13:41:12.582 [http-nio-8080-exec-1] ERROR - java.sql.SQLSyntaxErrorException: Unknown column 'c.name' in 'field list'
+13:43:34.821 [http-nio-8080-exec-3] ERROR - java.sql.SQLSyntaxErrorException: Unknown column 'c.name' in 'field list'
+13:43:43.362 [http-nio-8080-exec-4] ERROR - java.sql.SQLSyntaxErrorException: Unknown column 'c.name' in 'field list'
+13:43:49.806 [http-nio-8080-exec-5] ERROR - java.sql.SQLSyntaxErrorException: Unknown column 'c.name' in 'field list'
+13:45:50.328 [http-nio-8080-exec-7] ERROR - java.sql.SQLSyntaxErrorException: Unknown column 'c.name' in 'field list'
+13:46:00.268 [http-nio-8080-exec-8] ERROR - java.sql.SQLSyntaxErrorException: Unknown column 'c.name' in 'field list'
+13:46:03.469 [http-nio-8080-exec-9] ERROR - java.sql.SQLSyntaxErrorException: Unknown column 'c.name' in 'field list'
+13:46:15.960 [http-nio-8080-exec-7] ERROR - java.sql.SQLSyntaxErrorException: Unknown column 'c.category_id' in 'field list'
+13:46:20.574 [http-nio-8080-exec-4] ERROR - java.sql.SQLSyntaxErrorException: Unknown column 'c.category_id' in 'field list'
+13:46:24.653 [http-nio-8080-exec-5] ERROR - java.sql.SQLSyntaxErrorException: Unknown column 'c.category_id' in 'field list'
+13:47:18.066 [http-nio-8080-exec-11] ERROR - java.sql.SQLSyntaxErrorException: Unknown column 'c.category_id' in 'field list'
+13:47:23.629 [http-nio-8080-exec-12] ERROR - java.sql.SQLSyntaxErrorException: Unknown column 'c.category_id' in 'field list'
+15:16:15.598 [http-nio-8080-exec-5] ERROR - java.sql.SQLIntegrityConstraintViolationException: Duplicate entry 'Car' for key 'category_description.category_name'
+15:20:25.487 [http-nio-8080-exec-11] ERROR - java.sql.SQLIntegrityConstraintViolationException: Duplicate entry 'Car' for key 'category_description.category_name'

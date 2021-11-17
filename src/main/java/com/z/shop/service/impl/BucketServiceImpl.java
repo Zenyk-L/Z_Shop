@@ -1,8 +1,8 @@
 package com.z.shop.service.impl;
 
-import com.z.shop.dao.BucketDao;
+import com.z.shop.dao.OrderDAO;
 import com.z.shop.dao.impl.BucketDaoImpl;
-import com.z.shop.entity.Bucket;
+import com.z.shop.entity.Order;
 import com.z.shop.service.BucketService;
 
 import java.util.List;
@@ -11,10 +11,10 @@ public class BucketServiceImpl implements BucketService {
 
     public static BucketService bucketServiceImpl;
 
-    private BucketDao bucketDao;
+    private OrderDAO orderDAO;
 
     private BucketServiceImpl() {
-            bucketDao = new BucketDaoImpl();
+            orderDAO = new BucketDaoImpl();
     }
 
     public static BucketService getBucketService(){
@@ -25,27 +25,27 @@ public class BucketServiceImpl implements BucketService {
 
 
     @Override
-    public Bucket create(Bucket bucket) {
-        return bucketDao.create(bucket);
+    public Order create(Order order) {
+        return orderDAO.create(order);
     }
 
     @Override
-    public Bucket read(Integer id) {
-        return bucketDao.read(id);
+    public Order read(Integer id) {
+        return orderDAO.read(id);
     }
 
     @Override
-    public Bucket update(Bucket bucket) {
-        return bucketDao.update(bucket);
+    public Order update(Order order) {
+        return orderDAO.update(order);
     }
 
     @Override
     public void delete(Integer id) {
-        bucketDao.delete(id);
+        orderDAO.delete(id);
     }
 
     @Override
-    public List<Bucket> readAll() {
-        return bucketDao.readAll();
+    public List<Order> readAll() {
+        return orderDAO.readAll();
     }
 }

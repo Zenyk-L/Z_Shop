@@ -1,6 +1,7 @@
 package com.z.shop.entity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Objects;
 
 public class User implements Serializable {
@@ -13,19 +14,6 @@ public class User implements Serializable {
     private UserRole role;
     private Double amount;
     private boolean blocked;
-
-    public User(){}
-
-    public User(Integer id, String name, String lastName, String email, String password, UserRole role, Double amount, boolean blocked) {
-        this.id = id;
-        this.name = name;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
-        this.role = role;
-        this.amount = amount;
-        this.blocked = blocked;
-    }
 
 
     public Integer getId() {

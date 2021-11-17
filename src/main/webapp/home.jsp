@@ -39,26 +39,21 @@
                        <%-- <img src="${pageContext.request.contextPath}/image/IT.jpg">--%>
                 <div class="card-body">
                     <h5 class="card-title">Name: ${product.name}</h5>
-                    <h6 class="card-title" hidden >Category: ${product.category}</h6>
-                    <h6 class="card-title" hidden>Category:${param.lang}</h6>
+                    <h6 class="card-title" hidden >Category: ${product.id}</h6>
+                    <h6 class="card-title" hidden>Category:${sessionScope.lang}</h6>
+                    <h6 class="card-title" id="categoryName" >Category : ${product.category.translations[sessionScope.lang]} </h6>
 
-                    <c:forEach items="${categories}" var="categ">
-                        <c:if test="${product.category == categ.name}">
-<%--                            <h6 class="card-title" id="categoryName"  onclick="fillName(${categ},${param.lang})">Category: ${categ.translations[param.lang]} </h6>--%>
-                            <h6 class="card-title" id="categoryName" >Category: ${categ.translations[param.lang]} </h6>
-
-                        </c:if>
-                    </c:forEach>
                     <p class="card-text">Description: ${product.description} </p>
                     <p class="card-text">Color: ${product.color}</p>
                     <p class="card-text">Scale: ${product.scale}</p>
                     <p class="card-text">Added: ${product.addingDate}</p>
-                    <p class="card-text">Quantity: ${product.quantity}</p>
-                    <p class="card-text">Price: ${product.price}</p>
+                    <span class="card-text">Quantity: ${product.quantity}</span>
 
+                    <span class="card-text ml-3"><b>Price: ${product.price}</b></span>
+                    <p class="card-text"></p>
                     <div class="d-flex">
-                        <a href="#" class="btn btn-primary"> + add to bucket</a>
-                        <a href="/deleteProduct?productId=${product.id}" class="btn btn-danger ms-auto"> Delete </a>
+                        <a href="#"  class="btn btn-primary"> + add to bucket</a>
+                        <a href="#" onclick="deleteProduct(${product.id}, '${product.name}' )" class="btn btn-danger ms-auto"> Delete </a>
                     </div>
                 </div>
             </div>
@@ -72,7 +67,26 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript">
+function fillCategoryName(){
+    $('#categoryName').html('Category: ${product.category.translations[param.lang]}');
+}
 
+// $('#delete').click(
+function deleteProduct(productId, prodectName){
+
+    if (window.confirm("Do you really want to delete "+ prodectName + " ?")) {
+        window.open("/deleteProduct?productId=" + productId, "");
+    }
+
+
+
+    // var answer=confirm("Do u want to continue?") {
+    //     if (answer==false) {
+    //         document.form.field1.focus();
+    //         e.preventDefault();
+    //     }
+    }
+// });
 
 </script>
 

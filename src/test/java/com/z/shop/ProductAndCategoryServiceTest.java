@@ -2,10 +2,14 @@ package com.z.shop;
 
 import com.z.shop.entity.Category;
 import com.z.shop.entity.Product;
+import com.z.shop.entity.User;
+import com.z.shop.entity.UserRole;
 import com.z.shop.service.CategoryService;
 import com.z.shop.service.ProductService;
+import com.z.shop.service.UserService;
 import com.z.shop.service.impl.CategoryServiceImpl;
 import com.z.shop.service.impl.ProductServiceImpl;
+import com.z.shop.service.impl.UserServiceImpl;
 import com.z.shop.utils.DBManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -17,10 +21,10 @@ import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @RunWith(JUnit4.class)
@@ -29,22 +33,23 @@ public class ProductAndCategoryServiceTest {
     private static DBManager dbManager;
     private static ProductService productService;
     private static CategoryService categoryService;
+    private static UserService userService;
 
     private static String SQL_DROP_DB = "DROP DATABASE If EXISTS z_shop_test;";
     private static String SQL_CRETE_DB = "CREATE DATABASE IF NOT EXISTS z_shop_test CHAR SET UTF8;";
     private static String SQL_USE_DB = "USE z_shop_test;";
     private static String SQL_CRETE_TABLE_LANG = "CREATE TABLE language\n" +
             "(\n" +
-            "    id         BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT,\n" +
-            "    short_name VARCHAR(30)        NOT NULL UNIQUE,\n" +
+            "    id         BIGINT  PRIMARY KEY NOT NULL AUTO_INCREMENT,\n" +
+            "    short_name VARCHAR(30)         NOT NULL UNIQUE,\n" +
             "    full_name  VARCHAR(30)        NOT NULL UNIQUE,\n" +
-            "    deleted    BOOLEAN DEFAULT FALSE\n" +
+            "    deleted    BOOLEAN DEFAULT FALSE,\n" +
+            "    UNIQUE(short_name)\n" +
             ");";
 
     private static String SQL_CRETE_TABLE_CATEGORY = "CREATE TABLE category\n" +
             "(\n" +
             "    id      BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT,\n" +
-            "    name    VARCHAR(30)        NOT NULL UNIQUE,\n" +
             "    deleted BOOLEAN DEFAULT FALSE\n" +
             ");";
 
@@ -52,10 +57,10 @@ public class ProductAndCategoryServiceTest {
             "(\n" +
             "    id            BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT,\n" +
             "    category_id   BIGINT             NOT NULL,\n" +
-            "    language_id   BIGINT             NOT NULL,\n" +
+            "    language_id   VARCHAR(30)             NOT NULL,\n" +
             "    category_name VARCHAR(30)        NOT NULL UNIQUE,\n" +
             "    deleted       BOOLEAN DEFAULT FALSE,\n" +
-            "    FOREIGN KEY (language_id) REFERENCES language (id) ON DELETE CASCADE,\n" +
+            "    FOREIGN KEY (language_id) REFERENCES language (short_name)  ON DELETE CASCADE,\n" +
             "    FOREIGN KEY (category_id) REFERENCES category (id) ON DELETE CASCADE\n" +
             ");";
 
@@ -64,7 +69,7 @@ public class ProductAndCategoryServiceTest {
             "    id          BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT,\n" +
             "    name        VARCHAR(30)        NOT NULL,\n" +
             "    image       VARCHAR(30),\n" +
-            "    category_id BIGINT             NOT NULL,\n" +
+            "    category_id BIGINT             ,\n" +
             "    quantity    INT UNSIGNED,\n" +
             "    description TEXT               NOT NULL,\n" +
             "    color       VARCHAR(20)        NOT NULL,\n" +
@@ -72,14 +77,30 @@ public class ProductAndCategoryServiceTest {
             "    price       DECIMAL(9, 2) DEFAULT 0.00,\n" +
             "    adding_date TIMESTAMP     default CURRENT_TIMESTAMP,\n" +
             "    deleted     BOOLEAN       DEFAULT FALSE,\n" +
-            "    FOREIGN KEY (category_id) REFERENCES category (id) ON DELETE CASCADE\n" +
+            "    FOREIGN KEY (category_id) REFERENCES category (id) ON DELETE SET NULL\n" +
             ");";
-    private static String SQL_BASIC_FILL_LANG = " INSERT INTO language (short_name, full_name) VALUE ('ua', 'Українська'), ('pl', 'Polska');";
-    private static String SQL_BASIC_FILL_CAT = "INSERT INTO category(name) VALUE ('Phone'), ('Car'), ('Plane');";
-    private static String SQL_BASIC_FILL_CAT_DESCR = " INSERT INTO category_description(category_id, language_id, category_name) value (1, 1, 'Телефон'), (1, 2, 'Telefon'), (2, 1, 'Авто'), (1, 2, 'Auto');";
+
+    private static String SQL_CRETE_TABLE_USER = "CREATE TABLE user\n" +
+            "(\n" +
+            "    id        BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT,\n" +
+            "    email     VARCHAR(50)        NOT NULL UNIQUE,\n" +
+            "    name      VARCHAR(25)        NOT NULL,\n" +
+            "    last_name VARCHAR(25)        NOT NULL,\n" +
+            "    password  VARCHAR(50)        NOT NULL,\n" +
+            "    role      VARCHAR(20)        NOT NULL DEFAULT 'USER',\n" +
+            "    amount    DECIMAL(9, 2) DEFAULT 0.00,\n" +
+            "    blocked   BOOLEAN       DEFAULT FALSE\n" +
+            ")";
+
+
+    private static String SQL_BASIC_FILL_LANG = " INSERT INTO language (short_name, full_name) VALUE ('en','English'),('ua', 'Українська'), ('pl', 'Polska');";
+    private static String SQL_BASIC_FILL_CAT = "INSERT INTO category() VALUE (), ();";
+    private static String SQL_BASIC_FILL_CAT_DESCR = " INSERT INTO category_description(category_id, language_id, category_name) value (1, 'en', 'Phone'), (2, 'en', 'Car'), (1, 'ua', 'Телефон'), (1, 'pl', 'Telefon'), (2, 'ua', 'Авто'), (2, 'pl', 'Auto');";
     private static String SQL_BASIC_FILL_PRODUCTS = "INSERT INTO product(name, image, category_id, quantity, description, color, scale, price)\n" +
             "    VALUE ('Nokia', 'nokia.jpg', 1, 15, 'button phone', 'black', 'small', 9.99 ),\n" +
             "    ('AUDI', 'audi.jpg', 2, 5, 'sedan', 'blue', 'middle', 9999.99);";
+    private static String SQL_BASIC_FILL_USER = "INSERT INTO user(email, name, last_name, password, role, amount)\n"+
+            "value ('user@mail.com','user1','One User','user','USER',999.99)";
 
 
     @BeforeClass
@@ -88,6 +109,7 @@ public class ProductAndCategoryServiceTest {
         dbManager.setSqlConnectionUrl("jdbc:mysql://localhost:3306/z_shop_test?user=root&password=123456&serverTimezone=UTC&useSSL=false");
         productService = ProductServiceImpl.getProductService();
         categoryService = CategoryServiceImpl.getCategoryServiceImpl();
+        userService = UserServiceImpl.getUserService();
     }
 
     @Before
@@ -101,10 +123,12 @@ public class ProductAndCategoryServiceTest {
             statement.executeUpdate(SQL_CRETE_TABLE_CATEGORY);
             statement.executeUpdate(SQL_CRETE_TABLE_CATEGORY_DESCR);
             statement.executeUpdate(SQL_CRETE_TABLE_PRODUCT);
+            statement.executeUpdate(SQL_CRETE_TABLE_USER);
             statement.executeUpdate(SQL_BASIC_FILL_LANG);
             statement.executeUpdate(SQL_BASIC_FILL_CAT);
             statement.executeUpdate(SQL_BASIC_FILL_CAT_DESCR);
             statement.executeUpdate(SQL_BASIC_FILL_PRODUCTS);
+            statement.executeUpdate(SQL_BASIC_FILL_USER);
         } catch (SQLException e) {
             LOGGER.error(e);
         }
@@ -112,7 +136,16 @@ public class ProductAndCategoryServiceTest {
 
     @Test
     public void createProductTest(){
-        Product product = new Product(0,"Xiaomi", "xiaomi.jpg", "Phone", 5, "sensor phone", "silver", "middle", 199.99, new Date(new java.util.Date().getTime()), false);
+        Product product = new Product();
+        product.setName("Xiaomi");
+        product.setImage("xiaomi.jpg");
+        product.getCategory().setId(1);
+        product.setQuantity(1);
+        product.setDescription("sensor phone");
+        product.setColor("silver");
+        product.setScale("middle");
+        product.setPrice(199.99);
+        product.setAddingDate(new Date());
 
         productService.create(product);
         product.setId(3);
@@ -122,7 +155,7 @@ public class ProductAndCategoryServiceTest {
         Assert.assertEquals(product.getId(),productFromDB.getId());
         Assert.assertEquals(product.getName(),productFromDB.getName());
         Assert.assertEquals(product.getImage(),productFromDB.getImage());
-        Assert.assertEquals(product.getCategory() ,productFromDB.getCategory());
+        Assert.assertEquals(product.getCategory().getId(),productFromDB.getCategory().getId());
         Assert.assertEquals(product.getQuantity(),productFromDB.getQuantity());
         Assert.assertEquals(product.getDescription(),productFromDB.getDescription());
         Assert.assertEquals(product.getColor(),productFromDB.getColor());
@@ -135,39 +168,32 @@ public class ProductAndCategoryServiceTest {
 
     @Test
     public void readProductByIdTest(){
-        Product product1 = new Product(1,"Nokia", "nokia.jpg", "Phone", 15, "button phone", "black", "small", 9.99, new Date(new java.util.Date().getTime()), false);
-        Product product2 = new Product(2,"AUDI", "audi.jpg", "Car", 5, "sedan", "blue", "middle", 9999.99,  new Date(new java.util.Date().getTime()), false);
+        Product product = new Product();
+        product.setName("Xiaomi");
+        product.setImage("xiaomi.jpg");
+        product.getCategory().setId(1);
+        product.setQuantity(1);
+        product.setDescription("sensor phone");
+        product.setColor("silver");
+        product.setScale("middle");
+        product.setPrice(199.99);
+        product.setAddingDate(new Date());
+        productService.create(product);
 
-        List<Product> expectedProducts = new ArrayList();
-        expectedProducts.add(product1);
-        expectedProducts.add(product2);
 
-        List<Product> gettedFromBDProducts = productService.readAll();
+        Product productFromDB = productService.read(product.getId());
 
-        Product productFromDB = productService.read(1);
+        Assert.assertEquals(product.getId(),productFromDB.getId());
+        Assert.assertEquals(product.getName(),productFromDB.getName());
+        Assert.assertEquals(product.getImage(),productFromDB.getImage());
+        Assert.assertEquals(product.getCategory().getId(),productFromDB.getCategory().getId());
+        Assert.assertEquals(product.getQuantity(),productFromDB.getQuantity());
+        Assert.assertEquals(product.getDescription(),productFromDB.getDescription());
+        Assert.assertEquals(product.getColor(),productFromDB.getColor());
+        Assert.assertEquals(product.getScale(),productFromDB.getScale());
+        Assert.assertEquals(product.getPrice(),productFromDB.getPrice());
+        Assert.assertEquals(product.isDeleted(),productFromDB.isDeleted());
 
-        Assert.assertEquals(product1.getId(),productFromDB.getId());
-        Assert.assertEquals(product1.getName(),productFromDB.getName());
-        Assert.assertEquals(product1.getImage(),productFromDB.getImage());
-        Assert.assertEquals(product1.getCategory() ,productFromDB.getCategory());
-        Assert.assertEquals(product1.getQuantity(),productFromDB.getQuantity());
-        Assert.assertEquals(product1.getDescription(),productFromDB.getDescription());
-        Assert.assertEquals(product1.getColor(),productFromDB.getColor());
-        Assert.assertEquals(product1.getScale(),productFromDB.getScale());
-        Assert.assertEquals(product1.getPrice(),productFromDB.getPrice());
-        Assert.assertEquals(product1.isDeleted(),productFromDB.isDeleted());
-
-        productFromDB = productService.read(2);
-        Assert.assertEquals(product2.getId(),productFromDB.getId());
-        Assert.assertEquals(product2.getName(),productFromDB.getName());
-        Assert.assertEquals(product2.getImage(),productFromDB.getImage());
-        Assert.assertEquals(product2.getCategory() ,productFromDB.getCategory());
-        Assert.assertEquals(product2.getQuantity(),productFromDB.getQuantity());
-        Assert.assertEquals(product2.getDescription(),productFromDB.getDescription());
-        Assert.assertEquals(product2.getColor(),productFromDB.getColor());
-        Assert.assertEquals(product2.getScale(),productFromDB.getScale());
-        Assert.assertEquals(product2.getPrice(),productFromDB.getPrice());
-        Assert.assertEquals(product2.isDeleted(),productFromDB.isDeleted());
     }
 
     @Test
@@ -180,7 +206,7 @@ public class ProductAndCategoryServiceTest {
         Assert.assertEquals(product.getId(),productFromDB.getId());
         Assert.assertEquals(product.getName(),productFromDB.getName());
         Assert.assertEquals(product.getImage(),productFromDB.getImage());
-        Assert.assertEquals(product.getCategory() ,productFromDB.getCategory());
+        Assert.assertEquals(product.getCategory().getId(),productFromDB.getCategory().getId());
         Assert.assertEquals(product.getQuantity(),productFromDB.getQuantity());
         Assert.assertEquals(product.getDescription(),productFromDB.getDescription());
         Assert.assertEquals(product.getColor(),productFromDB.getColor());
@@ -192,15 +218,27 @@ public class ProductAndCategoryServiceTest {
 
     @Test
     public void updateProductTest(){
-        Product product = new Product(1,"BMV", "bmv.jpg", "Car", 1, "sport car", "red", "big", 9999.99, new Date(new java.util.Date().getTime()), false);
+
+        Product product = new Product();
+        product.setId(1);
+        product.setName("Xiaomi");
+        product.setImage("xiaomi.jpg");
+        product.getCategory().setId(1);
+        product.setQuantity(1);
+        product.setDescription("sensor phone");
+        product.setColor("silver");
+        product.setScale("middle");
+        product.setPrice(199.99);
+        product.setAddingDate(new Date());
         productService.update(product);
 
-        Product productFromDB = productService.read(1);
+
+        Product productFromDB = productService.read(product.getId());
 
         Assert.assertEquals(product.getId(),productFromDB.getId());
         Assert.assertEquals(product.getName(),productFromDB.getName());
         Assert.assertEquals(product.getImage(),productFromDB.getImage());
-        Assert.assertEquals(product.getCategory() ,productFromDB.getCategory());
+        Assert.assertEquals(product.getCategory().getId(),productFromDB.getCategory().getId());
         Assert.assertEquals(product.getQuantity(),productFromDB.getQuantity());
         Assert.assertEquals(product.getDescription(),productFromDB.getDescription());
         Assert.assertEquals(product.getColor(),productFromDB.getColor());
@@ -213,70 +251,98 @@ public class ProductAndCategoryServiceTest {
 
     @Test
     public void readAllProductTest(){
-        Product product1 = new Product(1,"Nokia", "nokia.jpg", "Phone", 15, "button phone", "black", "small", 9.99, new Date(new java.util.Date().getTime()), false);
-        Product product2 = new Product(2,"AUDI", "audi.jpg", "Car", 5, "sedan", "blue", "middle", 9999.99,  new Date(new java.util.Date().getTime()), false);
+        Product product = new Product();
+        product.setName("Xiaomi");
+        product.setImage("xiaomi.jpg");
+        product.getCategory().setId(1);
+        product.setQuantity(1);
+        product.setDescription("sensor phone");
+        product.setColor("silver");
+        product.setScale("middle");
+        product.setPrice(199.99);
+        product.setAddingDate(new Date());
+        productService.create(product);
 
-        List<Product> expectedProducts = new ArrayList();
-        expectedProducts.add(product1);
-        expectedProducts.add(product2);
+        List<Product> productsFromDB = productService.readAll();
+        Product productFromDB = productsFromDB.get(2);
 
-        List<Product> gettedFromBDProducts = productService.readAll();
-
-        Product productFromDB = gettedFromBDProducts.get(0);
-
-        Assert.assertEquals(product1.getId(),productFromDB.getId());
-        Assert.assertEquals(product1.getName(),productFromDB.getName());
-        Assert.assertEquals(product1.getImage(),productFromDB.getImage());
-        Assert.assertEquals(product1.getCategory() ,productFromDB.getCategory());
-        Assert.assertEquals(product1.getQuantity(),productFromDB.getQuantity());
-        Assert.assertEquals(product1.getDescription(),productFromDB.getDescription());
-        Assert.assertEquals(product1.getColor(),productFromDB.getColor());
-        Assert.assertEquals(product1.getScale(),productFromDB.getScale());
-        Assert.assertEquals(product1.getPrice(),productFromDB.getPrice());
-        Assert.assertEquals(product1.isDeleted(),productFromDB.isDeleted());
+        Assert.assertEquals(product.getId(),productFromDB.getId());
+        Assert.assertEquals(product.getName(),productFromDB.getName());
+        Assert.assertEquals(product.getImage(),productFromDB.getImage());
+        Assert.assertEquals(product.getCategory().getId(),productFromDB.getCategory().getId());
+        Assert.assertEquals(product.getQuantity(),productFromDB.getQuantity());
+        Assert.assertEquals(product.getDescription(),productFromDB.getDescription());
+        Assert.assertEquals(product.getColor(),productFromDB.getColor());
+        Assert.assertEquals(product.getScale(),productFromDB.getScale());
+        Assert.assertEquals(product.getPrice(),productFromDB.getPrice());
+        Assert.assertEquals(product.isDeleted(),productFromDB.isDeleted());
 
     }
 
     @Test
     public void createCategoryTest() {
         Category category = new Category();
-        category.setName("Shoes");
+        category.setId(10);
+        category.getTranslations().put("en","Plane");
+        category.getTranslations().put("ua","Літак");
+        category.getTranslations().put("pl","Samolot");
+        category.setDeleted(false);
+
         categoryService.create(category);
 
-
         Category categoryFromDB = categoryService.read(category.getId());
-        System.out.println(category);
-        System.out.println(categoryFromDB);
+
         Assert.assertEquals(category.getId(), categoryFromDB.getId());
-        Assert.assertEquals(category.getName(), categoryFromDB.getName());
+        Assert.assertEquals(category.getTranslations(), categoryFromDB.getTranslations());
         Assert.assertEquals(category.isDeleted(), category.isDeleted());
     }
 
     @Test
     public void readAllCategoryTest() {
         List<Category> expectedCategories = new ArrayList<>();
+
         Category category = new Category();
         category.setId(1);
-        category.setName("Phone");
+        category.getTranslations().put("en","Phone");
+        category.getTranslations().put("ua","Телефон");
+        category.getTranslations().put("pl","Telefon");
+        category.setDeleted(false);
 
         Category category2 = new Category();
         category2.setId(2);
-        category2.setName("Car");
-
-        Category category3 = new Category();
-        category3.setId(3);
-        category3.setName("Plane");
+        category2.getTranslations().put("en","Car");
+        category2.getTranslations().put("ua","Авто");
+        category2.getTranslations().put("pl","Auto");
+        category2.setDeleted(false);
 
         expectedCategories.add(category);
         expectedCategories.add(category2);
-        expectedCategories.add(category3);
-
 
         List<Category> categoriesFromDB = categoryService.readAll();
 
         Assert.assertEquals(expectedCategories, categoriesFromDB);
-//        Assert.assertEquals(category3.getName(), categoryFromDB.getName());
-//        Assert.assertEquals(category3.isDeleted(), category3.isDeleted());
+
+    }
+
+    @Test
+    public void createUserTest() {
+//        "value ('user@mail.com','user1','One User','user','USER',999.99)";
+        User user = new User();
+        user.setEmail("admin@mail.com");
+        user.setName("admin1");
+        user.setLastName("ADMIN");
+        user.setPassword("admin");
+        user.setRole(UserRole.ADMIN);
+        user.setAmount(0.0);
+
+        userService.create(user);
+        User userFromDB = userService.read(user.getId());
+        System.out.println(userFromDB);
+        System.out.println(userService.readAll());
+        System.out.println(userService.getUserByEmail("admin@mail.com"));
+//        Assert.assertEquals(user,userFromDB);
+
+
     }
 
 }

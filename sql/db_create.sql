@@ -33,7 +33,6 @@ DROP TABLE IF EXISTS category;
 CREATE TABLE category
 (
     id      BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    name    VARCHAR(30)        NOT NULL UNIQUE,
     deleted BOOLEAN DEFAULT FALSE
 );
 
@@ -57,7 +56,7 @@ CREATE TABLE product
     id          BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     name        VARCHAR(30)        NOT NULL,
     image       VARCHAR(30),
-    category_id BIGINT             NOT NULL,
+    category_id BIGINT             ,
     quantity    INT UNSIGNED,
     description TEXT               NOT NULL,
     color       VARCHAR(20)        NOT NULL,
@@ -65,7 +64,7 @@ CREATE TABLE product
     price       DECIMAL(9, 2) DEFAULT 0.00,
     adding_date TIMESTAMP     default CURRENT_TIMESTAMP,
     deleted     BOOLEAN       DEFAULT FALSE,
-    FOREIGN KEY (category_id) REFERENCES category (id) ON DELETE CASCADE
+    FOREIGN KEY (category_id) REFERENCES category (id) ON DELETE SET NULL
 );
 
 DROP TABLE IF EXISTS order;
@@ -82,8 +81,8 @@ CREATE TABLE order
 );
 
 INSERT INTO language (short_name, full_name) VALUE ('en', 'English'), ('ua', 'Українська'), ('pl', 'Polska');
-INSERT INTO category(name) VALUE ('Phone'), ('Car');
-INSERT INTO category_description(category_id, language_id, category_name) value (1, 'en', 'Phone'), (2, 'en', 'Car'); //, (1, 'ua', 'Телефон'), (1, 'pl', 'Telefon'), (2, 'ua', 'Авто'), (2, 'pl', 'Auto');
+INSERT INTO category() VALUE (), ();
+INSERT INTO category_description(category_id, language_id, category_name) value (1, 'en', 'Phone'), (2, 'en', 'Car'), (1, 'ua', 'Телефон'), (1, 'pl', 'Telefon'), (2, 'ua', 'Авто'), (2, 'pl', 'Auto');
 INSERT INTO product(name, image, category_id, quantity, description, color, scale, price)
     VALUE ('Nokia', 'nokia.jpg', 1, 15, 'button phone', 'black', 'small', 9.99),
     ('Xiaomi', 'xiaomi.jpg', 1, 20, 'sensor phone', 'blue', 'middle', 199.99);
@@ -94,10 +93,23 @@ INSERT INTO product(name, category_id, description, color, scale, price) value (
 select *
 from product;
 
-delete from category where  id = 3;
+delete from category where  id >2;
+
+select *
+from language;
 
 select *
 from category_description;
+
+
+select *
+from category;
+
+select *
+from z_shop_test.user;
+
+
+INSERT INTO category value();
 
 INSERT INTO category_description (category_id, language_id, category_name) VALUE (23,'en','Cat');
 
@@ -106,7 +118,7 @@ SELECT c.id, c.name, cd.language_id, cd.category_name FROM  category c  LEFT JOI
 
 select p.name,
        p.image,
-       c.name,
+       p.category_id,
        cd.category_name,
        l.short_name,
        l.full_name,

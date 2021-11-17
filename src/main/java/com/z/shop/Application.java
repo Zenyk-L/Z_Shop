@@ -40,9 +40,10 @@ public class Application {
 //        LanguageService languageService = LanguageServiceImpl.getLanguageServiceImpl();
 //        System.out.println(languageService.readAll());
 
-        ProductService productService = ProductServiceImpl.getProductService();
-
-        System.out.println(productService.findByName("Мітсубісі"));
+        CategoryService categoryService = CategoryServiceImpl.getCategoryServiceImpl();
+        System.out.println(categoryService.create(new Category()));
+//        System.out.println(productService.readAll());
+//        System.out.println(productService.findByName("Мітсубісі"));
 
     }
 }

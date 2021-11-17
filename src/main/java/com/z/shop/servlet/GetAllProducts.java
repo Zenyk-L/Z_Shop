@@ -17,8 +17,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,7 +35,14 @@ public class GetAllProducts extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 
-        List<Product> products ;
+        String lang = request.getParameter("lang");
+        HttpSession session = request.getSession();
+        if (lang != null){
+            session.setAttribute("lang", lang);
+        }
+
+        List<Product> products = null;
+//        searching products by name, if no matches return all products
         String searchingText = request.getParameter("searchText");
         if ( searchingText == null){
             products = productService.readAll();
@@ -45,13 +52,15 @@ public class GetAllProducts extends HttpServlet {
                 products = productService.readAll();
             }
         }
+//        sort by category
         String sortByCategory = request.getParameter("sortByCategory");
-        System.out.println(sortByCategory);
-        System.out.println(products);
+
         if(sortByCategory != null && !"default".equals(sortByCategory) ) {
 
-            products = products.stream().filter(product -> product.getCategory().equals(sortByCategory)).collect(Collectors.toList());
+            products = products.stream().filter(product -> product.getCategory().getId().equals(Integer.valueOf(sortByCategory))).collect(Collectors.toList());
         }
+
+        //        sort by name
         String sortByName = request.getParameter("sortByName");
         if("UP".equals(sortByName)) {
             products = products.stream().sorted((product1,product2)->product1.getName().compareTo(product2.getName())).collect(Collectors.toList());
@@ -60,15 +69,23 @@ public class GetAllProducts extends HttpServlet {
             products = products.stream().sorted((product1,product2)->product2.getName().compareTo(product1.getName())).collect(Collectors.toList());
         }
 
+        //        sort by price
+        String sortByPrice = request.getParameter("sortByPrice");
+        if("UP".equals(sortByPrice)) {
+            products = products.stream().sorted((product1,product2)->product1.getPrice().compareTo(product2.getPrice())).collect(Collectors.toList());
+        }
+        if("DOWN".equals(sortByPrice)) {
+            products = products.stream().sorted((product1,product2)->product2.getPrice().compareTo(product1.getPrice())).collect(Collectors.toList());
+        }
 
 
+        request.setAttribute("searchingText", searchingText);
 
         List<Category> categories = categoryService.readAll();
         List<Language> languages = languageService.readAll();
         request.setAttribute("languages", languages);
         request.setAttribute("categories", categories);
 
-        System.out.println(products);
 
 
         request.setAttribute("products", products);
@@ -78,6 +95,7 @@ public class GetAllProducts extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 
     }
 }

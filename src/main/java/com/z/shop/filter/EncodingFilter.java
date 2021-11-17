@@ -18,6 +18,7 @@ public class EncodingFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         code = filterConfig.getInitParameter("encoding");
+        filterConfig.getServletContext().setAttribute("lang", "en");
         LOGGER.trace("encoding filter init" + code);
 
 

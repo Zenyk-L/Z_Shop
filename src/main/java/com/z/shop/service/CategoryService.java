@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface CategoryService extends AbstractCRUD<Category> {
 
-    Category createByName(String categoryName);
+//    Category createByName(String categoryName);
 }

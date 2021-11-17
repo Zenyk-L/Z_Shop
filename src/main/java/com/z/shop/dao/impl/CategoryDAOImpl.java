@@ -16,11 +16,11 @@ public class CategoryDAOImpl implements CategoryDAO {
     private static final Logger LOGGER = LogManager.getLogger(CategoryDAOImpl.class);
     private static DBManager dbManager = DBManager.getInstance();
 
-    private static String CREATE_CATEGORY = "INSERT INTO category (name) VALUE (?)";
+    private static String CREATE_CATEGORY = "INSERT INTO category () VALUE ()";
 
     private static String CREATE_CATEGORY_DESCR = "INSERT INTO category_description (category_id, language_id, category_name) VALUE (?,?,?)";
     private static String READ_ALL = "SELECT * FROM category WHERE deleted = false";
-    private static String READ_BY_ID = "SELECT c.id, c.name, cd.language_id, cd.category_name FROM  category c  LEFT JOIN category_description cd on c.id = cd.category_id WHERE c.id=? AND c.deleted = false ";  //"/*SELECT * FROM category  WHERE id =? AND deleted = false; */SELECT c.id, c.name, cd.language_id, cd.category_name FROM category c LEFT JOIN category_description cd on c.id = cd.category_id WHERE c.id =? AND c.deleted = false ;";
+    private static String READ_BY_ID = "SELECT c.id, cd.language_id, cd.category_name FROM  category c  LEFT JOIN category_description cd on c.id = cd.category_id WHERE c.id=? AND c.deleted = false ";  //"/*SELECT * FROM category  WHERE id =? AND deleted = false; */SELECT c.id, c.name, cd.language_id, cd.category_name FROM category c LEFT JOIN category_description cd on c.id = cd.category_id WHERE c.id =? AND c.deleted = false ;";
 
 
     @Override
@@ -28,13 +28,12 @@ public class CategoryDAOImpl implements CategoryDAO {
 
         try (Connection connection = dbManager.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(CREATE_CATEGORY, Statement.RETURN_GENERATED_KEYS)) {
-            int k = 0;
-            preparedStatement.setString(++k, category.getName());
 
             preparedStatement.executeUpdate();
 
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
             resultSet.next();
+
             category.setId(resultSet.getInt(1));
 
 
@@ -43,8 +42,8 @@ public class CategoryDAOImpl implements CategoryDAO {
             while (iterator.hasNext()) {
                 String lang_code = iterator.next();
 
-                k = 0;
-                preparedStatement2.setString(++k, String.valueOf(category.getId()));
+                int k = 0;
+                preparedStatement2.setInt(++k, category.getId());
                 preparedStatement2.setString(++k, lang_code);
                 preparedStatement2.setString(++k, category.getTranslations().get(lang_code));
 
@@ -69,14 +68,12 @@ public class CategoryDAOImpl implements CategoryDAO {
 
             category = new Category();
             Map<String, String> categoryTranslations = category.getTranslations();
-//            category.setId(id);
+
             while (resultSet.next()) {
-//                if(category.getId() == null) {
+                if(category.getId() == null) {
                     category.setId(resultSet.getInt("id"));
-//                }
-//                if(category.getName() == null) {
-                    category.setName(resultSet.getString("name"));
-//                }
+                }
+
                 String langCode = resultSet.getString("language_id");
                 String categoryName = resultSet.getString("category_name");
 
@@ -110,7 +107,7 @@ public class CategoryDAOImpl implements CategoryDAO {
 
                 Category category = new Category();
              category.setId(resultSet.getInt("id"));
-             category.setName(resultSet.getString("name"));
+
                 categoryRecords.add(category);
             }
         } catch (SQLException e) {
@@ -121,7 +118,7 @@ public class CategoryDAOImpl implements CategoryDAO {
         while (categoryIterator.hasNext()){
             Category category = categoryIterator.next();
             Category categoryFromDB = read(category.getId());
-            category.setName(categoryFromDB.getName());
+
             category.setTranslations(categoryFromDB.getTranslations());
             category.setDeleted(categoryFromDB.isDeleted());
         }
@@ -129,15 +126,4 @@ public class CategoryDAOImpl implements CategoryDAO {
 
     }
 
-//    private static Category getCategoryFromResultSet(ResultSet resultSet) throws SQLException {
-//        Integer id = resultSet.getInt("id");
-//        String name = resultSet.getString("name");
-//        boolean deleted = resultSet.getBoolean("deleted");
-//
-//        Category category = new Category();
-//        category.setId(id);
-//        category.setName(name);
-//        category.setDeleted(deleted);
-//        return category;
-//    }
 }

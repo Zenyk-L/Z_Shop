@@ -9,7 +9,7 @@ public class Category implements Serializable {
 
     private Integer id;
 
-    private String name;
+//    private Integer categoryDescriptionId;
 
     Map<String, String> translations = new HashMap<>();
 
@@ -18,9 +18,9 @@ public class Category implements Serializable {
     public Category() {
     }
 
-    public Category(String name) {
-        this.name = name;
-    }
+//    public Category(Integer categoryId) {
+//        this.categoryDescriptionId = categoryId;
+//    }
 
     public Integer getId() {
         return id;
@@ -30,13 +30,13 @@ public class Category implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
+//    public Integer getCategoryDescriptionId() {
+//        return categoryDescriptionId;
+//    }
+//
+//    public void setCategoryDescriptionId(Integer categoryDescriptionId) {
+//        this.categoryDescriptionId = categoryDescriptionId;
+//    }
 
     public Map<String, String> getTranslations() {
         return translations;
@@ -59,19 +59,18 @@ public class Category implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Category category = (Category) o;
-        return deleted == category.deleted && Objects.equals(id, category.id) && Objects.equals(name, category.name) && Objects.equals(translations, category.translations);
+        return deleted == category.deleted && Objects.equals(id, category.id) && Objects.equals(translations, category.translations);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, translations, deleted);
+        return Objects.hash(id, translations, deleted);
     }
 
     @Override
     public String toString() {
         return "Category{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
                 ", translations=" + translations +
                 ", deleted=" + deleted +
                 '}';

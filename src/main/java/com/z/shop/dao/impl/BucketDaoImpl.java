@@ -1,7 +1,7 @@
 package com.z.shop.dao.impl;
 
-import com.z.shop.dao.BucketDao;
-import com.z.shop.entity.Bucket;
+import com.z.shop.dao.OrderDAO;
+import com.z.shop.entity.Order;
 import com.z.shop.utils.DBManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class BucketDaoImpl implements BucketDao {
+public class BucketDaoImpl implements OrderDAO {
     private static final Logger LOGGER = LogManager.getLogger(BucketDaoImpl.class);
 
     private static final Lock CONNECTION_LOCK = new ReentrantLock();
@@ -24,29 +24,29 @@ public class BucketDaoImpl implements BucketDao {
 
 
     @Override
-    public Bucket create(Bucket bucket) {
+    public Order create(Order order) {
         DBManager dbManager = DBManager.getInstance();
         try ( Connection connection = dbManager.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(CREATE, Statement.RETURN_GENERATED_KEYS)) {
             int k = 0;
-            preparedStatement.setInt(++k, bucket.getUserId());
-            preparedStatement.setInt(++k, bucket.getProductId());
-            preparedStatement.setDate(++k, new Date(bucket.getPurchaseDate().getTime()));
-            preparedStatement.setString(++k, bucket.getStatus());
+            preparedStatement.setInt(++k, order.getUserId());
+            preparedStatement.setInt(++k, order.getProductId());
+            preparedStatement.setDate(++k, new Date(order.getPurchaseDate().getTime()));
+            preparedStatement.setString(++k, order.getStatus());
             preparedStatement.executeUpdate();
 
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
             resultSet.next();
-            bucket.setId(resultSet.getInt(1));
+            order.setId(resultSet.getInt(1));
         } catch (SQLException e) {
             LOGGER.error(e);
         }
-        return bucket;
+        return order;
     }
 
     @Override
-    public Bucket read(Integer id) {
-        Bucket bucket = null;
+    public Order read(Integer id) {
+        Order order = null;
         DBManager dbManager = DBManager.getInstance();
         try ( Connection connection = dbManager.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(READ_BY_ID)) {
@@ -55,15 +55,15 @@ public class BucketDaoImpl implements BucketDao {
             ResultSet resultSet = preparedStatement.executeQuery();
             resultSet.next();
 
-            bucket = getBucketFromResultSet(resultSet);
+            order = getBucketFromResultSet(resultSet);
         } catch (SQLException e) {
             LOGGER.error(e);
         }
-        return bucket;
+        return order;
     }
 
     @Override
-    public Bucket update(Bucket bucket) {
+    public Order update(Order order) {
         throw new IllegalStateException("There is no update for bucket");
     }
 
@@ -97,8 +97,8 @@ public class BucketDaoImpl implements BucketDao {
 
 
     @Override
-    public List<Bucket> readAll() {
-        List<Bucket> bucketRecords = new ArrayList<>();
+    public List<Order> readAll() {
+        List<Order> orderRecords = new ArrayList<>();
         DBManager dbManager = DBManager.getInstance();
         try ( Connection connection = dbManager.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(READ_ALL)) {
@@ -106,23 +106,23 @@ public class BucketDaoImpl implements BucketDao {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
 
-                Bucket bucket = getBucketFromResultSet(resultSet);
-                bucketRecords.add(bucket);
+                Order order = getBucketFromResultSet(resultSet);
+                orderRecords.add(order);
             }
         } catch (SQLException e) {
             LOGGER.error(e);
         }
-        return bucketRecords;
+        return orderRecords;
     }
 
-    private Bucket getBucketFromResultSet(ResultSet resultSet) throws SQLException {
+    private Order getBucketFromResultSet(ResultSet resultSet) throws SQLException {
         Integer id = resultSet.getInt("id");
         Integer userId = resultSet.getInt("user_id");
         Integer productId = resultSet.getInt("product_id");
         Date purchaseDate = resultSet.getDate("purchase_date");
         String status = resultSet.getString("status");
 
-        Bucket bucket = new Bucket(id, userId, productId, purchaseDate, status);
-        return bucket;
+        Order order = new Order(id, userId, productId, purchaseDate, status);
+        return order;
     }
 }

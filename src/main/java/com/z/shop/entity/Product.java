@@ -12,7 +12,7 @@ public class Product implements Serializable {
 
     private String image;
 
-    private String category;
+    private Category category = new Category();
 
     private Integer quantity;
 
@@ -28,34 +28,6 @@ public class Product implements Serializable {
 
     private boolean deleted;
 
-    public Product() {
-    }
-
-    public Product(Integer id, String name, String image, String category, String description, String color, String scale, Double price, Date addingDate) {
-        this.id = id;
-        this.name = name;
-        this.image = image;
-        this.category = category;
-        this.description = description;
-        this.color = color;
-        this.scale = scale;
-        this.price = price;
-        this.addingDate = addingDate;
-    }
-
-    public Product(Integer id, String name, String image, String category, Integer quantity, String description, String color, String scale, Double price, Date addingDate, boolean deleted) {
-        this.id = id;
-        this.name = name;
-        this.image = image;
-        this.category = category;
-        this.description = description;
-        this.color = color;
-        this.scale = scale;
-        this.price = price;
-        this.addingDate = addingDate;
-        this.deleted = deleted;
-        this.quantity = quantity;
-    }
 
     public Integer getId() {
         return id;
@@ -71,14 +43,6 @@ public class Product implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
     }
 
     public String getDescription() {
@@ -107,6 +71,14 @@ public class Product implements Serializable {
 
     public Double getPrice() {
         return price;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public void setPrice(Double price) {
@@ -164,7 +136,7 @@ public class Product implements Serializable {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", image='" + image + '\'' +
-                ", category='" + category + '\'' +
+                ", category id=" + category.getId() +
                 ", quantity=" + quantity +
                 ", description='" + description + '\'' +
                 ", color='" + color + '\'' +
@@ -172,6 +144,6 @@ public class Product implements Serializable {
                 ", price=" + price +
                 ", addingDate=" + addingDate +
                 ", deleted=" + deleted +
-                '}'+ System.lineSeparator();
+                '}'+System.lineSeparator();
     }
 }

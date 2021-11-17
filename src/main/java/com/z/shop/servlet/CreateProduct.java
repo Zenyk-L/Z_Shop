@@ -49,29 +49,31 @@ public class CreateProduct extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String selectCategoryValue = request.getParameter("category");
-        if ("add".equals(selectCategoryValue)) {
-            selectCategoryValue=request.getParameter("newLanguage_en");
-            Category category = new Category();
-            category.setName(selectCategoryValue);
+        System.out.println(selectCategoryValue);
 
-            Map<String, String> categoryTranslations = new HashMap<>();
+        Product product = new Product();
+        product.setName(request.getParameter("name"));
+
+        if ("add".equals(selectCategoryValue)) {
+
+            Category category = product.getCategory();
+            
+            Map<String, String> categoryTranslations = category.getTranslations();
             Iterator<Language> languageIterator = languageService.readAll().iterator();
 
             while(languageIterator.hasNext()){
                 String shortName = languageIterator.next().getShortName();
-                System.out.println("newLanguage_"+shortName);
-                System.out.println(request.getParameter("newLanguage_"+shortName));
-                categoryTranslations.put(shortName,request.getParameter("newLanguage_"+shortName));
-            }
-            category.setTranslations(categoryTranslations);
-            categoryService.create(category);
 
+                categoryTranslations.put(shortName,request.getParameter("newLanguage_"+shortName));
+
+            }
+
+            categoryService.create(category);
+        }else{
+
+            product.setCategory(categoryService.read(Integer.valueOf(selectCategoryValue)));
         }
 
-
-        Product product = new Product();
-        product.setName(request.getParameter("name"));
-        product.setCategory(selectCategoryValue);
         product.setImage(processRequest(request, response));
         product.setQuantity(Integer.valueOf(request.getParameter("quantity")));
         product.setDescription(request.getParameter("description"));

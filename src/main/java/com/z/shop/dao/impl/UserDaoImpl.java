@@ -2,12 +2,11 @@ package com.z.shop.dao.impl;
 
 import com.z.shop.dao.UserDao;
 import com.z.shop.entity.User;
-import com.z.shop.entity.UserRole;
 import com.z.shop.utils.DBManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-//import org.apache.log4j.Logger;
 
+import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,12 +19,12 @@ public class UserDaoImpl implements UserDao {
 
     private static final Lock CONNECTION_LOCK = new ReentrantLock();
 
-    private static final String READ_ALL = "SELECT * FROM z_shop.user";
-    private static final String CREATE = "INSERT INTO z_shop.users (email, name, last_name, password, role, amount, blocked) VALUES (?,?,?,?,?,?,?)";
-    private static final String READ_BY_ID = "SELECT * FROM z_shop.users WHERE id =?";
-    private static final String READ_BY_EMAIL = "SELECT * FROM z_shop.users WHERE email =?";
-    private static final String UPDATE_BY_ID = "UPDATE z_shop.users SET email =?, name = ?, last_name = ?, role =?, password =?, amount=?, blocked=? WHERE id = ?";
-    private static final String DELETE_BY_ID = "DELETE FROM z_shop.users WHERE id =?";
+    private static final String READ_ALL = "SELECT * FROM user";
+    private static final String CREATE = "INSERT INTO user (email, name, last_name, password, role, amount, blocked) VALUES (?,?,?,?,?,?,?)";
+    private static final String READ_BY_ID = "SELECT * FROM user WHERE id =?";
+    private static final String READ_BY_EMAIL = "SELECT * FROM user WHERE email =?";
+    private static final String UPDATE_BY_ID = "UPDATE user SET email =?, name = ?, last_name = ?, role =?, password =?, amount=?, blocked=? WHERE id = ?";
+    private static final String DELETE_BY_ID = "DELETE FROM user WHERE id =?";
 
     @Override
     public User create(User user) {
@@ -78,7 +77,7 @@ public class UserDaoImpl implements UserDao {
         try {connection = dbManager.getConnection();
             connection.setAutoCommit(false);
             preparedStatement = connection.prepareStatement(UPDATE_BY_ID);
-
+//            UPDATE user SET email =?, name = ?, last_name = ?, role =?, password =?, amount=?, blocked=? WHERE id = ?";
             int k = 0;
             preparedStatement.setString(++k, user.getEmail());
             preparedStatement.setString(++k, user.getName());
@@ -86,8 +85,8 @@ public class UserDaoImpl implements UserDao {
             preparedStatement.setString(++k, user.getRole().toString());
             preparedStatement.setString(++k, user.getPassword());
             preparedStatement.setDouble(++k,user.getAmount());
-            preparedStatement.setInt(++k, user.getId());
             preparedStatement.setBoolean(++k, user.isBlocked());
+            preparedStatement.setInt(++k, user.getId());
             preparedStatement.executeUpdate();
             connection.commit();
         } catch (SQLException e) {
@@ -162,10 +161,10 @@ public class UserDaoImpl implements UserDao {
         String lastName = resultSet.getString("last_name");
         String role = resultSet.getString("role");
         String password = resultSet.getString("password");
-        Double amount = resultSet.getDouble("amount");
+        BigDecimal amount = resultSet.getBigDecimal("amount");
         Boolean blocked = resultSet.getBoolean("blocked");
 
-        return new User(userId, name,lastName,email,password, UserRole.valueOf(role),amount, blocked) ;
+        return null;
     }
 
 
