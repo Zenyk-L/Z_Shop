@@ -18,20 +18,68 @@
     <title>Home</title>
 </head>
 <body>
+    <div class="login-page" id="popup">
+        <div class="form">
+
+            <img src="https://cdn4.vectorstock.com/i/1000x1000/89/13/user-login-icon-vector-21078913.jpg" height="50px"
+                 width="50px" style="margin: 0 auto" onclick="javascript:openLogin()">
+            <br>
+            <form class="register-form" action="/registration" method="POST">
+                <input type="text" name="firstName" placeholder="First name"/>
+                <input type="text" name="lastName" placeholder="Last name"/>
+                <input type="text" name="email" placeholder="email address"/>
+                <input type="password" name="password" placeholder="password"/>
+                <%--            <input name="cpassword" type="password" placeholder="confirm password"/>--%>
+
+                <button type="submit" class="register">Register</button>
+                <button type="reset" class="cancel">Cancel</button>
+                <p class="message">Already registered? <a href="#">Sign In</a></p>
+            </form>
+
+            <form class="login-form" action="/login" method="POST">
+
+                <input type="text" name="email" placeholder="email address" value="user@mail.com"/>
+                <input type="password" name="password" placeholder="password" value="user"/>
+                <button type="submit" class="login">Login</button>
+                <button type="reset" class=" cancel">Cancel</button>
+                <p class="message">Not registered? <a href="#">Create an account</a></p>
+            </form>
+        </div>
+        <div class="alert alert-success alert-dismissible fade show"
+             role="alert">
+            <b>Success</b> You are registered.
+            <button type="button" class="btn-close " data-bs-dismiss="alert"
+                    aria-label="Close"></button>
+        </div>
+    </div>
 
 <jsp:include page="header.jsp"></jsp:include>
 
-<div class="container overflow-hidden">
+
+
+
+
+
+    <div class="containerBody overflow-hidden">
+
+        <c:if test="${sessionScope.success == 'invalid input' || sessionScope.success == 'fail: user already registered' || sessionScope.success == 'registered'}">
+            <H6>${sessionScope.succes}</h6>
+        </c:if>
+
+
+
+
+
+
     <div class="row">
 
 
         <c:forEach items="${products}" var="product">
 
-            <div class="card col-3 mt-3">
+            <div class="card col-3 mt-3" >
                     <%--            <img src="https://kaverisias.com/wp-content/uploads/2018/01/catalog-default-img.gif" class="card-img-top" alt="Image not found">--%>
 
                 <div style="width: 100%; height: 200px; background-image: url('https://kaverisias.com/wp-content/uploads/2018/01/catalog-default-img.gif'); background-size: 100% 100%">
-                   <%-- <div style="width:100%; height:100%; background-image:url('data:image/jpg;base64, ${product.image}'); background-size:100% 100%">--%>
                        <div style="width:100%; height:100%; background-image:url('${pageContext.request.contextPath}/image/${product.image}'); background-size:100% 100%">
 
                     </div>
@@ -71,22 +119,17 @@ function fillCategoryName(){
     $('#categoryName').html('Category: ${product.category.translations[param.lang]}');
 }
 
-// $('#delete').click(
+
 function deleteProduct(productId, prodectName){
 
     if (window.confirm("Do you really want to delete "+ prodectName + " ?")) {
-        window.open("/deleteProduct?productId=" + productId, "");
+        window.open("/deleteProduct?productId=" + productId, "_self");
+    }
+
     }
 
 
 
-    // var answer=confirm("Do u want to continue?") {
-    //     if (answer==false) {
-    //         document.form.field1.focus();
-    //         e.preventDefault();
-    //     }
-    }
-// });
 
 </script>
 

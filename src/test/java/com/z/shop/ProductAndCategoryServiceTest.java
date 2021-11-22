@@ -99,7 +99,7 @@ public class ProductAndCategoryServiceTest {
     private static String SQL_BASIC_FILL_PRODUCTS = "INSERT INTO product(name, image, category_id, quantity, description, color, scale, price)\n" +
             "    VALUE ('Nokia', 'nokia.jpg', 1, 15, 'button phone', 'black', 'small', 9.99 ),\n" +
             "    ('AUDI', 'audi.jpg', 2, 5, 'sedan', 'blue', 'middle', 9999.99);";
-    private static String SQL_BASIC_FILL_USER = "INSERT INTO user(email, name, last_name, password, role, amount)\n"+
+    private static String SQL_BASIC_FILL_USER = "INSERT INTO user(email, first_name, last_name, password, role, amount)\n"+
             "value ('user@mail.com','user1','One User','user','USER',999.99)";
 
 
@@ -326,10 +326,9 @@ public class ProductAndCategoryServiceTest {
 
     @Test
     public void createUserTest() {
-//        "value ('user@mail.com','user1','One User','user','USER',999.99)";
         User user = new User();
         user.setEmail("admin@mail.com");
-        user.setName("admin1");
+        user.setFirstName("admin1");
         user.setLastName("ADMIN");
         user.setPassword("admin");
         user.setRole(UserRole.ADMIN);
@@ -337,11 +336,39 @@ public class ProductAndCategoryServiceTest {
 
         userService.create(user);
         User userFromDB = userService.read(user.getId());
-        System.out.println(userFromDB);
-        System.out.println(userService.readAll());
-        System.out.println(userService.getUserByEmail("admin@mail.com"));
-//        Assert.assertEquals(user,userFromDB);
+        Assert.assertEquals(user,userFromDB);
 
+    }
+
+    @Test
+    public void readUserByIdTest() {
+        User user = new User();
+        user.setEmail("admin@mail.com");
+        user.setFirstName("admin1");
+        user.setLastName("ADMIN");
+        user.setPassword("admin");
+        user.setRole(UserRole.ADMIN);
+        user.setAmount(0.0);
+
+        userService.create(user);
+        User userFromDB = userService.read(2);
+        Assert.assertEquals(user,userFromDB);
+
+    }
+
+    @Test
+    public void readUserByEmailTest() {
+        User user = new User();
+        user.setEmail("admin@mail.com");
+        user.setFirstName("admin1");
+        user.setLastName("ADMIN");
+        user.setPassword("admin");
+        user.setRole(UserRole.ADMIN);
+        user.setAmount(0.0);
+
+        userService.create(user);
+        User userFromDB = userService.getUserByEmail("admin@mail.com");
+        Assert.assertEquals(user,userFromDB);
 
     }
 

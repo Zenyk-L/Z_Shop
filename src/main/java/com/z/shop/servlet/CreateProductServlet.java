@@ -25,9 +25,9 @@ import java.util.*;
 
 @WebServlet(name = "CreateProduct", value = "/createProduct")
 @MultipartConfig
-public class CreateProduct extends HttpServlet {
+public class CreateProductServlet extends HttpServlet {
 
-    private static final Logger LOGGER = LogManager.getLogger(CreateProduct.class);
+    private static final Logger LOGGER = LogManager.getLogger(CreateProductServlet.class);
 
     private ProductService productService = ProductServiceImpl.getProductService();
     private CategoryService categoryService = CategoryServiceImpl.getCategoryServiceImpl();

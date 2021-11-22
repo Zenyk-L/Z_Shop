@@ -1,13 +1,12 @@
 package com.z.shop.entity;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Objects;
 
 public class User implements Serializable {
 
     private Integer id;
-    private String name;
+    private String firstName;
     private String lastName;
     private String email;
     private String password;
@@ -24,12 +23,12 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getLastName() {
@@ -85,23 +84,25 @@ public class User implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(lastName, user.lastName) && Objects.equals(email, user.email) && role == user.role && Objects.equals(amount, user.amount);
+        return blocked == user.blocked && Objects.equals(id, user.id) && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(email, user.email) && Objects.equals(password, user.password) && role == user.role && Objects.equals(amount, user.amount);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, lastName, email, role, amount);
+        return Objects.hash(id, firstName, lastName, email, password, role, amount, blocked);
     }
 
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
-                ", userRole=" + role +
+                ", password='" + password + '\'' +
+                ", role=" + role +
                 ", amount=" + amount +
+                ", blocked=" + blocked +
                 '}'+System.lineSeparator();
     }
 }

@@ -2,11 +2,11 @@ package com.z.shop.dao.impl;
 
 import com.z.shop.dao.UserDao;
 import com.z.shop.entity.User;
+import com.z.shop.entity.UserRole;
 import com.z.shop.utils.DBManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,23 +18,24 @@ public class UserDaoImpl implements UserDao {
     private static final Logger LOGGER = LogManager.getLogger(UserDaoImpl.class);
 
     private static final Lock CONNECTION_LOCK = new ReentrantLock();
+    private static  DBManager dbManager = DBManager.getInstance();
+
 
     private static final String READ_ALL = "SELECT * FROM user";
-    private static final String CREATE = "INSERT INTO user (email, name, last_name, password, role, amount, blocked) VALUES (?,?,?,?,?,?,?)";
+    private static final String CREATE = "INSERT INTO user (email, first_name, last_name, password, role, amount, blocked) VALUES (?,?,?,?,?,?,?)";
     private static final String READ_BY_ID = "SELECT * FROM user WHERE id =?";
     private static final String READ_BY_EMAIL = "SELECT * FROM user WHERE email =?";
-    private static final String UPDATE_BY_ID = "UPDATE user SET email =?, name = ?, last_name = ?, role =?, password =?, amount=?, blocked=? WHERE id = ?";
+    private static final String UPDATE_BY_ID = "UPDATE user SET email =?, first_name = ?, last_name = ?, role =?, password =?, amount=?, blocked=? WHERE id = ?";
     private static final String DELETE_BY_ID = "DELETE FROM user WHERE id =?";
 
     @Override
     public User create(User user) {
-        DBManager dbManager = DBManager.getInstance();
         try ( Connection connection = dbManager.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(CREATE, Statement.RETURN_GENERATED_KEYS)){
 
             int k = 0;
             preparedStatement.setString(++k, user.getEmail());
-            preparedStatement.setString(++k, user.getName());
+            preparedStatement.setString(++k, user.getFirstName());
             preparedStatement.setString(++k, user.getLastName());
             preparedStatement.setString(++k, user.getPassword());
             preparedStatement.setString(++k, user.getRole().toString());
@@ -53,7 +54,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public User read(Integer id) {
         User user = null;
-        DBManager dbManager = DBManager.getInstance();
+//        DBManager dbManager = DBManager.getInstance();
         try ( Connection connection = dbManager.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(READ_BY_ID)){
 
@@ -73,14 +74,14 @@ public class UserDaoImpl implements UserDao {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         CONNECTION_LOCK.lock();
-        DBManager dbManager = DBManager.getInstance();
+//        DBManager dbManager = DBManager.getInstance();
         try {connection = dbManager.getConnection();
             connection.setAutoCommit(false);
             preparedStatement = connection.prepareStatement(UPDATE_BY_ID);
 //            UPDATE user SET email =?, name = ?, last_name = ?, role =?, password =?, amount=?, blocked=? WHERE id = ?";
             int k = 0;
             preparedStatement.setString(++k, user.getEmail());
-            preparedStatement.setString(++k, user.getName());
+            preparedStatement.setString(++k, user.getFirstName());
             preparedStatement.setString(++k, user.getLastName());
             preparedStatement.setString(++k, user.getRole().toString());
             preparedStatement.setString(++k, user.getPassword());
@@ -108,7 +109,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void delete(Integer id) {
-        DBManager dbManager = DBManager.getInstance();
+//        DBManager dbManager = DBManager.getInstance();
         try ( Connection connection = dbManager.getConnection();
               PreparedStatement preparedStatement = connection.prepareStatement(DELETE_BY_ID)){
             preparedStatement.setInt(1,id);
@@ -121,7 +122,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public List<User> readAll() {
         List<User> userRecords = new ArrayList<>();
-        DBManager dbManager = DBManager.getInstance();
+//        DBManager dbManager = DBManager.getInstance();
         try ( Connection connection = dbManager.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(READ_ALL);
              ResultSet resultSet = preparedStatement.executeQuery()){
@@ -139,7 +140,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public User getUserByEmail(String email) {
         User user = null;
-        DBManager dbManager = DBManager.getInstance();
+//        DBManager dbManager = DBManager.getInstance();
         try ( Connection connection = dbManager.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(READ_BY_EMAIL)){
 
@@ -155,16 +156,17 @@ public class UserDaoImpl implements UserDao {
     }
 
     private User getUserFromResultSet(ResultSet resultSet) throws SQLException {
-        Integer userId = resultSet.getInt("id");
-        String email = resultSet.getString("email");
-        String name = resultSet.getString("name");
-        String lastName = resultSet.getString("last_name");
-        String role = resultSet.getString("role");
-        String password = resultSet.getString("password");
-        BigDecimal amount = resultSet.getBigDecimal("amount");
-        Boolean blocked = resultSet.getBoolean("blocked");
+        User user = new User();
+        user.setId(resultSet.getInt("id"));
+        user.setEmail(resultSet.getString("email"));
+        user.setFirstName(resultSet.getString("first_name"));
+        user.setLastName( resultSet.getString("last_name"));
+        user.setRole(UserRole.valueOf(resultSet.getString("role")));
+        user.setPassword(resultSet.getString("password"));
+        user.setAmount(resultSet.getDouble("amount"));
+        user.setBlocked(resultSet.getBoolean("blocked"));
 
-        return null;
+        return user;
     }
 
 

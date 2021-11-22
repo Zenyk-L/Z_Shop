@@ -11,8 +11,8 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 
 @WebServlet(name = "DeleteProduct", value = "/deleteProduct")
-public class DeleteProduct extends HttpServlet {
-    private static final Logger LOGGER = LogManager.getLogger(DeleteProduct.class);
+public class DeleteProductServlet extends HttpServlet {
+    private static final Logger LOGGER = LogManager.getLogger(DeleteProductServlet.class);
     private ProductService productService = ProductServiceImpl.getProductService();
 
     @Override

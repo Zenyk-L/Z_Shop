@@ -23,9 +23,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @WebServlet(name = "Home", urlPatterns = {"/home"}, loadOnStartup = 10)
-public class GetAllProducts extends HttpServlet {
+public class GetAllProductsServlet extends HttpServlet {
 
-    private static final Logger LOGGER = LogManager.getLogger(GetAllProducts.class);
+    private static final Logger LOGGER = LogManager.getLogger(GetAllProductsServlet.class);
 
     private ProductService productService = ProductServiceImpl.getProductService();
     private CategoryService categoryService = CategoryServiceImpl.getCategoryServiceImpl();
@@ -37,9 +37,13 @@ public class GetAllProducts extends HttpServlet {
 
         String lang = request.getParameter("lang");
         HttpSession session = request.getSession();
+//        if(session.getAttribute("lang") == null){
+//            session.setAttribute("lang", "en");
+//        };
         if (lang != null){
             session.setAttribute("lang", lang);
         }
+        LOGGER.trace("servlet session lang after settings = " + session.getAttribute("lang"));
 
         List<Product> products = null;
 //        searching products by name, if no matches return all products

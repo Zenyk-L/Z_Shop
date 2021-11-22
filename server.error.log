@@ -104,3 +104,18 @@
 13:47:23.629 [http-nio-8080-exec-12] ERROR - java.sql.SQLSyntaxErrorException: Unknown column 'c.category_id' in 'field list'
 15:16:15.598 [http-nio-8080-exec-5] ERROR - java.sql.SQLIntegrityConstraintViolationException: Duplicate entry 'Car' for key 'category_description.category_name'
 15:20:25.487 [http-nio-8080-exec-11] ERROR - java.sql.SQLIntegrityConstraintViolationException: Duplicate entry 'Car' for key 'category_description.category_name'
+23:15:50.204 [http-nio-8080-exec-70] ERROR - java.sql.SQLSyntaxErrorException: Table 'z_shop.user' doesn't exist
+23:15:53.905 [http-nio-8080-exec-63] ERROR - java.sql.SQLSyntaxErrorException: Table 'z_shop.user' doesn't exist
+23:16:15.337 [http-nio-8080-exec-76] ERROR - java.sql.SQLSyntaxErrorException: Table 'z_shop.user' doesn't exist
+23:17:33.495 [http-nio-8080-exec-78] ERROR - java.sql.SQLSyntaxErrorException: Table 'z_shop.user' doesn't exist
+23:27:43.598 [http-nio-8080-exec-86] ERROR - java.sql.SQLException: Column 'name' not found.
+23:32:19.650 [http-nio-8080-exec-105] ERROR - java.sql.SQLException: Illegal operation on empty result set.
+23:35:45.936 [http-nio-8080-exec-110] ERROR - java.sql.SQLException: Illegal operation on empty result set.
+23:36:17.199 [http-nio-8080-exec-102] ERROR - java.sql.SQLException: Illegal operation on empty result set.
+23:39:38.788 [http-nio-8080-exec-116] ERROR - java.sql.SQLException: Illegal operation on empty result set.
+23:40:28.785 [http-nio-8080-exec-115] ERROR - java.sql.SQLException: Illegal operation on empty result set.
+23:41:36.598 [http-nio-8080-exec-121] ERROR - java.sql.SQLException: Illegal operation on empty result set.
+23:41:51.854 [http-nio-8080-exec-126] ERROR - java.sql.SQLException: Illegal operation on empty result set.
+23:42:32.511 [http-nio-8080-exec-123] ERROR - java.sql.SQLException: Illegal operation on empty result set.
+23:43:05.197 [http-nio-8080-exec-137] ERROR - java.sql.SQLException: Illegal operation on empty result set.
+23:44:10.280 [http-nio-8080-exec-138] ERROR - java.sql.SQLException: Illegal operation on empty result set.

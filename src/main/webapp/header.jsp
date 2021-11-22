@@ -1,4 +1,3 @@
-<%@ page import="com.mysql.cj.Session" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -11,12 +10,36 @@
 
 
     <link type="text/css" href="style/header.css" rel="stylesheet">
+    <link rel="stylesheet" href="style/login.css">
 
 
 </head>
 <body>
 <header class="section-header">
     <section class="header-main border-bottom">
+
+        <div class="d-flex justify-content-end">
+            <c:if test="${sessionScope.user.amount > 0}">
+            <div s<%--tyle="color: white"--%> class="text-white mr-5"> Amount: ${sessionScope.user.amount}</div>
+            </c:if>
+            <div id="userEmail" s<%--tyle="color: white"--%> class="text-white mr-5">${sessionScope.user.email}</div>
+
+            <fieldset>
+                <label style="color: white"> Language</label>
+                <select id="localesSession" style="color: #007bff" class="mr-5">
+                    <c:forEach items="${languages}" var="language">
+
+                        <%--                                       <c:if test="${language.shortName == sessionScope.lang}">--%>
+                        <%--                                           <option hidden value ="${language.fullName}"></option>--%>
+                        <%--                                       </c:if>--%>
+
+                        <option value="${language.shortName}">${language.fullName}</option>
+                    </c:forEach>
+                </select>
+
+            </fieldset>
+        </div>
+
         <div class="container-fluid">
             <div class="row align-items-center">
                 <div class="col-lg-3 col-sm-4 col-md-4 col-5"><a href="/home" class="brand-wrap" data-abc="true">
@@ -28,7 +51,8 @@
                     <form action="#" class="search-wrap">
                         <div class="input-group w-100"><input type="text" id="searchNameInput"
                                                               class="form-control search-form" style="width:55%;"
-                                                              placeholder="Search by name" onkeyup="searchSortFunction()">
+                                                              placeholder="Search by name"
+                                                              onkeyup="searchSortFunction()">
                             <div class="input-group-append">
                                 <button class="btn btn-primary search-button" type="submit"><i class="fa fa-search"></i>
                                 </button>
@@ -37,24 +61,28 @@
                     </form>
                 </div>
                 <div class="col-lg-5 col-xl-4 col-sm-8 col-md-4 col-7">
+
                     <div class="d-flex justify-content-end">
 
                         <%--                        language switcher--%>
-                        <div>
+                        <%--                        <div>--%>
 
-                            <fieldset>
-                                <label style="color: white"> Language</label>
-                                <select id="localesSession" >
-                                    <c:forEach items="${languages}" var="language">
+                        <%--                            <fieldset>--%>
+                        <%--                                <label style="color: white"  > Language</label>--%>
+                        <%--                                <select id="localesSession" style="color: #007bff">--%>
+                        <%--                                    <c:forEach items="${languages}" var="language">--%>
 
-                                       <c:if test="${language.shortName == sessionScope.lang}">  <option hidden >${language.fullName}</option></c:if>
-<%--                                        <p>${language.shortName}</p>--%>
-                                        <option value="${language.shortName}">${language.fullName}</option>
-                                    </c:forEach>
-                                </select>
+                        <%--&lt;%&ndash;                                       <c:if test="${language.shortName == sessionScope.lang}">&ndash;%&gt;--%>
+                        <%--&lt;%&ndash;                                           <option hidden value ="${language.fullName}"></option>&ndash;%&gt;--%>
+                        <%--&lt;%&ndash;                                       </c:if>&ndash;%&gt;--%>
 
-                            </fieldset>
-                        </div>
+                        <%--                                        <option value="${language.shortName}">${language.fullName}</option>--%>
+                        <%--                                    </c:forEach>--%>
+                        <%--                                </select>--%>
+
+                        <%--                            </fieldset>--%>
+                        <%--                        </div >--%>
+                        <%--                            <div id="userEmail">${sessionScope.user.email}</div>--%>
                         <a target="_blank" href="#" data-abc="true" class="nav-link widget-header"> <i
                                 class="fas fa fa-shopping-cart"></i></a> <span class="vl"></span>
                         <a target="_blank" href="#" data-abc="true" class="nav-link widget-header"> <i
@@ -107,9 +135,18 @@
                                 </li>
                             </ul>
                         </div>
-                        <span class="vl"></span> <a class="nav-link nav-user-img" href="#" data-toggle="modal"
-                                                    data-target="#login-modal" data-abc="true"><span class="login"><i
-                            class="fa fa-sign-in"></i>  LOGIN</span></a>
+                        <%--                            <div class="text-white mr-5">${sessionScope.success}</div>--%>
+                        <c:if test="${sessionScope.success != 'success'}">
+                            <a class="text-white mr-5 togglePopup" href="#"><i
+                                    class="fa fa-sign-in"></i> LOGIN </a>
+                        </c:if>
+                        <c:if test="${sessionScope.success == 'success' }">
+                            <a class="text-white mr-4" href="${pageContext.request.contextPath}/logout"><i
+                                    class="fa fa-sign-out"></i> LOGOUT</a>
+                        </c:if>
+                        <%--                        <span class="vl"></span> <a class="nav-link nav-user-img" href="${pageContext.request.contextPath}/login.jsp" data-toggle="modal"--%>
+                        <%--                                                    data-target="#login-modal" data-abc="true" ><span class="login"><i--%>
+                        <%--                            class="fa fa-sign-in"></i>  LOGIN</span></a>--%>
                     </div>
 
                 </div>
@@ -124,7 +161,7 @@
                     <li class="nav-item dropdown">
 
 
-                        <select name="category" id="sortByCategory" class="nav-link dropdown-toggle"
+                        <select name="category" id="sortByCategory" class="nav-link  dropdown-toggle"
                                 style="border-color:white" onchange="searchSortFunction()">
                             <option value="default">ALL</option>
                             <c:forEach items="${categories}" var="category">
@@ -133,23 +170,23 @@
                             < </select>
 
                     </li>
-<%--                    <li class="nav-item"><p class="nav-link"> </p></li>--%>
+                    <%--                    <li class="nav-item"><p class="nav-link"> </p></li>--%>
                     <li class="nav-item dropdown">
 
                         <select name="category" id="sortByName" class="nav-link dropdown-toggle"
                                 style="border-color:white" onchange="searchSortFunction()">
-                            <option value="default" > SORT BY NAME</option>
+                            <option class="nav-item" value="default"> SORT BY NAME</option>
                             <option value="UP">NAME UP</option>
-                            <option value="DOWN">NAME DOWN <i class="fas fa-chevron-circle-down" ></i></option>
+                            <option value="DOWN">NAME DOWN <i class="fas fa-chevron-circle-down"></i></option>
                         </select>
 
                     </li>
-<%--                    <li class="nav-item"><p class="nav-link"> </p></li>--%>
+                    <%--                    <li class="nav-item"><p class="nav-link"> </p></li>--%>
                     <li class="nav-item dropdown">
 
                         <select name="category" id="sortByPrice" class="nav-link dropdown-toggle"
                                 style="border-color:white" onchange="searchSortFunction()">
-                            <option value="default" > SORT BY PRICE</option>
+                            <option value="default"> SORT BY PRICE</option>
                             <option value="UP">PRICE UP</option>
                             <option value="DOWN">PRICE DOWN</option>
                         </select>
@@ -157,18 +194,57 @@
                     </li>
 
 
-                    <li class="nav-item"><a class="nav-link" href="" data-abc="true">Support</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" data-abc="true">Support</a></li>
                 </ul>
             </div>
         </div>
     </nav>
+    <%--    <div class="login-page" id="popup">--%>
+    <%--        <div class="form">--%>
+
+    <%--            <img src="https://cdn4.vectorstock.com/i/1000x1000/89/13/user-login-icon-vector-21078913.jpg" height="50px"--%>
+    <%--                 width="50px" style="margin: 0 auto" onclick="javascript:openLogin()">--%>
+    <%--            <br>--%>
+    <%--            <form class="register-form" action="/registration" method="POST">--%>
+    <%--                <input type="text" name="firstName" placeholder="First name"/>--%>
+    <%--                <input type="text" name="lastName" placeholder="Last name"/>--%>
+    <%--                <input type="text" name="email" placeholder="email address"/>--%>
+    <%--                <input type="password" name="password" placeholder="password"/>--%>
+    <%--                &lt;%&ndash;            <input name="cpassword" type="password" placeholder="confirm password"/>&ndash;%&gt;--%>
+
+    <%--                <button type="submit" class="register">Register</button>--%>
+    <%--                <button type="reset" class="togglePopup ">Cancel</button>--%>
+    <%--                <p class="message">Already registered? <a href="#">Sign In</a></p>--%>
+    <%--            </form>--%>
+
+    <%--            <form class="login-form" action="/login" method="POST">--%>
+
+    <%--                <input type="text" name="email" placeholder="email address" value="user@mail.com"/>--%>
+    <%--                <input type="password" name="password" placeholder="password" value="user"/>--%>
+    <%--                <button type="submit" class="login">Login</button>--%>
+    <%--                <button type="reset" class="togglePopup">Cancel</button>--%>
+    <%--                <p class="message">Not registered? <a href="#">Create an account</a></p>--%>
+    <%--            </form>--%>
+    <%--        </div>--%>
+    <%--        <div class="alert alert-success alert-dismissible fade show"--%>
+    <%--             role="alert">--%>
+    <%--            <b>Success</b> You are registered.--%>
+    <%--            <button type="button" class="btn-close " data-bs-dismiss="alert"--%>
+    <%--                    aria-label="Close"></button>--%>
+    <%--        </div>--%>
+    <%--    </div>--%>
 </header>
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+<script src="js/login.js"></script>
 <script type="text/javascript">
 
     $(document).ready(function () {
+        var language = window.navigator.language;
+        <%--alert(language.split('-')[1].toLowerCase());--%>
+        <%--console.log('${sessionScope.lang}');--%>
 
         function openNav() {
             document.getElementById("mySidenav").style.width = "70%";
@@ -181,19 +257,44 @@
             document.body.style.backgroundColor = "rgba(0,0,0,0)";
         }
 
-        var selItem = localStorage.getItem("localesSession");
+        var selItem = '${sessionScope.lang}';
+        if (selItem == "") {
+            selItem = language.split('-')[1].toLowerCase();
+            var searchText = $('#searchNameInput').val();
+            var sortByCategory = $('#sortByCategory').val();
+            var sortByPrice = $('#sortByPrice').val();
+            var sortByName = $('#sortByName').val();
+            $.get("home", {
+                lang: selItem,
+                searchText: searchText,
+                sortByCategory: sortByCategory,
+                sortByPrice: sortByPrice,
+                sortByName: sortByName
+            }, function (response) {
+                // $(".containerBody").html($($.parseHTML(response)).filter(".containerBody").html());
+                $(document.body).html(response);
+            });
+        }
+        // localStorage.getItem("localesSession");
         $("#localesSession").val(selItem);
         $("#localesSession").change(function () {
             var selectedOption = $("#localesSession").val()
             console.log("selectedOption " + selectedOption);
             if (selectedOption) {
-                localStorage.setItem("localesSession", selectedOption);
+                // localStorage.setItem("localesSession", selectedOption);
                 var searchText = $('#searchNameInput').val();
                 var sortByCategory = $('#sortByCategory').val();
                 var sortByPrice = $('#sortByPrice').val();
                 var sortByName = $('#sortByName').val();
-                $.get("home", {lang: selectedOption,searchText:searchText,sortByCategory:sortByCategory, sortByPrice:sortByPrice,sortByName:sortByName }, function (response) {
-                    $(".container").html($($.parseHTML(response)).filter(".container").html());});
+                $.get("home", {
+                    lang: selectedOption,
+                    searchText: searchText,
+                    sortByCategory: sortByCategory,
+                    sortByPrice: sortByPrice,
+                    sortByName: sortByName
+                }, function (response) {
+                    $(".containerBody").html($($.parseHTML(response)).filter(".containerBody").html());
+                });
             }
         });
     });
@@ -208,11 +309,21 @@
         var sortByCategory = $('#sortByCategory').val();
         var sortByPrice = $('#sortByPrice').val();
         var sortByName = $('#sortByName').val();
-        $.get("home", {searchText:searchText,sortByCategory:sortByCategory, sortByPrice:sortByPrice,sortByName:sortByName }, function (response) {
-            $(".container").html($($.parseHTML(response)).filter(".container").html());
+        $.get("home", {
+            searchText: searchText,
+            sortByCategory: sortByCategory,
+            sortByPrice: sortByPrice,
+            sortByName: sortByName
+        }, function (response) {
+            $(".containerBody").html($($.parseHTML(response)).filter(".containerBody").html());
             // $(document.body).html(response);
         });
     }
+
+    /*function showNewWindow(){
+        window.open("/index.jsp", "name1", params);
+
+    }*/
 
 </script>
 
