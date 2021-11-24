@@ -1,18 +1,174 @@
-2021-11-22 11:41:30 INFO  GetAllProductsServlet:96 - All product getted from DB 
-2021-11-22 11:41:37 INFO  GetAllProductsServlet:96 - All product getted from DB 
-2021-11-22 11:41:39 INFO  GetAllProductsServlet:96 - All product getted from DB 
-2021-11-22 11:42:00 INFO  LoginServlet:56 - User user@mail.com logged in
-2021-11-22 11:42:01 INFO  GetAllProductsServlet:96 - All product getted from DB 
-2021-11-22 11:42:01 INFO  GetAllProductsServlet:96 - All product getted from DB 
-2021-11-22 11:42:07 INFO  GetAllProductsServlet:96 - All product getted from DB 
-2021-11-22 11:42:07 INFO  GetAllProductsServlet:96 - All product getted from DB 
-2021-11-22 11:42:15 INFO  GetAllProductsServlet:96 - All product getted from DB 
-2021-11-22 11:42:27 INFO  LoginServlet:56 - User user@mail.com logged in
-2021-11-22 11:42:27 INFO  GetAllProductsServlet:96 - All product getted from DB 
-2021-11-22 11:42:28 INFO  GetAllProductsServlet:96 - All product getted from DB 
-2021-11-22 11:42:36 INFO  GetAllProductsServlet:96 - All product getted from DB 
-2021-11-22 11:42:38 INFO  GetAllProductsServlet:96 - All product getted from DB 
-2021-11-22 11:42:39 INFO  GetAllProductsServlet:96 - All product getted from DB 
-2021-11-22 11:42:45 INFO  GetAllProductsServlet:96 - All product getted from DB 
-2021-11-22 11:42:49 INFO  GetAllProductsServlet:96 - All product getted from DB 
-2021-11-22 11:42:51 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 00:01:21 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 00:01:29 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 00:01:43 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 00:02:00 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 00:02:02 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 00:02:49 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 00:02:54 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 00:03:42 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 00:03:44 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 00:30:37 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 00:34:28 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 00:34:49 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 00:34:53 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 00:34:57 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 00:34:59 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 00:37:06 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 00:37:08 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 00:37:10 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 00:37:12 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 00:37:18 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 00:37:24 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 00:37:24 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 00:37:26 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 00:40:33 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 00:40:36 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 00:40:42 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 00:40:43 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 00:40:45 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 00:40:51 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 00:40:51 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 00:40:53 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 00:43:45 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 00:44:15 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 00:44:18 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 00:44:19 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 00:46:08 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 00:46:10 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 00:46:17 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 00:46:19 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 00:46:21 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 00:47:20 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 00:50:12 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 00:50:29 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 00:50:29 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 00:50:31 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 00:53:09 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 00:58:27 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 00:58:43 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 00:58:48 INFO  AddToBucketServlet:55 - Product with id : 1 added to DB bucket for user user@mail.com
+2021-11-24 00:58:48 INFO  AddToBucketServlet:60 - Product with id : 1 added to session bucket 
+2021-11-24 00:58:48 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 00:58:53 INFO  AddToBucketServlet:55 - Product with id : 2 added to DB bucket for user user@mail.com
+2021-11-24 00:58:53 INFO  AddToBucketServlet:60 - Product with id : 2 added to session bucket 
+2021-11-24 00:58:53 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 00:58:56 INFO  AddToBucketServlet:55 - Product with id : 3 added to DB bucket for user user@mail.com
+2021-11-24 00:58:56 INFO  AddToBucketServlet:60 - Product with id : 3 added to session bucket 
+2021-11-24 00:58:56 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 00:58:58 INFO  AddToBucketServlet:55 - Product with id : 4 added to DB bucket for user user@mail.com
+2021-11-24 00:58:58 INFO  AddToBucketServlet:60 - Product with id : 4 added to session bucket 
+2021-11-24 00:58:58 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 00:59:18 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 00:59:21 INFO  AddToBucketServlet:55 - Product with id : 1 added to DB bucket for user user@mail.com
+2021-11-24 00:59:21 INFO  AddToBucketServlet:60 - Product with id : 1 added to session bucket 
+2021-11-24 00:59:21 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 00:59:23 INFO  AddToBucketServlet:55 - Product with id : 1 added to DB bucket for user user@mail.com
+2021-11-24 00:59:23 INFO  AddToBucketServlet:60 - Product with id : 1 added to session bucket 
+2021-11-24 00:59:23 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 00:59:25 INFO  AddToBucketServlet:55 - Product with id : 1 added to DB bucket for user user@mail.com
+2021-11-24 00:59:25 INFO  AddToBucketServlet:60 - Product with id : 1 added to session bucket 
+2021-11-24 00:59:25 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 00:59:27 INFO  AddToBucketServlet:55 - Product with id : 2 added to DB bucket for user user@mail.com
+2021-11-24 00:59:27 INFO  AddToBucketServlet:60 - Product with id : 2 added to session bucket 
+2021-11-24 00:59:27 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 00:59:28 INFO  AddToBucketServlet:55 - Product with id : 3 added to DB bucket for user user@mail.com
+2021-11-24 00:59:28 INFO  AddToBucketServlet:60 - Product with id : 3 added to session bucket 
+2021-11-24 00:59:29 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 01:06:26 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 01:06:29 INFO  AddToBucketServlet:55 - Product with id : 7 added to DB bucket for user user@mail.com
+2021-11-24 01:06:29 INFO  AddToBucketServlet:60 - Product with id : 7 added to session bucket 
+2021-11-24 01:06:29 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 01:06:40 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 01:06:41 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 01:06:46 INFO  LoginServlet:56 - User user@mail.com logged in
+2021-11-24 01:06:47 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 01:06:47 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 01:14:05 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 01:14:13 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 01:14:13 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 01:14:15 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 01:14:17 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 01:14:18 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 01:14:22 INFO  LoginServlet:56 - User user@mail.com logged in
+2021-11-24 01:14:23 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 01:14:23 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 01:14:29 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 01:14:51 INFO  AddToBucketServlet:55 - Product with id : 1 added to DB bucket for user user@mail.com
+2021-11-24 01:14:51 INFO  AddToBucketServlet:60 - Product with id : 1 added to session bucket 
+2021-11-24 01:14:51 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 01:15:12 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 01:15:13 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 01:15:27 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 01:15:30 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 01:15:31 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 01:15:40 INFO  LoginServlet:65 - User user@mail.com logged in
+2021-11-24 01:15:40 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 01:15:41 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 01:16:29 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 01:16:29 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 01:18:07 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 01:18:08 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 01:18:14 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 01:18:16 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 01:18:18 INFO  AddToBucketServlet:60 - Product with id : 1 added to session bucket 
+2021-11-24 01:18:18 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 01:18:21 INFO  AddToBucketServlet:60 - Product with id : 2 added to session bucket 
+2021-11-24 01:18:22 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 01:18:24 INFO  AddToBucketServlet:60 - Product with id : 3 added to session bucket 
+2021-11-24 01:18:24 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 01:23:54 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 01:24:04 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 01:24:11 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 01:28:10 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 01:28:12 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 01:28:14 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 01:28:15 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 01:28:16 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 01:28:17 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 01:28:54 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 01:29:09 INFO  LoginServlet:65 - User user@mail.com logged in
+2021-11-24 01:29:09 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 01:29:10 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 01:29:19 INFO  AddToBucketServlet:55 - Product with id : 1 added to DB bucket for user user@mail.com
+2021-11-24 01:29:19 INFO  AddToBucketServlet:60 - Product with id : 1 added to session bucket 
+2021-11-24 01:29:19 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 01:29:27 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 01:30:17 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 01:30:21 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 01:30:25 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 01:30:30 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 01:30:33 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 01:30:38 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 01:30:39 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 01:30:42 INFO  LoginServlet:65 - User user@mail.com logged in
+2021-11-24 01:30:42 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 01:30:42 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 01:31:36 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 01:31:36 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 01:31:57 INFO  LoginServlet:65 - User user@mail.com logged in
+2021-11-24 01:31:57 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 01:31:58 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 01:32:13 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 01:32:15 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 01:32:25 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 01:32:26 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 11:24:31 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 11:40:34 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 11:40:37 INFO  LoginServlet:65 - User user@mail.com logged in
+2021-11-24 11:40:37 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 11:40:38 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 11:41:17 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 11:41:18 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 11:41:49 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 11:41:53 INFO  LoginServlet:65 - User user@mail.com logged in
+2021-11-24 11:41:53 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 11:41:53 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 11:41:59 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 11:42:00 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 11:42:19 INFO  LoginServlet:65 - User user@mail.com logged in
+2021-11-24 11:42:19 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 11:42:19 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 12:33:28 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 12:33:35 INFO  LoginServlet:65 - User user@mail.com logged in
+2021-11-24 12:33:35 INFO  GetAllProductsServlet:96 - All product getted from DB 
+2021-11-24 12:33:36 INFO  GetAllProductsServlet:96 - All product getted from DB 

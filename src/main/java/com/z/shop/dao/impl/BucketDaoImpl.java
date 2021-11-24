@@ -1,7 +1,7 @@
 package com.z.shop.dao.impl;
 
-import com.z.shop.dao.OrderDAO;
-import com.z.shop.entity.Order;
+import com.z.shop.dao.BucketDAO;
+import com.z.shop.entity.Bucket;
 import com.z.shop.utils.DBManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -12,42 +12,44 @@ import java.util.List;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class BucketDaoImpl implements OrderDAO {
+public class BucketDaoImpl implements BucketDAO {
     private static final Logger LOGGER = LogManager.getLogger(BucketDaoImpl.class);
+    private static final DBManager dbManager = DBManager.getInstance();
 
     private static final Lock CONNECTION_LOCK = new ReentrantLock();
 
-    private static final String READ_ALL = "SELECT * FROM z_shop.buckets WHERE deleted = false";
-    private static final String CREATE = "INSERT INTO z_shop.buckets ( user_id, product_id, purchase_date, status) VALUES (?,?,?,?)";
-    private static final String READ_BY_ID = "SELECT * FROM z_shop.buckets WHERE id =? AND deleted = false";
-    private static final String DELETE_BY_ID = "UPDATE z_shop.buckets SET deleted = true WHERE id =?";
+    private static final String READ_ALL = "SELECT * FROM bucket WHERE deleted = false";
+    private static final String CREATE = "INSERT INTO bucket ( user_id, product_id, quantity, purchase_date, status) VALUES (?,?,?,?,?)";
+    private static final String READ_BY_ID = "SELECT * FROM bucket WHERE id =? AND deleted = false";
+    private static String UPDATE_BY_ID = "UPDATE bucket SET user_id =?, product_id=?, quantity=?, purchase_date=?, status=? WHERE id = ?";
+
+    private static final String DELETE_BY_ID = "UPDATE bucket SET deleted = true WHERE id =?";
 
 
     @Override
-    public Order create(Order order) {
-        DBManager dbManager = DBManager.getInstance();
+    public Bucket create(Bucket bucket) {
         try ( Connection connection = dbManager.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(CREATE, Statement.RETURN_GENERATED_KEYS)) {
             int k = 0;
-            preparedStatement.setInt(++k, order.getUserId());
-            preparedStatement.setInt(++k, order.getProductId());
-            preparedStatement.setDate(++k, new Date(order.getPurchaseDate().getTime()));
-            preparedStatement.setString(++k, order.getStatus());
+            preparedStatement.setInt(++k, bucket.getUserId());
+            preparedStatement.setInt(++k, bucket.getProductId());
+            preparedStatement.setInt(++k, bucket.getQuantity());
+            preparedStatement.setDate(++k, new Date(bucket.getPurchaseDate().getTime()));
+            preparedStatement.setString(++k, bucket.getStatus());
             preparedStatement.executeUpdate();
 
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
             resultSet.next();
-            order.setId(resultSet.getInt(1));
+            bucket.setId(resultSet.getInt(1));
         } catch (SQLException e) {
             LOGGER.error(e);
         }
-        return order;
+        return bucket;
     }
 
     @Override
-    public Order read(Integer id) {
-        Order order = null;
-        DBManager dbManager = DBManager.getInstance();
+    public Bucket read(Integer id) {
+        Bucket bucket = null;
         try ( Connection connection = dbManager.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(READ_BY_ID)) {
 
@@ -55,16 +57,50 @@ public class BucketDaoImpl implements OrderDAO {
             ResultSet resultSet = preparedStatement.executeQuery();
             resultSet.next();
 
-            order = getBucketFromResultSet(resultSet);
+            bucket = getBucketFromResultSet(resultSet);
         } catch (SQLException e) {
             LOGGER.error(e);
         }
-        return order;
+        return bucket;
     }
 
     @Override
-    public Order update(Order order) {
-        throw new IllegalStateException("There is no update for bucket");
+    public Bucket update(Bucket bucket) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+
+        CONNECTION_LOCK.lock();
+
+        try {
+            connection = dbManager.getConnection();
+            connection.setAutoCommit(false);
+            preparedStatement = connection.prepareStatement(UPDATE_BY_ID);
+
+            int k = 0;
+            preparedStatement.setInt(++k, bucket.getUserId());
+            preparedStatement.setInt(++k, bucket.getProductId());
+            preparedStatement.setInt(++k, bucket.getQuantity());
+            preparedStatement.setDate(++k, new Date(bucket.getPurchaseDate().getTime()));
+            preparedStatement.setString(++k, bucket.getStatus());
+            preparedStatement.setInt(++k, bucket.getId());
+
+            preparedStatement.executeUpdate();
+            connection.commit();
+        } catch (SQLException e) {
+            if (connection != null) {
+                try {
+                    connection.rollback();
+                } catch (SQLException ex) {
+                    LOGGER.error(e);
+                }
+            }
+            LOGGER.error(e);
+        } finally {
+            DBManager.close(preparedStatement);
+            DBManager.close(connection);
+            CONNECTION_LOCK.unlock();
+        }
+        return bucket;
     }
 
     @Override
@@ -72,7 +108,6 @@ public class BucketDaoImpl implements OrderDAO {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         CONNECTION_LOCK.lock();
-        DBManager dbManager = DBManager.getInstance();
         try {connection = dbManager.getConnection();
             connection.setAutoCommit(false);
             preparedStatement = connection.prepareStatement(DELETE_BY_ID);
@@ -97,32 +132,41 @@ public class BucketDaoImpl implements OrderDAO {
 
 
     @Override
-    public List<Order> readAll() {
-        List<Order> orderRecords = new ArrayList<>();
-        DBManager dbManager = DBManager.getInstance();
+    public List<Bucket> readAll() {
+        List<Bucket> bucketRecords = new ArrayList<>();
         try ( Connection connection = dbManager.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(READ_ALL)) {
 
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
 
-                Order order = getBucketFromResultSet(resultSet);
-                orderRecords.add(order);
+                Bucket bucket = getBucketFromResultSet(resultSet);
+                bucketRecords.add(bucket);
             }
         } catch (SQLException e) {
             LOGGER.error(e);
         }
-        return orderRecords;
+        return bucketRecords;
     }
 
-    private Order getBucketFromResultSet(ResultSet resultSet) throws SQLException {
+    private Bucket getBucketFromResultSet(ResultSet resultSet) throws SQLException {
+        Bucket bucket = new Bucket();
         Integer id = resultSet.getInt("id");
         Integer userId = resultSet.getInt("user_id");
         Integer productId = resultSet.getInt("product_id");
+        Integer quantity = resultSet.getInt("quantity");
         Date purchaseDate = resultSet.getDate("purchase_date");
         String status = resultSet.getString("status");
+        boolean deleted = resultSet.getBoolean("deleted");
 
-        Order order = new Order(id, userId, productId, purchaseDate, status);
-        return order;
+        bucket.setId(id);
+        bucket.setUserId(userId);
+        bucket.setProductId(productId);
+        bucket.setQuantity(quantity);
+        bucket.setPurchaseDate(purchaseDate);
+        bucket.setStatus(status);
+        bucket.setDeleted(deleted);
+
+        return bucket;
     }
 }

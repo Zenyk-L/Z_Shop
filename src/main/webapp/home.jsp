@@ -62,9 +62,9 @@
 
     <div class="containerBody overflow-hidden">
 
-        <c:if test="${sessionScope.success == 'invalid input' || sessionScope.success == 'fail: user already registered' || sessionScope.success == 'registered'}">
-            <H6>${sessionScope.succes}</h6>
-        </c:if>
+<%--        <c:if test="${sessionScope.success == 'invalid input' || sessionScope.success == 'fail: user already registered' || sessionScope.success == 'registered'}">--%>
+<%--            <H1> Hello ${success}</H1>--%>
+<%--        </c:if>--%>
 
 
 
@@ -100,7 +100,7 @@
                     <span class="card-text ml-3"><b>Price: ${product.price}</b></span>
                     <p class="card-text"></p>
                     <div class="d-flex">
-                        <a href="#"  class="btn btn-primary"> + add to bucket</a>
+                        <a href="/addToBucket?productId=${product.id}"  class="btn btn-primary"> + add to bucket</a>
                         <a href="#" onclick="deleteProduct(${product.id}, '${product.name}' )" class="btn btn-danger ms-auto"> Delete </a>
                     </div>
                 </div>

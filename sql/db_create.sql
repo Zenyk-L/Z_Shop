@@ -71,8 +71,8 @@ CREATE TABLE product
     FOREIGN KEY (category_id) REFERENCES category (id) ON DELETE SET NULL
 );
 
-DROP TABLE IF EXISTS order;
-CREATE TABLE order
+DROP TABLE IF EXISTS bucket;
+CREATE TABLE bucket
 (
     id            BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     user_id       BIGINT             NOT NULL,
@@ -139,7 +139,7 @@ from product;
 
 delete
 from category
-where id > 2;
+where id = 16;
 
 select *
 from z_shop.language;
@@ -153,6 +153,9 @@ from category;
 
 select *
 from z_shop.user;
+
+select *
+from bucket;
 
 
 INSERT INTO category value ();

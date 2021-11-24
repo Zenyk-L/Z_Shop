@@ -19,19 +19,16 @@
     <section class="header-main border-bottom">
 
         <div class="d-flex justify-content-end">
+
             <c:if test="${sessionScope.user.amount > 0}">
-            <div s<%--tyle="color: white"--%> class="text-white mr-5"> Amount: ${sessionScope.user.amount}</div>
+            <div  class="text-white mr-5"> Amount: ${sessionScope.user.amount}</div>
             </c:if>
-            <div id="userEmail" s<%--tyle="color: white"--%> class="text-white mr-5">${sessionScope.user.email}</div>
+            <div id="userEmail" class="text-white mr-5">${sessionScope.user.email}</div>
 
             <fieldset>
                 <label style="color: white"> Language</label>
                 <select id="localesSession" style="color: #007bff" class="mr-5">
                     <c:forEach items="${languages}" var="language">
-
-                        <%--                                       <c:if test="${language.shortName == sessionScope.lang}">--%>
-                        <%--                                           <option hidden value ="${language.fullName}"></option>--%>
-                        <%--                                       </c:if>--%>
 
                         <option value="${language.shortName}">${language.fullName}</option>
                     </c:forEach>
@@ -83,58 +80,67 @@
                         <%--                            </fieldset>--%>
                         <%--                        </div >--%>
                         <%--                            <div id="userEmail">${sessionScope.user.email}</div>--%>
-                        <a target="_blank" href="#" data-abc="true" class="nav-link widget-header"> <i
-                                class="fas fa fa-shopping-cart"></i></a> <span class="vl"></span>
-                        <a target="_blank" href="#" data-abc="true" class="nav-link widget-header"> <i
-                                class="fas fa fa-user"></i></a> <span class="vl"></span>
-                        <div class="dropdown btn-group"><a class="nav-link nav-icons" href="#"
-                                                           id="navbarDropdownMenuLink1" data-toggle="dropdown"
-                                                           aria-haspopup="true" aria-expanded="false" data-abc="true"><i
-                                class="fas fa fa-cog<%--fa-bell--%>"></i></a>
-                            <ul class="dropdown-menu dropdown-menu-right notification-dropdown">
-                                <li>
-                                    <div class="notification-title">Admin menu</div>
-                                    <div class="notification-list">
-                                        <div class="list-group"><a href="/createProduct"
-                                                                   class="list-group-item list-group-item-action active"
-                                                                   data-abc="true">
-                                            <div class="notification-info">
-                                                <div class="notification-list-user-img"><%--<img src="https://img.icons8.com/nolan/100/000000/helping-hand.png" alt="" class="user-avatar-md rounded-circle">--%>
-                                                    <i class="fa fa-plus"></i> <h6>Create product</h6></div>
-                                            </div>
-                                        </a> <a href="redemption-center"
-                                                class="list-group-item list-group-item-action active" data-abc="true">
-                                            <div class="notification-info">
-                                                <div class="notification-list-user-img"><img
-                                                        src="https://img.icons8.com/bubbles/100/000000/prize.png" alt=""
-                                                        class="user-avatar-md rounded-circle"></div>
-                                                <div class="notification-list-user-block"><span
-                                                        class="notification-list-user-name">Redemption Center</span>
-                                                </div>
-                                            </div>
-                                        </a> <a href="#" class="list-group-item list-group-item-action active"
-                                                data-abc="true">
-                                            <div class="notification-info">
-                                                <div class="notification-list-user-img"><img
-                                                        src="https://img.icons8.com/ultraviolet/100/000000/medal.png"
-                                                        alt="" class="user-avatar-md rounded-circle"></div>
-                                                <div class="notification-list-user-block"><span
-                                                        class="notification-list-user-name">Achievements</span></div>
-                                            </div>
-                                        </a> <a href="#" class="list-group-item list-group-item-action active"
-                                                data-abc="true">
-                                            <div class="notification-info">
-                                                <div class="notification-list-user-img"><img
-                                                        src="https://img.icons8.com/bubbles/100/000000/call-female.png"
-                                                        alt="" class="user-avatar-md rounded-circle"></div>
-                                                <div class="notification-list-user-block"><span
-                                                        class="notification-list-user-name">Contact us</span></div>
-                                            </div>
-                                        </a></div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
+<%--                        <a target="_blank" href="#" data-abc="true" class="nav-link widget-header"> <i--%>
+<%--                                class="fas fa fa-shopping-cart"></i></a> <span class="vl"></span>--%>
+<%--                        <a target="_blank" href="#" data-abc="true" class="nav-link widget-header"> <i--%>
+<%--                                class="fas fa fa-user"></i></a> <span class="vl"></span>--%>
+<%--                        <div class="dropdown btn-group"><a class="nav-link nav-icons" href="#"--%>
+<%--                                                           id="navbarDropdownMenuLink1" data-toggle="dropdown"--%>
+<%--                                                           aria-haspopup="true" aria-expanded="false" data-abc="true"><i class="fas fa fa-cog&lt;%&ndash;fa-bell&ndash;%&gt;"></i></a>--%>
+<%--                            <ul class="dropdown-menu dropdown-menu-right notification-dropdown">--%>
+<%--                                <li>--%>
+<%--                                    <div class="notification-title">Admin menu</div>--%>
+<%--                                    <div class="notification-list">--%>
+<%--                                        <div class="list-group"><a href="/createProduct"--%>
+<%--                                                                   class="list-group-item list-group-item-action active"--%>
+<%--                                                                   data-abc="true">--%>
+<%--                                            <div class="notification-info">--%>
+<%--                                                <div class="notification-list-user-img">&lt;%&ndash;<img src="https://img.icons8.com/nolan/100/000000/helping-hand.png" alt="" class="user-avatar-md rounded-circle">&ndash;%&gt;--%>
+<%--                                                    <i class="fa fa-plus"></i> <h6>Create product</h6></div>--%>
+<%--                                            </div>--%>
+<%--                                        </a> <a href="redemption-center"--%>
+<%--                                                class="list-group-item list-group-item-action active" data-abc="true">--%>
+<%--                                            <div class="notification-info">--%>
+<%--                                                <div class="notification-list-user-img"><img--%>
+<%--                                                        src="https://img.icons8.com/bubbles/100/000000/prize.png" alt=""--%>
+<%--                                                        class="user-avatar-md rounded-circle"></div>--%>
+<%--                                                <div class="notification-list-user-block"><span--%>
+<%--                                                        class="notification-list-user-name">Redemption Center</span>--%>
+<%--                                                </div>--%>
+<%--                                            </div>--%>
+<%--                                        </a> <a href="#" class="list-group-item list-group-item-action active"--%>
+<%--                                                data-abc="true">--%>
+<%--                                            <div class="notification-info">--%>
+<%--                                                <div class="notification-list-user-img"><img--%>
+<%--                                                        src="https://img.icons8.com/ultraviolet/100/000000/medal.png"--%>
+<%--                                                        alt="" class="user-avatar-md rounded-circle"></div>--%>
+<%--                                                <div class="notification-list-user-block"><span--%>
+<%--                                                        class="notification-list-user-name">Achievements</span></div>--%>
+<%--                                            </div>--%>
+<%--                                        </a> <a href="#" class="list-group-item list-group-item-action active"--%>
+<%--                                                data-abc="true">--%>
+<%--                                            <div class="notification-info">--%>
+<%--                                                <div class="notification-list-user-img"><img--%>
+<%--                                                        src="https://img.icons8.com/bubbles/100/000000/call-female.png"--%>
+<%--                                                        alt="" class="user-avatar-md rounded-circle"></div>--%>
+<%--                                                <div class="notification-list-user-block"><span--%>
+<%--                                                        class="notification-list-user-name">Contact us</span></div>--%>
+<%--                                            </div>--%>
+<%--                                        </a></div>--%>
+<%--                                    </div>--%>
+<%--                                </li>--%>
+<%--                            </ul>--%>
+<%--                        </div>--%>
+                            <c:if test="${sessionScope.buckets.size() > 0}">
+                            <a class="text-white mr-5" style=" position: relative;" href="/bucket">
+                                <span class="number"  style=" position: absolute; right: 6px">${sessionScope.buckets.size()}</span>
+                                <img class="img-fluid" src="/image/cart.png" alt="cart" />
+<%--                                <i class="fas fa fa-shopping-cart"></i>--%>
+                            </a>
+                            </c:if>
+
+                            <a class="text-white mr-5" href="#"><i class="fas fa fa-user"></i></a>
+                         <a class="text-white mr-5" href="/createProduct"><i class="fas fa fa-cog"></i></a>
                         <%--                            <div class="text-white mr-5">${sessionScope.success}</div>--%>
                         <c:if test="${sessionScope.success != 'success'}">
                             <a class="text-white mr-5 togglePopup" href="#"><i

@@ -4,24 +4,23 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
-public class Order implements Serializable {
+public class Bucket implements Serializable {
 
     private Integer id;
     private Integer userId;
     private Integer productId;
+    private Integer quantity;
     private Date purchaseDate;
     private boolean deleted;
     private String status;
 
-    public Order() {
+
+    public Integer getQuantity() {
+        return quantity;
     }
 
-    public Order(Integer id, Integer userId, Integer productId, Date purchaseDate, String status) {
-        this.id = id;
-        this.userId = userId;
-        this.productId = productId;
-        this.purchaseDate = purchaseDate;
-        this.status = status;
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
     }
 
     public Integer getId() {
@@ -76,13 +75,13 @@ public class Order implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Order order = (Order) o;
-        return Objects.equals(id, order.id) && Objects.equals(userId, order.userId) && Objects.equals(productId, order.productId) && Objects.equals(purchaseDate, order.purchaseDate);
+        Bucket bucket = (Bucket) o;
+        return deleted == bucket.deleted && Objects.equals(id, bucket.id) && Objects.equals(userId, bucket.userId) && Objects.equals(productId, bucket.productId) && Objects.equals(quantity, bucket.quantity) && Objects.equals(purchaseDate, bucket.purchaseDate) && Objects.equals(status, bucket.status);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, userId, productId, purchaseDate);
+        return Objects.hash(id, userId, productId, quantity, purchaseDate, deleted, status);
     }
 
     @Override
@@ -91,8 +90,10 @@ public class Order implements Serializable {
                 "id=" + id +
                 ", userId=" + userId +
                 ", productId=" + productId +
+                ", quantity=" + quantity +
                 ", purchaseDate=" + purchaseDate +
                 ", deleted=" + deleted +
-                '}' + System.lineSeparator();
+                ", status='" + status + '\'' +
+                '}'+ System.lineSeparator();
     }
 }
