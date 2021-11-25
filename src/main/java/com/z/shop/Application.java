@@ -13,6 +13,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.List;
 
 public class Application {
     private static final Logger LOGGER = LogManager.getLogger(Application.class);
@@ -21,28 +22,28 @@ public class Application {
     public static void main(String[] args) throws SQLException {
 
         BucketService bucketService = BucketServiceImpl.getBucketService();
-        Bucket bucket = new Bucket();
-        bucket.setUserId(3);
-        bucket.setProductId(2);
-        bucket.setQuantity(3);
-        bucket.setPurchaseDate(new Date());
-        bucket.setStatus("reserved");
-        bucket.setDeleted(true);
-//        bucketService.create(bucket);
-//        bucketService.delete(2);
-//
-//        System.out.println(bucket);
-        System.out.println(bucketService.readAll());
-        bucket = bucketService.read(2);
-        bucket.setUserId(1);
-        bucket.setProductId(1);
-        bucket.setQuantity(1);
-        bucket.setPurchaseDate(new Date());
-        bucket.setStatus("canceled");
-        bucket.setDeleted(true);
+//        Bucket bucket = new Bucket();
+//        bucket.setUserId(3);
+//        bucket.setProductId(2);
+//        bucket.setQuantity(3);
+//        bucket.setPurchaseDate(new Date());
+//        bucket.setStatus("reserved");
+//        bucket.setDeleted(true);
+////        bucketService.create(bucket);
+////        bucketService.delete(2);
+////
+////        System.out.println(bucket);
+//        System.out.println(bucketService.readAll());
+//        bucket = bucketService.read(2);
+//        bucket.setUserId(1);
+//        bucket.setProductId(1);
+//        bucket.setQuantity(1);
+//        bucket.setPurchaseDate(new Date());
+//        bucket.setStatus("canceled");
+//        bucket.setDeleted(true);
 
-        bucketService.update(bucket);
-        System.out.println(bucketService.readAll());
+        List<Bucket> buckets = bucketService.findByUserIdReserved(1);
+        System.out.println(buckets);
 
     }
 }

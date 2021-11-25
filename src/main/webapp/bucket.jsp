@@ -67,7 +67,7 @@
     <div class="container1 pb-5  mt-md-n3 pl-3">
         <div class="row">
             <div class="col-xl-9 col-md-8">
-                <h2 class="h6 d-flex flex-wrap justify-content-between align-items-center px-4 py-3 bg-secondary"><span>Products</span><a class="font-size-sm" href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left" style="width: 1rem; height: 1rem;"><polyline points="15 18 9 12 15 6"></polyline></svg>Continue shopping</a></h2>
+                <h2 class="h6 d-flex flex-wrap justify-content-between align-items-center px-4 py-3 bg-secondary"><span>Products</span><a class="font-size-sm" style="color: #1a1a1a" href="/home"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left" style="width: 1rem; height: 1rem;"><polyline points="15 18 9 12 15 6"></polyline></svg>Continue shopping</a></h2>
         <c:forEach items="${sessionScope.buckets}" var="bucket">
     <c:set var="product"  value="${productMap[bucket.productId]}"/>
                 <!-- Item-->
@@ -76,16 +76,20 @@
                         <a class="cart-item-thumb mx-auto mr-sm-4" href="#"><div style="background-image:url('${pageContext.request.contextPath}/image/${product.image}'); background-size:100% 100%; height: 150px; width: 150px"></div> </a>
                         <div class="media-body pt-3">
                             <h3 class="product-card-title font-weight-semibold border-0 pb-0"><a href="#"> ${product.category.translations[sessionScope.lang]}</a> <a href="#">${product.name}</a></h3>
-                            <div class="font-size-sm"><span class="text-muted mr-2">Description:</span>${product.description}</div>
                             <div class="font-size-sm"><span class="text-muted mr-2">Size:</span>${product.scale}</div>
                             <div class="font-size-sm"><span class="text-muted mr-2">Color:</span>${product.color}</div>
                             <div class="font-size-lg text-primary pt-2"><b>Price: </b> ${product.price}</div>
                         </div>
                     </div>
+                    <div class="media-body pt-5 ml-5">
+                        <div class="font-size-sm"><span class="text-muted mr-2">Description:</span></div>
+                        <div class="font-size-sm"><span class="text-muted mr-2">${product.description}</span></div>
+<%--                        <span>Description:</span> </span>--%>
+                    </div>
                     <div class="pt-2 pt-sm-0 pl-sm-3 mx-auto mx-sm-0 text-center text-sm-left" style="max-width: 10rem;">
                         <div class="form-group mb-2">
-                            <label for="quantity1">Quantity</label>
-                            <input class="form-control form-control-sm" type="number" id="quantity1" value="${bucket.quantity}">
+                            <label for="quantity${product.id}">Quantity</label>
+                            <input class="form-control form-control-sm" type="number" id="quantity${product.id}" value="${bucket.quantity}" onchange="changeQuantity(${product.id})">
                         </div>
                         <button class="btn btn-outline-secondary btn-sm btn-block mb-2" type="button">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-refresh-cw mr-1">
@@ -109,7 +113,7 @@
             <!-- Sidebar-->
             <div class="col-xl-3 col-md-4 pt-3 pt-md-0">
                 <h2 class="h6 px-4 py-3 bg-secondary text-center">Subtotal</h2>
-                <div class="h3 font-weight-semibold text-center py-3">$325.00</div>
+                <div class="h3 font-weight-semibold text-center py-3">${subtotal}</div>
                 <hr>
                 <h3 class="h6 pt-4 font-weight-semibold"><span class="badge badge-success mr-2">Note</span>Additional comments</h3>
                 <textarea class="form-control mb-3" id="order-comments" rows="5"></textarea>
@@ -124,6 +128,6 @@
     </div>
 
 
-
+<script src="js/bucket.js"></script>
 </body>
 </html>

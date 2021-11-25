@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface BucketService extends AbstractCRUD<Bucket> {
     List<Bucket> findByUserId(Integer userId);
+    List<Bucket> findByUserIdReserved(Integer userId);
 }

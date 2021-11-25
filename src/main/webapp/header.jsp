@@ -205,40 +205,41 @@
             </div>
         </div>
     </nav>
-    <%--    <div class="login-page" id="popup">--%>
-    <%--        <div class="form">--%>
 
-    <%--            <img src="https://cdn4.vectorstock.com/i/1000x1000/89/13/user-login-icon-vector-21078913.jpg" height="50px"--%>
-    <%--                 width="50px" style="margin: 0 auto" onclick="javascript:openLogin()">--%>
-    <%--            <br>--%>
-    <%--            <form class="register-form" action="/registration" method="POST">--%>
-    <%--                <input type="text" name="firstName" placeholder="First name"/>--%>
-    <%--                <input type="text" name="lastName" placeholder="Last name"/>--%>
-    <%--                <input type="text" name="email" placeholder="email address"/>--%>
-    <%--                <input type="password" name="password" placeholder="password"/>--%>
-    <%--                &lt;%&ndash;            <input name="cpassword" type="password" placeholder="confirm password"/>&ndash;%&gt;--%>
+    <div class="login-page" id="popup">
+        <div class="form">
 
-    <%--                <button type="submit" class="register">Register</button>--%>
-    <%--                <button type="reset" class="togglePopup ">Cancel</button>--%>
-    <%--                <p class="message">Already registered? <a href="#">Sign In</a></p>--%>
-    <%--            </form>--%>
+            <img src="https://cdn4.vectorstock.com/i/1000x1000/89/13/user-login-icon-vector-21078913.jpg" height="50px"
+                 width="50px" style="margin: 0 auto" onclick="javascript:openLogin()">
+            <br>
+            <form class="register-form" action="/registration" method="POST">
+                <input type="text" name="firstName" placeholder="First name"/>
+                <input type="text" name="lastName" placeholder="Last name"/>
+                <input type="text" name="email" placeholder="email address"/>
+                <input type="password" name="password" placeholder="password"/>
+                <%--            <input name="cpassword" type="password" placeholder="confirm password"/>--%>
 
-    <%--            <form class="login-form" action="/login" method="POST">--%>
+                <button type="submit" class="register">Register</button>
+                <button type="reset" class="cancel">Cancel</button>
+                <p class="message">Already registered? <a href="#">Sign In</a></p>
+            </form>
 
-    <%--                <input type="text" name="email" placeholder="email address" value="user@mail.com"/>--%>
-    <%--                <input type="password" name="password" placeholder="password" value="user"/>--%>
-    <%--                <button type="submit" class="login">Login</button>--%>
-    <%--                <button type="reset" class="togglePopup">Cancel</button>--%>
-    <%--                <p class="message">Not registered? <a href="#">Create an account</a></p>--%>
-    <%--            </form>--%>
-    <%--        </div>--%>
-    <%--        <div class="alert alert-success alert-dismissible fade show"--%>
-    <%--             role="alert">--%>
-    <%--            <b>Success</b> You are registered.--%>
-    <%--            <button type="button" class="btn-close " data-bs-dismiss="alert"--%>
-    <%--                    aria-label="Close"></button>--%>
-    <%--        </div>--%>
-    <%--    </div>--%>
+            <form class="login-form" action="/login" method="POST">
+
+                <input type="text" name="email" placeholder="email address" value="user@mail.com"/>
+                <input type="password" name="password" placeholder="password" value="user"/>
+                <button type="submit" class="login">Login</button>
+                <button type="reset" class=" cancel">Cancel</button>
+                <p class="message">Not registered? <a href="#">Create an account</a></p>
+            </form>
+        </div>
+        <div class="alert alert-success alert-dismissible fade show"
+             role="alert">
+            <b>Success</b> You are registered.
+            <button type="button" class="btn-close " data-bs-dismiss="alert"
+                    aria-label="Close"></button>
+        </div>
+    </div>
 </header>
 
 

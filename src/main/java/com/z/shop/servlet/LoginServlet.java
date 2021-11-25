@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.List;
 
 @WebServlet(name = "LoginServlet", value = "/login")
@@ -35,25 +36,40 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         HttpSession session = request.getSession();
-        if (session != null) {
-            session.invalidate();
-        }
 
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
         String success = null;
-        if(!email.isEmpty() && email != null) {
+        if (!email.isEmpty() && email != null) {
             User user = userService.getUserByEmail(email);
 
             if (user.getId() != null && user.getPassword().equals(password)) {
                 user.setPassword("");
-                session = request.getSession();
+
+                User userFromSession = (User) session.getAttribute("user");
+                if (userFromSession != null && !user.getEmail().equals(userFromSession.getEmail())){
+
+                    if (session != null) {
+                        session.invalidate();
+                    }
+
+                }
                 session.setAttribute("user", user);
                 success = "success";
-
-                List<Bucket> userBuckets = bucketService.findByUserId(user.getId());
+                System.out.println((List<Bucket>) session.getAttribute("buckets"));
+                List<Bucket> userBuckets = (List<Bucket>) session.getAttribute("buckets");
                 System.out.println(userBuckets);
+                if (userBuckets != null) {
+                    Iterator<Bucket> iterator = userBuckets.iterator();
+                    while (iterator.hasNext()) {
+                        Bucket bucket = iterator.next();
+                        bucket.setUserId(user.getId());
+                        bucketService.create(bucket);
+                    }
+                }
+
+                userBuckets = bucketService.findByUserIdReserved(user.getId());
                 session.setAttribute("buckets", userBuckets);
             }
 

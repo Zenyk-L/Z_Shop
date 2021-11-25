@@ -120,9 +120,9 @@ function fillCategoryName(){
 }
 
 
-function deleteProduct(productId, prodectName){
+function deleteProduct(productId, productName){
 
-    if (window.confirm("Do you really want to delete "+ prodectName + " ?")) {
+    if (window.confirm("Do you really want to delete "+ productName + " ?")) {
         window.open("/deleteProduct?productId=" + productId, "_self");
     }
 
