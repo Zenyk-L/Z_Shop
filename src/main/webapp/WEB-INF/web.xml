@@ -18,6 +18,14 @@
         <dispatcher>INCLUDE</dispatcher>
         <dispatcher>ERROR</dispatcher>
     </filter-mapping>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/error_page404.jsp</location>
+    </error-page>
+    <error-page>
+
+        <location>/error_page.jsp</location>
+    </error-page>
 
 <!--    <resource-ref>-->
 <!--        &lt;!&ndash;        DB Connection&ndash;&gt;-->

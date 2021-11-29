@@ -22,22 +22,23 @@
 <jsp:include page="header.jsp"></jsp:include>
 
 
-<form id="form" action="createProduct" method="POST" enctype="multipart/form-data" accept-charset="utf-8">
+<form id="form" action="editProduct" method="POST" enctype="multipart/form-data" accept-charset="utf-8">
 
     <div class="form-group">
         <label>Product Name</label>
         <input type="text" name="name" class="form-control productName"
-               placeholder="Enter product name" required>
+               placeholder="Enter product name" value="${product.name}" required>
     </div>
     <div class="form-group">
         <label>Image</label>
         <input type="file" name="file" class="form-control productName"
-               placeholder="Choose file" accept="image/*">
+               placeholder="Choose file" accept="image/*" value="${product.image}">
     </div>
 
     <div class="form-group">
         <label>Category</label>
         <select name="category" id="selectCat" class="form-control productName">
+            <option value="${product.category.id}" selected hidden>${product.category.translations[sessionScope.lang]}</option>
             <c:forEach items="${categories}" var="category">
                 <option value="${category.id}">${category.translations[sessionScope.lang]}</option>
             </c:forEach>
@@ -52,32 +53,32 @@
     <div class="form-group">
         <label>Quantity</label>
         <input type="number" name="quantity" class="form-control productName"
-               placeholder="Enter product quantity" min="0" required>
+               placeholder="Enter product quantity" min="0" value="${product.quantity}" required>
     </div>
     <div class="form-group">
         <label>Product Description</label>
         <input type="text" name="description" class="form-control productDescription"
-               placeholder="Enter product description" required>
+               placeholder="Enter product description" value="${product.description}" required>
     </div>
     <div class="form-group">
         <label>Product color</label>
         <input type="text" name="color" class="form-control productName"
-               placeholder="Enter product color" required>
+               placeholder="Enter product color"  value="${product.color}" required>
     </div>
     <div class="form-group">
         <label>Product scale</label>
         <input type="text" name="scale" class="form-control productName"
-               placeholder="Enter product scale" required>
+               placeholder="Enter product scale" value="${product.scale}" required>
     </div>
 
     <div class="form-group">
         <label>Product Price</label>
         <input type="number" step="0.01" name="price" class="form-control productPrice"
-               placeholder="Enter product price" required>
+               placeholder="Enter product price" value="${product.price}" required>
     </div>
 
 
-    <button class="btn btn-primary createProduct" onclick="alertOfSuccessShow()">Submit</button>
+    <button class="btn btn-primary createProduct" >Submit</button>
 
 </form>
 

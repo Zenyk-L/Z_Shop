@@ -101,6 +101,8 @@
                     <p class="card-text"></p>
                     <div class="d-flex">
                         <a href="/addToBucket?productId=${product.id}"  class="btn btn-primary"> + add to bucket</a>
+
+                        <a href="/editProduct?productId=${product.id}"  class="btn btn-warning ms-auto">Edit</a>
                         <a href="#" onclick="deleteProduct(${product.id}, '${product.name}' )" class="btn btn-danger ms-auto"> Delete </a>
                     </div>
                 </div>

@@ -58,4 +58,9 @@ public class BucketServiceImpl implements BucketService {
     public List<Bucket> findByUserIdReserved(Integer userId) {
         return  readAll().stream().filter(bucket -> bucket.getUserId().equals(userId) && bucket.getStatus().equals("reserved")).collect(Collectors.toList());
     }
+
+    @Override
+    public List<Bucket> findByUserIdPaid(Integer userId) {
+        return  readAll().stream().filter(bucket -> bucket.getUserId().equals(userId) && bucket.getStatus().equals("paid")).collect(Collectors.toList());
+    }
 }

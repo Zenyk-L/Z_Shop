@@ -14,26 +14,28 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
-@WebServlet(name = "BuyHistoryServlet", value = "/buyHistory")
-public class BuyHistoryServlet extends HttpServlet {
-    private BucketService bucketService = BucketServiceImpl.getBucketService();
+@WebServlet(name = "RemoveFromBucketServlet", value = "/removeFromBucket")
+public class RemoveFromBucketServlet extends HttpServlet {
+    private static BucketService bucketService = BucketServiceImpl.getBucketService();
     private static ProductService productService = ProductServiceImpl.getProductService();
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Map<Integer, Product> productMap = productService.readAllMap();
-        request.setAttribute("productMap", productMap);
-
         HttpSession session = request.getSession();
+
+        Integer productId = Integer.valueOf(request.getParameter("productId"));
+        List<Bucket> buckets = (List<Bucket>) session.getAttribute("buckets");
+
+        buckets = buckets.stream().filter(bucket -> bucket.getProductId().intValue() != productId.intValue()).collect(Collectors.toList());
+
         User user = (User) session.getAttribute("user");
-        if (user != null) {
-            List<Bucket> userBucketPaid = bucketService.findByUserIdPaid(user.getId());
-
-                request.setAttribute("buckets", userBucketPaid);
+        if (user != null){
+            Integer bucketId = Integer.valueOf(request.getParameter("bucketId"));
+            bucketService.delete(bucketId);
         }
-
-        request.getRequestDispatcher("bucketHistory.jsp").forward(request,response);
+        session.setAttribute("buckets", buckets);
+        response.sendRedirect("/bucket");
     }
 
     @Override

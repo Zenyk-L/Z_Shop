@@ -41,10 +41,10 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("password");
 
         String success = null;
-        if (!email.isEmpty() && email != null) {
+        if (!email.isEmpty() && email != null && !password.isEmpty() && password != null) {
             User user = userService.getUserByEmail(email);
 
-            if (user.getId() != null && user.getPassword().equals(password)) {
+            if (user != null && user.getPassword().equals(password)) {
                 user.setPassword("");
 
                 User userFromSession = (User) session.getAttribute("user");
@@ -57,9 +57,9 @@ public class LoginServlet extends HttpServlet {
                 }
                 session.setAttribute("user", user);
                 success = "success";
-                System.out.println((List<Bucket>) session.getAttribute("buckets"));
+
                 List<Bucket> userBuckets = (List<Bucket>) session.getAttribute("buckets");
-                System.out.println(userBuckets);
+
                 if (userBuckets != null) {
                     Iterator<Bucket> iterator = userBuckets.iterator();
                     while (iterator.hasNext()) {
@@ -71,8 +71,9 @@ public class LoginServlet extends HttpServlet {
 
                 userBuckets = bucketService.findByUserIdReserved(user.getId());
                 session.setAttribute("buckets", userBuckets);
+            }else {
+                success = "user doesnt exist";
             }
-
         } else {
             success = "invalid input";
         }

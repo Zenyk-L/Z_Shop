@@ -20,49 +20,6 @@
 </head>
 <body>
 <jsp:include page="header.jsp"></jsp:include>
-<%--<table>--%>
-<%--    <thead>--%>
-<%--    <tr>--%>
-<%--        <th style='width: 15%;'> Category</th>--%>
-<%--        <th style='width: 15%;'> Product name</th>--%>
-<%--        <th style='width: 10%;'> Image </th>--%>
-<%--        <th style='width: 10%;'> Color </th>--%>
-<%--        <th style='width: 15%;'> Size </th>--%>
-<%--        <th style='width: 15%;'> Price </th>--%>
-<%--        <th style='width: 15%;'> Quantity </th>--%>
-<%--        <th style='width: 20%;'> Purchase date </th>--%>
-<%--        <th style='width: 20%;'> Action </th>--%>
-
-
-<%--    </tr>--%>
-
-<%--    </thead>--%>
-
-
-
-<%--    <tbody>--%>
-<%--    <c:forEach items="${sessionScope.buckets}" var="bucket">--%>
-<%--        <c:set var="product"  value="${productMap[bucket.productId]}"/>--%>
-<%--    <tr>--%>
-<%--        <td>  ${product.category.translations[sessionScope.lang]}</td>--%>
-<%--        <td> ${product.name}</td>--%>
-<%--        <td style="background-image:url('${pageContext.request.contextPath}/image/${product.image}'); background-size:100% 100%; height: 50px; width: 50px"> </td>--%>
-<%--        <td> ${product.color}</td>--%>
-<%--        <td> ${product.scale}</td>--%>
-<%--        <td> ${product.price}</td>--%>
-<%--        <td> ${bucket.quantity}</td>--%>
-<%--        <td>  <fmt:formatDate type = "date" dateStyle = "short"  value="${bucket.purchaseDate}"/></td>--%>
-<%--&lt;%&ndash;        <td>  <fmt:formatDate  type = "both" dateStyle = "short"  value="${bucket.purchaseDate}"/></td>&ndash;%&gt;--%>
-<%--&lt;%&ndash;        <td>  <fmt:formatDate  type = "both" dateStyle = "medium"  value="${bucket.purchaseDate}"/></td>&ndash;%&gt;--%>
-<%--        <td> ${bucket.status}</td>--%>
-<%--        <td><a href="/removeFromBucket?productId=${product.id}&bucketId=${bucket.id}">delete</a> </td>--%>
-
-<%--    </tr>--%>
-<%--    </c:forEach>--%>
-<%--    </tbody>--%>
-<%--</table>--%>
-
-<%--==================================================================================================================    --%>
 
     <div class="container1 pb-5  mt-md-n3 pl-3">
         <div class="row">
@@ -84,24 +41,19 @@
                     <div class="media-body pt-5 ml-5">
                         <div class="font-size-sm"><span class="text-muted mr-2">Description:</span></div>
                         <div class="font-size-sm"><span class="text-muted mr-2">${product.description}</span></div>
-<%--                        <span>Description:</span> </span>--%>
                     </div>
                     <div class="pt-2 pt-sm-0 pl-sm-3 mx-auto mx-sm-0 text-center text-sm-left" style="max-width: 10rem;">
                         <div class="form-group mb-2">
                             <label for="quantity${product.id}">Quantity</label>
                             <input class="form-control form-control-sm" type="number" id="quantity${product.id}" value="${bucket.quantity}" onchange="changeQuantity(${product.id})">
                         </div>
-<%--                        <button class="btn btn-primary btn-sm btn-block mb-2" type="button">--%>
 
 <%--&lt;%&ndash;                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-refresh-cw mr-1">&ndash;%&gt;--%>
 <%--&lt;%&ndash;                                <polyline points="23 4 23 10 17 10"></polyline>&ndash;%&gt;--%>
 <%--&lt;%&ndash;                                <polyline points="1 20 1 14 7 14"></polyline>&ndash;%&gt;--%>
 <%--&lt;%&ndash;                                <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>&ndash;%&gt;--%>
 <%--&lt;%&ndash;                            </svg>Update cart&ndash;%&gt;--%>
-<%--                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-credit-card mr-2">--%>
-<%--                            <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>--%>
-<%--                            <line x1="1" y1="10" x2="23" y2="10"></line>--%>
-<%--                        </svg> Buy </button>--%>
+
                         <c:if test="${sessionScope.success == 'success' }">
                         <a class="btn btn-primary btn-block" href="/buyProduct?bucketId=${bucket.id}"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-credit-card mr-2">
                             <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
@@ -134,9 +86,10 @@
                             <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
                             <line x1="1" y1="10" x2="23" y2="10"></line>
                         </svg>Buy All</a>
-                </c:if>
+
                 <hr>
-                    <a class="btn btn-outline-secondary btn-block" href="#"> Buying history </a>
+                    <a class="btn btn-outline-secondary btn-block" href="/buyHistory"> Buying history </a>
+                </c:if>
                 <hr>
                 <h3 class="h6 pt-4 font-weight-semibold"><span class="badge badge-success mr-2">Note</span>Additional comments</h3>
                 <textarea class="form-control mb-3" id="order-comments" rows="5"></textarea>
