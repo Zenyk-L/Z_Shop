@@ -34,7 +34,6 @@ public class GetAllProductsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-
         String lang = request.getParameter("lang");
         HttpSession session = request.getSession();
 //        if(session.getAttribute("lang") == null){
@@ -87,7 +86,7 @@ public class GetAllProductsServlet extends HttpServlet {
 
         List<Category> categories = categoryService.readAll();
         List<Language> languages = languageService.readAll();
-        request.setAttribute("languages", languages);
+        session.setAttribute("languages", languages);
         request.setAttribute("categories", categories);
 
 

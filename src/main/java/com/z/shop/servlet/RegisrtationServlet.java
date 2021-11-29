@@ -11,6 +11,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 @WebServlet(name = "RegisrtationServlet", value = "/registration")
 public class RegisrtationServlet extends HttpServlet {
@@ -32,6 +33,10 @@ public class RegisrtationServlet extends HttpServlet {
         User user = new User();
         String success = null;
 
+
+        PrintWriter out = response.getWriter();
+        out.println("<script type=\"text/javascript\">");
+
         if (!firstName.isEmpty() && !lastName.isEmpty() && !email.isEmpty() && !password.isEmpty()
                 && firstName != null && lastName != null && email != null && password != null) {
 
@@ -44,23 +49,30 @@ public class RegisrtationServlet extends HttpServlet {
 
             System.out.println("User email" + user.getEmail());
             User userFromDB = userService.getUserByEmail(user.getEmail());
-            if (userFromDB.getId() == null) {
+            System.out.println(userFromDB);
+            if (userFromDB == null) {
                 userService.create(user);
                 success = "registered";
+                out.println("alert('Successfully  registered ');");
             } else {
                 success = "fail: user already registered";
+                out.println("alert('Registration fail: user already registered ');");
             }
         } else {
             success = "invalid input";
+            out.println("alert('Registration fail: invalid input');");
         }
 
         request.setAttribute("success", success);
 
-        LOGGER.info( email + " : " + success);
-        System.out.println(user);
+        LOGGER.info(email + " : " + success);
+
+//        response.sendRedirect("/home");
 
 
-        response.sendRedirect("/home");
+        out.println("location='/home';");
+        out.println("</script>");
+
 
     }
 }

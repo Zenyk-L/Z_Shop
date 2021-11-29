@@ -91,13 +91,23 @@
                             <label for="quantity${product.id}">Quantity</label>
                             <input class="form-control form-control-sm" type="number" id="quantity${product.id}" value="${bucket.quantity}" onchange="changeQuantity(${product.id})">
                         </div>
-                        <button class="btn btn-outline-secondary btn-sm btn-block mb-2" type="button">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-refresh-cw mr-1">
-                                <polyline points="23 4 23 10 17 10"></polyline>
-                                <polyline points="1 20 1 14 7 14"></polyline>
-                                <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
-                            </svg>Update cart</button>
+<%--                        <button class="btn btn-primary btn-sm btn-block mb-2" type="button">--%>
 
+<%--&lt;%&ndash;                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-refresh-cw mr-1">&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                <polyline points="23 4 23 10 17 10"></polyline>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                <polyline points="1 20 1 14 7 14"></polyline>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                            </svg>Update cart&ndash;%&gt;--%>
+<%--                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-credit-card mr-2">--%>
+<%--                            <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>--%>
+<%--                            <line x1="1" y1="10" x2="23" y2="10"></line>--%>
+<%--                        </svg> Buy </button>--%>
+                        <c:if test="${sessionScope.success == 'success' }">
+                        <a class="btn btn-primary btn-block" href="/buyProduct?bucketId=${bucket.id}"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-credit-card mr-2">
+                            <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                            <line x1="1" y1="10" x2="23" y2="10"></line>
+                        </svg> Buy</a>
+                        </c:if>
                         <a  class="btn btn-outline-danger btn-sm btn-block mb-2" href="/removeFromBucket?productId=${product.id}&bucketId=${bucket.id}"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2 mr-1">
                             <polyline points="3 6 5 6 21 6"></polyline>
                             <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
@@ -114,6 +124,19 @@
             <div class="col-xl-3 col-md-4 pt-3 pt-md-0">
                 <h2 class="h6 px-4 py-3 bg-secondary text-center">Subtotal</h2>
                 <div class="h3 font-weight-semibold text-center py-3">${subtotal}</div>
+                <hr>
+                <c:if test="${sessionScope.success != 'success' }">
+                    <span class="btn   btn-danger btn-block">You need to login to buy</span>
+                </c:if>
+                <c:if test="${sessionScope.success == 'success' }">
+                    <a class="btn btn-primary btn-block" href="/buyAllProduct">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-credit-card mr-2">
+                            <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                            <line x1="1" y1="10" x2="23" y2="10"></line>
+                        </svg>Buy All</a>
+                </c:if>
+                <hr>
+                    <a class="btn btn-outline-secondary btn-block" href="#"> Buying history </a>
                 <hr>
                 <h3 class="h6 pt-4 font-weight-semibold"><span class="badge badge-success mr-2">Note</span>Additional comments</h3>
                 <textarea class="form-control mb-3" id="order-comments" rows="5"></textarea>
