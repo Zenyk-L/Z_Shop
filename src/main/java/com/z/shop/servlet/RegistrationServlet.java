@@ -13,14 +13,14 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(name = "RegisrtationServlet", value = "/registration")
-public class RegisrtationServlet extends HttpServlet {
-    private static final Logger LOGGER = LogManager.getLogger(RegisrtationServlet.class);
+@WebServlet(name = "RegistrationServlet", value = "/registration")
+public class RegistrationServlet extends HttpServlet {
+    private static final Logger LOGGER = LogManager.getLogger(RegistrationServlet.class);
     private UserService userService = UserServiceImpl.getUserService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        response.sendRedirect("/home");
     }
 
     @Override

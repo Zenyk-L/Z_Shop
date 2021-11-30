@@ -22,7 +22,6 @@ public class EncodingFilter implements Filter {
         LOGGER.trace("encoding filter init" + code);
 
     }
-    //TODO how handle these exceptions
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {

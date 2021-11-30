@@ -119,3 +119,37 @@
 23:42:32.511 [http-nio-8080-exec-123] ERROR - java.sql.SQLException: Illegal operation on empty result set.
 23:43:05.197 [http-nio-8080-exec-137] ERROR - java.sql.SQLException: Illegal operation on empty result set.
 23:44:10.280 [http-nio-8080-exec-138] ERROR - java.sql.SQLException: Illegal operation on empty result set.
+22:37:36.513 [http-nio-8080-exec-14] ERROR - java.sql.SQLException: Illegal operation on empty result set.
+22:39:43.111 [http-nio-8080-exec-13] ERROR - java.sql.SQLException: Illegal operation on empty result set.
+22:40:15.061 [http-nio-8080-exec-14] ERROR - java.sql.SQLException: Illegal operation on empty result set.
+22:44:25.819 [http-nio-8080-exec-38] ERROR - java.sql.SQLException: Illegal operation on empty result set.
+22:44:41.145 [http-nio-8080-exec-39] ERROR - java.sql.SQLException: Illegal operation on empty result set.
+21:28:54.176 [http-nio-8080-exec-63] ERROR - java.sql.SQLException: Illegal operation on empty result set.
+21:32:35.473 [http-nio-8080-exec-67] ERROR - java.sql.SQLException: Illegal operation on empty result set.
+21:34:57.286 [http-nio-8080-exec-74] ERROR - java.sql.SQLException: Illegal operation on empty result set.
+23:37:51.918 [http-nio-8080-exec-102] ERROR - java.sql.SQLException: Illegal operation on empty result set.
+01:13:07.974 [http-nio-8080-exec-22] ERROR - java.sql.SQLException: Illegal operation on empty result set.
+01:13:19.901 [http-nio-8080-exec-27] ERROR - java.sql.SQLException: Illegal operation on empty result set.
+01:14:00.932 [http-nio-8080-exec-29] ERROR - java.sql.SQLException: Illegal operation on empty result set.
+17:34:25.376 [http-nio-8080-exec-96] ERROR - java.sql.SQLException: Illegal operation on empty result set.
+17:42:27.515 [http-nio-8080-exec-92] ERROR - java.sql.SQLException: Illegal operation on empty result set.
+23:49:44.325 [http-nio-8080-exec-22] ERROR - java.sql.SQLException: Illegal operation on empty result set.
+23:49:57.369 [http-nio-8080-exec-20] ERROR - java.sql.SQLException: Illegal operation on empty result set.
+19:13:59.318 [http-nio-8080-exec-1] ERROR - java.sql.SQLException: Access denied for user 'root'@'localhost' (using password: YES)
+19:13:59.389 [http-nio-8080-exec-1] ERROR - java.sql.SQLException: Access denied for user 'root'@'localhost' (using password: YES)
+19:14:06.832 [http-nio-8080-exec-3] ERROR - java.sql.SQLException: Access denied for user 'root'@'localhost' (using password: YES)
+19:14:06.840 [http-nio-8080-exec-3] ERROR - java.sql.SQLException: Access denied for user 'root'@'localhost' (using password: YES)
+19:14:06.844 [http-nio-8080-exec-3] ERROR - java.sql.SQLException: Access denied for user 'root'@'localhost' (using password: YES)
+19:14:08.751 [http-nio-8080-exec-5] ERROR - java.sql.SQLException: Access denied for user 'root'@'localhost' (using password: YES)
+19:14:08.799 [http-nio-8080-exec-5] ERROR - java.sql.SQLException: Access denied for user 'root'@'localhost' (using password: YES)
+19:14:08.802 [http-nio-8080-exec-5] ERROR - java.sql.SQLException: Access denied for user 'root'@'localhost' (using password: YES)
+19:14:08.805 [http-nio-8080-exec-5] ERROR - java.sql.SQLException: Access denied for user 'root'@'localhost' (using password: YES)
+19:14:47.140 [http-nio-8080-exec-1] ERROR - java.sql.SQLException: Access denied for user 'root'@'localhost' (using password: YES)
+19:14:47.169 [http-nio-8080-exec-1] ERROR - java.sql.SQLException: Access denied for user 'root'@'localhost' (using password: YES)
+19:14:47.200 [http-nio-8080-exec-1] ERROR - java.sql.SQLException: Access denied for user 'root'@'localhost' (using password: YES)
+19:15:15.235 [http-nio-8080-exec-4] ERROR - java.sql.SQLException: Access denied for user 'root'@'localhost' (using password: YES)
+19:15:15.283 [http-nio-8080-exec-4] ERROR - java.sql.SQLException: Access denied for user 'root'@'localhost' (using password: YES)
+19:15:15.317 [http-nio-8080-exec-4] ERROR - java.sql.SQLException: Access denied for user 'root'@'localhost' (using password: YES)
+19:16:05.773 [http-nio-8080-exec-7] ERROR - java.sql.SQLException: Access denied for user 'root'@'localhost' (using password: YES)
+19:16:05.781 [http-nio-8080-exec-7] ERROR - java.sql.SQLException: Access denied for user 'root'@'localhost' (using password: YES)
+19:16:05.786 [http-nio-8080-exec-7] ERROR - java.sql.SQLException: Access denied for user 'root'@'localhost' (using password: YES)
