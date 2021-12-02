@@ -66,7 +66,7 @@ public class GetAllProductsServlet extends HttpServlet {
         //        sort by name
         String sortByName = request.getParameter("sortByName");
         if("UP".equals(sortByName)) {
-            products = products.stream().sorted((product1,product2)->product1.getName().compareTo(product2.getName())).collect(Collectors.toList());
+            products = products.stream().sorted((product1,product2)->product1.getName().toLowerCase().compareTo(product2.getName().toLowerCase())).collect(Collectors.toList());
         }
         if("DOWN".equals(sortByName)) {
             products = products.stream().sorted((product1,product2)->product2.getName().compareTo(product1.getName())).collect(Collectors.toList());
@@ -90,9 +90,29 @@ public class GetAllProductsServlet extends HttpServlet {
         request.setAttribute("categories", categories);
 
 
+        Integer totalProducts = products.size();
+        int totalPages = totalProducts /8 ;
+        if(totalProducts % 8 != 0){
+            totalPages++;
+        }
 
-        request.setAttribute("products", products);
+        String currentPageFromJsp = request.getParameter("page");
+        int currenPage = 1;
+        if(currentPageFromJsp != null){
+            currenPage = Integer.valueOf(currentPageFromJsp);
+            if (currenPage > totalPages || currenPage < 1 ){
+                currenPage = 1;
+            }
+        }
+
+        request.setAttribute("totalPages", totalPages);
+        request.setAttribute("page", currenPage);
+
+        List <Product> productsToShowOnPage = products.stream().skip(8*(currenPage-1)).limit(8).collect(Collectors.toList()); ;
+        
+        request.setAttribute("products", productsToShowOnPage);
         LOGGER.info("All product getted from DB ");
+
         request.getRequestDispatcher("home.jsp").forward(request,response);
     }
 

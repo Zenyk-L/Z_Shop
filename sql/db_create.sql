@@ -138,8 +138,8 @@ select *
 from product;
 
 delete
-from category
-where id = 16;
+from bucket
+where user_id = 1;
 
 select *
 from z_shop.language;

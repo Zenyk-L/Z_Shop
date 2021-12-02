@@ -61,8 +61,16 @@ public class BucketShowServlet extends HttpServlet {
 
         Bucket bucket = new Bucket();
         if (buckets != null) {
-            bucket = buckets.stream().filter(b -> b.getProductId().equals(productId)).findFirst().get();
-            bucket.setQuantity(quantity);
+
+            Product product = productService.read(productId);
+            if(product != null && product.getQuantity() >= quantity) {
+
+                bucket = buckets.stream().filter(b -> b.getProductId().equals(productId)).findFirst().get();
+                bucket.setQuantity(quantity);
+//                int newProductQuantity = product.getQuantity() - quantity;
+//                product.setQuantity(newProductQuantity);
+//                productService.update(product);
+            }
         }
 
         User userFromSession = (User) session.getAttribute("user");

@@ -13,7 +13,8 @@ public class LogoutServlet extends HttpServlet {
         if (session != null) {
             session.invalidate();
         }
-        request.getRequestDispatcher("/home").forward(request, response);
+        response.sendRedirect("/home");
+
     }
 
     @Override

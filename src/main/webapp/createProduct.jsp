@@ -72,7 +72,7 @@
 
     <div class="form-group">
         <label>Product Price</label>
-        <input type="number" step="0.01" name="price" class="form-control productPrice"
+        <input type="number" step="0.01" min="0" name="price" class="form-control productPrice"
                placeholder="Enter product price" required>
     </div>
 

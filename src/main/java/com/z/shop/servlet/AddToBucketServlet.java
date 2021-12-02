@@ -1,9 +1,12 @@
 package com.z.shop.servlet;
 
 import com.z.shop.entity.Bucket;
+import com.z.shop.entity.Product;
 import com.z.shop.entity.User;
 import com.z.shop.service.BucketService;
+import com.z.shop.service.ProductService;
 import com.z.shop.service.impl.BucketServiceImpl;
+import com.z.shop.service.impl.ProductServiceImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -20,6 +23,7 @@ import java.util.Optional;
 public class AddToBucketServlet extends HttpServlet {
     private static final Logger LOGGER = LogManager.getLogger(AddToBucketServlet.class);
     private static BucketService bucketService = BucketServiceImpl.getBucketService();
+    private static ProductService productService = ProductServiceImpl.getProductService();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -35,8 +39,11 @@ public class AddToBucketServlet extends HttpServlet {
         Bucket bucket = null;
         if (optionalBucket.isPresent()){
             bucket = optionalBucket.get();
-            bucket.setQuantity(bucket.getQuantity()+1);
-            bucket.setPurchaseDate(new Date());
+            Product product = productService.read(productId);
+            if (product.getQuantity() > bucket.getQuantity()) {
+                bucket.setQuantity(bucket.getQuantity() + 1);
+                bucket.setPurchaseDate(new Date());
+            }
         } else {
             bucket = new Bucket();
             bucket.setProductId(productId);

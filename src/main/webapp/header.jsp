@@ -11,18 +11,17 @@
 
     <link type="text/css" href="style/header.css" rel="stylesheet">
     <link rel="stylesheet" href="style/login.css">
-
+    <script src="js/header.js"></script>
 
 </head>
 <body>
+
 <header class="section-header">
     <section class="header-main border-bottom">
 
         <div class="d-flex justify-content-end">
 
-            <c:if test="${sessionScope.user.amount > 0}">
-                <div class="text-white mr-5"> Amount: ${sessionScope.user.amount}</div>
-            </c:if>
+
             <div id="userEmail" class="text-white mr-5">${sessionScope.user.email}</div>
 
             <fieldset>
@@ -69,19 +68,26 @@
                                     <%--                                <i class="fas fa fa-shopping-cart"></i>--%>
                             </a>
                         </c:if>
-                        <c:if test="${sessionScope.success == 'success' }">
+                        <c:if test="${sessionScope.user.role == 'ADMIN' || sessionScope.user.role == 'USER'}">
                             <a class="text-white mr-5" href="/editUser"><i class="fas fa fa-user"></i></a>
                         </c:if>
-                        <a class="text-white mr-5" href="/createProduct"><i class="fas fa fa-cog"></i></a>
-                        <%--                            <div class="text-white mr-5">${sessionScope.success}</div>--%>
-                        <c:if test="${sessionScope.success != 'success'}">
-                            <a class="text-white mr-5 togglePopup" href="#"><i
-                                    class="fa fa-sign-in"></i> LOGIN </a>
+
+                        <c:if test="${sessionScope.user.role == 'ADMIN' }">
+                            <a class="text-white mr-5" href="/createProduct"><i class="fas fa fa-cog"></i></a>
                         </c:if>
-                        <c:if test="${sessionScope.success == 'success' }">
-                            <a class="text-white mr-4" href="${pageContext.request.contextPath}/logout"><i
-                                    class="fa fa-sign-out"></i> LOGOUT</a>
-                        </c:if>
+
+                        <c:choose>
+                            <c:when test="${sessionScope.user.role == 'ADMIN' || sessionScope.user.role == 'USER'}">
+                                <a class="text-white mr-4" href="${pageContext.request.contextPath}/logout"><i
+                                        class="fa fa-sign-out"></i> LOGOUT</a>
+                            </c:when>
+                            <c:otherwise>
+                                <a class="text-white mr-5 togglePopup" href="#"><i
+                                        class="fa fa-sign-in"></i> LOGIN </a>
+                            </c:otherwise>
+                        </c:choose>
+
+
                         <%--                        <span class="vl"></span> <a class="nav-link nav-user-img" href="${pageContext.request.contextPath}/login.jsp" data-toggle="modal"--%>
                         <%--                                                    data-target="#login-modal" data-abc="true" ><span class="login"><i--%>
                         <%--                            class="fa fa-sign-in"></i>  LOGIN</span></a>--%>
@@ -176,99 +182,12 @@
     </div>
 
 
-
-
+<input type="hidden" name="sessionLanguage" id="sessionLanguage" value="${sessionScope.lang}"/>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
 <script src="js/login.js"></script>
-<script type="text/javascript">
 
-    $(document).ready(function () {
-        var language = window.navigator.language;
-        <%--alert(language.split('-')[1].toLowerCase());--%>
-        <%--console.log('${sessionScope.lang}');--%>
-
-        function openNav() {
-            document.getElementById("mySidenav").style.width = "70%";
-
-            document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
-        }
-
-        function closeNav() {
-            document.getElementById("mySidenav").style.width = "0";
-            document.body.style.backgroundColor = "rgba(0,0,0,0)";
-        }
-
-        var selItem = '${sessionScope.lang}';
-        if (selItem == "") {
-            selItem = language.split('-')[1].toLowerCase();
-            var searchText = $('#searchNameInput').val();
-            var sortByCategory = $('#sortByCategory').val();
-            var sortByPrice = $('#sortByPrice').val();
-            var sortByName = $('#sortByName').val();
-            $.get("home", {
-                lang: selItem,
-                searchText: searchText,
-                sortByCategory: sortByCategory,
-                sortByPrice: sortByPrice,
-                sortByName: sortByName
-            }, function (response) {
-                // $(".containerBody").html($($.parseHTML(response)).filter(".containerBody").html());
-                $(document.body).html(response);
-            });
-        }
-        // localStorage.getItem("localesSession");
-        $("#localesSession").val(selItem);
-        $("#localesSession").change(function () {
-            var selectedOption = $("#localesSession").val()
-            console.log("selectedOption " + selectedOption);
-            if (selectedOption) {
-                // localStorage.setItem("localesSession", selectedOption);
-                var searchText = $('#searchNameInput').val();
-                var sortByCategory = $('#sortByCategory').val();
-                var sortByPrice = $('#sortByPrice').val();
-                var sortByName = $('#sortByName').val();
-                $.get("home", {
-                    lang: selectedOption,
-                    searchText: searchText,
-                    sortByCategory: sortByCategory,
-                    sortByPrice: sortByPrice,
-                    sortByName: sortByName
-                }, function (response) {
-                    $(".containerBody").html($($.parseHTML(response)).filter(".containerBody").html());
-                });
-            }
-        });
-    });
-
-
-    /*function searching by name, sorting by category, by name, by price from db */
-    /* with caching parameters */
-    function searchSortFunction() {
-        var searchText = $('#searchNameInput').val();
-
-        var searchText = $('#searchNameInput').val();
-        var sortByCategory = $('#sortByCategory').val();
-        var sortByPrice = $('#sortByPrice').val();
-        var sortByName = $('#sortByName').val();
-        $.get("home", {
-            searchText: searchText,
-            sortByCategory: sortByCategory,
-            sortByPrice: sortByPrice,
-            sortByName: sortByName
-        }, function (response) {
-            $(".containerBody").html($($.parseHTML(response)).filter(".containerBody").html());
-            // $(document.body).html(response);
-        });
-    }
-
-    /*function showNewWindow(){
-        window.open("/index.jsp", "name1", params);
-
-    }*/
-
-</script>
 
 </body>
 </html>

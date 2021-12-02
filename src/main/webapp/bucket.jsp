@@ -35,6 +35,7 @@
                             <h3 class="product-card-title font-weight-semibold border-0 pb-0"><a href="#"> ${product.category.translations[sessionScope.lang]}</a> <a href="#">${product.name}</a></h3>
                             <div class="font-size-sm"><span class="text-muted mr-2">Size:</span>${product.scale}</div>
                             <div class="font-size-sm"><span class="text-muted mr-2">Color:</span>${product.color}</div>
+                            <div class="font-size-sm"><span class="text-muted mr-2">Available quantity:</span>${product.quantity}</div>
                             <div class="font-size-lg text-primary pt-2"><b>Price: </b> ${product.price}</div>
                         </div>
                     </div>
@@ -45,7 +46,7 @@
                     <div class="pt-2 pt-sm-0 pl-sm-3 mx-auto mx-sm-0 text-center text-sm-left" style="max-width: 10rem;">
                         <div class="form-group mb-2">
                             <label for="quantity${product.id}">Quantity</label>
-                            <input class="form-control form-control-sm" type="number" id="quantity${product.id}" value="${bucket.quantity}" onchange="changeQuantity(${product.id})">
+                            <input class="form-control form-control-sm" type="number" min="0" max="${product.quantity}" id="quantity${product.id}" value="${bucket.quantity}" onchange="changeQuantity(${product.id}, ${bucket.id})">
                         </div>
 
 <%--&lt;%&ndash;                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-refresh-cw mr-1">&ndash;%&gt;--%>
@@ -55,7 +56,7 @@
 <%--&lt;%&ndash;                            </svg>Update cart&ndash;%&gt;--%>
 
                         <c:if test="${sessionScope.success == 'success' }">
-                        <a class="btn btn-primary btn-block" href="/buyProduct?bucketId=${bucket.id}"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-credit-card mr-2">
+                        <a class="btn btn-primary btn-block" id="buy${bucket.id}" href="/buyProduct?bucketId=${bucket.id}"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-credit-card mr-2">
                             <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
                             <line x1="1" y1="10" x2="23" y2="10"></line>
                         </svg> Buy</a>
@@ -75,13 +76,13 @@
             <!-- Sidebar-->
             <div class="col-xl-3 col-md-4 pt-3 pt-md-0">
                 <h2 class="h6 px-4 py-3 bg-secondary text-center">Subtotal</h2>
-                <div class="h3 font-weight-semibold text-center py-3">${subtotal}</div>
+                <div class="h3 font-weight-semibold text-center py-3" id="subtotal">${subtotal}</div>
                 <hr>
                 <c:if test="${sessionScope.success != 'success' }">
                     <span class="btn   btn-danger btn-block">You need to login to buy</span>
                 </c:if>
                 <c:if test="${sessionScope.success == 'success' }">
-                    <a class="btn btn-primary btn-block" href="/buyAllProduct">
+                    <a class="btn btn-primary btn-block" id="buyAll" href="/buyAllProduct">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-credit-card mr-2">
                             <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
                             <line x1="1" y1="10" x2="23" y2="10"></line>
@@ -105,5 +106,6 @@
 
 
 <script src="js/bucket.js"></script>
+
 </body>
 </html>

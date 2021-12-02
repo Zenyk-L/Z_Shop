@@ -18,57 +18,11 @@
     <title>Home</title>
 </head>
 <body>
-<%--    <div class="login-page" id="popup">--%>
-<%--        <div class="form">--%>
-
-<%--            <img src="https://cdn4.vectorstock.com/i/1000x1000/89/13/user-login-icon-vector-21078913.jpg" height="50px"--%>
-<%--                 width="50px" style="margin: 0 auto" onclick="javascript:openLogin()">--%>
-<%--            <br>--%>
-<%--            <form class="register-form" action="/registration" method="POST">--%>
-<%--                <input type="text" name="firstName" placeholder="First name" required/>--%>
-<%--                <input type="text" name="lastName" placeholder="Last name" required/>--%>
-<%--                <input type="email" name="email" placeholder="email address" required/>--%>
-<%--                <input type="password" name="password" placeholder="password" required/>--%>
-<%--                &lt;%&ndash;            <input name="cpassword" type="password" placeholder="confirm password"/>&ndash;%&gt;--%>
-
-<%--                <button type="submit" class="register">Register</button>--%>
-<%--                <button type="reset" class="cancel">Cancel</button>--%>
-<%--                <p class="message">Already registered? <a href="#">Sign In</a></p>--%>
-<%--            </form>--%>
-
-<%--            <form class="login-form" action="/login" method="POST">--%>
-
-<%--                <input type="email" name="email" placeholder="email address" value="user@mail.com" required/>--%>
-<%--                <input type="password" name="password" placeholder="password" value="user" required/>--%>
-<%--                <button type="submit" class="login">Login</button>--%>
-<%--                <button type="reset" class=" cancel">Cancel</button>--%>
-<%--                <p class="message">Not registered? <a href="#">Create an account</a></p>--%>
-<%--            </form>--%>
-<%--        </div>--%>
-<%--        <div class="alert alert-success alert-dismissible fade show"--%>
-<%--             role="alert">--%>
-<%--            <b>Success</b> You are registered.--%>
-<%--            <button type="button" class="btn-close " data-bs-dismiss="alert"--%>
-<%--                    aria-label="Close"></button>--%>
-<%--        </div>--%>
-<%--    </div>--%>
-
-<jsp:include page="header.jsp"></jsp:include>
 
 
+<jsp:include page="header.jsp"/>
 
-
-
-
-    <div class="containerBody overflow-hidden">
-
-<%--        <c:if test="${sessionScope.success == 'invalid input' || sessionScope.success == 'fail: user already registered' || sessionScope.success == 'registered'}">--%>
-<%--            <H1> Hello ${success}</H1>--%>
-<%--        </c:if>--%>
-
-
-
-
+<div class="containerBody overflow-hidden">
 
 
     <div class="row">
@@ -100,10 +54,13 @@
                     <span class="card-text ml-3"><b>Price: ${product.price}</b></span>
                     <p class="card-text"></p>
                     <div class="d-flex">
-                        <a href="/addToBucket?productId=${product.id}"  class="btn btn-primary"> + add to bucket</a>
-
-                        <a href="/editProduct?productId=${product.id}"  class="btn btn-warning ms-auto">Edit</a>
-                        <a href="#" onclick="deleteProduct(${product.id}, '${product.name}' )" class="btn btn-danger ms-auto"> Delete </a>
+                        <c:if test="${sessionScope.user.role != 'ADMIN'}">
+                            <a href="/addToBucket?productId=${product.id}"  class="btn btn-primary"> + add to bucket</a>
+                        </c:if>
+                        <c:if test="${sessionScope.user.role == 'ADMIN'}">
+                            <a href="/editProduct?productId=${product.id}"  class="btn btn-warning ms-auto">Edit</a>
+                            <a href="#" onclick="deleteProduct(${product.id}, '${product.name}' )" class="btn btn-danger ms-auto"> Delete </a>
+                        </c:if>
                     </div>
                 </div>
             </div>
@@ -111,29 +68,52 @@
 
 
     </div>
-</div>
 
-<br/>
+
+    <br/>
+    <nav aria-label="..." class="d-flex justify-content-center mt-3">
+    <ul class="pagination">
+        <c:if test="${totalPages > 1}">
+            <c:choose>
+                <c:when test="${page  > 1}">
+                    <li class="page-item "><a class="page-link " onclick="getPage(${page-1})" href="#"<%--href="/home?page=${page-1}"--%>>Previous</a></li>
+                </c:when>
+                <c:otherwise>
+                    <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+                </c:otherwise>
+            </c:choose>
+
+            <c:forEach  begin="1" end="${totalPages}" var="pageNumber">
+                <c:choose>
+                    <c:when test="${pageNumber == page }">
+                        <li class="page-item active"><a class="page-link" onclick="getPage(${pageNumber})" href="#"<%--href="/home?page=${pageNumber}"--%>>${pageNumber}</a></li>
+                    </c:when>
+                    <c:otherwise>
+                        <li class="page-item"><a class="page-link" onclick="getPage(${pageNumber})" href="#" <%--href="/home?page=${pageNumber}"--%>>${pageNumber}</a></li>
+                    </c:otherwise>
+                </c:choose>
+            </c:forEach>
+
+
+            <c:choose>
+                <c:when test="${totalPages < page + 1 }">
+                    <li class="page-item disabled"><a class="page-link " href="#">Next</a></li>
+                </c:when>
+                <c:otherwise>
+                    <li class="page-item"><a class="page-link" onclick="getPage(${page+1})" href="#" <%--href="/home?page=${page+1}"--%>>Next</a></li>
+                </c:otherwise>
+            </c:choose>
+        </c:if>
+    </ul>
+</nav>
+</div>
+<br>
+
+
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script type="text/javascript">
-<%--function fillCategoryName(){--%>
-<%--    $('#categoryName').html('Category: ${product.category.translations[param.lang]}');--%>
-<%--}--%>
-
-
-function deleteProduct(productId, productName){
-
-    if (window.confirm("Do you really want to delete "+ productName + " ?")) {
-        window.open("/deleteProduct?productId=" + productId, "_self");
-    }
-
-    }
-
-
-
-
-</script>
+<script src="js/home.js"></script>
 
 </body>
 </html>

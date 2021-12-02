@@ -1,6 +1,7 @@
 package com.z.shop.servlet;
 
 import com.z.shop.entity.Bucket;
+import com.z.shop.entity.Product;
 import com.z.shop.entity.User;
 import com.z.shop.service.BucketService;
 import com.z.shop.service.ProductService;
@@ -21,7 +22,7 @@ import java.util.List;
 public class BuyProductServlet extends HttpServlet {
     private static final Logger LOGGER = LogManager.getLogger(BuyProductServlet.class);
     private BucketService bucketService = BucketServiceImpl.getBucketService();
-
+    private static ProductService productService = ProductServiceImpl.getProductService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -34,10 +35,17 @@ public class BuyProductServlet extends HttpServlet {
             List<Bucket> buckets = (List<Bucket>) session.getAttribute("buckets");
             Integer bucketId = Integer.valueOf(request.getParameter("bucketId"));
             Bucket bucket = buckets.stream().filter(b -> b.getId().equals(bucketId)).findFirst().get();
-            buckets.remove(bucket);
-            bucket.setStatus("paid");
-            bucket.setPurchaseDate(new Date());
-            bucketService.update(bucket);
+            Product product = productService.read(bucket.getProductId());
+            System.out.println(product);
+            System.out.println(bucket);
+            if(product.getQuantity() >= bucket.getQuantity()) {
+                product.setQuantity(product.getQuantity()-bucket.getQuantity());
+                buckets.remove(bucket);
+                bucket.setStatus("paid");
+                bucket.setPurchaseDate(new Date());
+                bucketService.update(bucket);
+                productService.update(product);
+            }
         }
         response.sendRedirect("/bucket");
 
