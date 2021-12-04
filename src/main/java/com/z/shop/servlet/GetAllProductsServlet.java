@@ -36,9 +36,10 @@ public class GetAllProductsServlet extends HttpServlet {
 
         String lang = request.getParameter("lang");
         HttpSession session = request.getSession();
-//        if(session.getAttribute("lang") == null){
-//            session.setAttribute("lang", "en");
-//        };
+        if(session.getAttribute("lang") == null){
+            session.setAttribute("lang", "en");
+        };
+
         if (lang != null){
             session.setAttribute("lang", lang);
         }
@@ -50,6 +51,7 @@ public class GetAllProductsServlet extends HttpServlet {
         if ( searchingText == null){
             products = productService.readAll();
         }else{
+            request.setAttribute("searchingText", searchingText);
             products = productService.findByName(searchingText);
             if(products.size() == 0){
                 products = productService.readAll();
@@ -59,7 +61,7 @@ public class GetAllProductsServlet extends HttpServlet {
         String sortByCategory = request.getParameter("sortByCategory");
 
         if(sortByCategory != null && !"default".equals(sortByCategory) ) {
-
+            request.setAttribute("sortByCategory", sortByCategory);
             products = products.stream().filter(product -> product.getCategory().getId().equals(Integer.valueOf(sortByCategory))).collect(Collectors.toList());
         }
 
@@ -69,7 +71,7 @@ public class GetAllProductsServlet extends HttpServlet {
             products = products.stream().sorted((product1,product2)->product1.getName().toLowerCase().compareTo(product2.getName().toLowerCase())).collect(Collectors.toList());
         }
         if("DOWN".equals(sortByName)) {
-            products = products.stream().sorted((product1,product2)->product2.getName().compareTo(product1.getName())).collect(Collectors.toList());
+            products = products.stream().sorted((product1,product2)->product2.getName().toLowerCase().compareTo(product1.getName().toLowerCase())).collect(Collectors.toList());
         }
 
         //        sort by price
@@ -82,7 +84,9 @@ public class GetAllProductsServlet extends HttpServlet {
         }
 
 
-        request.setAttribute("searchingText", searchingText);
+        request.setAttribute("sortByName", sortByName);
+        request.setAttribute("sortByPrice", sortByPrice);
+
 
         List<Category> categories = categoryService.readAll();
         List<Language> languages = languageService.readAll();

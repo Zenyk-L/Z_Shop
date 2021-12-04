@@ -153,3 +153,8 @@
 19:16:05.773 [http-nio-8080-exec-7] ERROR - java.sql.SQLException: Access denied for user 'root'@'localhost' (using password: YES)
 19:16:05.781 [http-nio-8080-exec-7] ERROR - java.sql.SQLException: Access denied for user 'root'@'localhost' (using password: YES)
 19:16:05.786 [http-nio-8080-exec-7] ERROR - java.sql.SQLException: Access denied for user 'root'@'localhost' (using password: YES)
+00:36:19.873 [http-nio-8080-exec-52] ERROR - java.sql.SQLException: Illegal operation on empty result set.
+00:39:02.257 [http-nio-8080-exec-50] ERROR - java.sql.SQLException: Illegal operation on empty result set.
+02:23:37.872 [http-nio-8080-exec-211] ERROR - java.sql.SQLException: Illegal operation on empty result set.
+02:23:45.625 [http-nio-8080-exec-212] ERROR - java.sql.SQLException: Illegal operation on empty result set.
+02:24:35.527 [http-nio-8080-exec-209] ERROR - java.sql.SQLException: Illegal operation on empty result set.

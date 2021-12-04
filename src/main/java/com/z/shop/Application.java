@@ -42,7 +42,7 @@ public class Application {
 //        bucket.setStatus("canceled");
 //        bucket.setDeleted(true);
 
-        List<Bucket> buckets = bucketService.findByUserIdReserved(1);
+        List<Bucket> buckets = bucketService.findByUserIdReserved(4);
         System.out.println(buckets);
 
     }

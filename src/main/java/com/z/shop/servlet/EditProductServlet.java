@@ -38,7 +38,7 @@ public class EditProductServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("editProd");
+
         Product product = new Product();
         String productId = request.getParameter("productId");
         if (!productId.isEmpty()){

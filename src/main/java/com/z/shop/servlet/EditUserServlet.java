@@ -37,7 +37,7 @@ public class EditUserServlet extends HttpServlet {
                 && firstName != null && lastName != null && email != null && oldPassword != null) {
 
             User userFromDB = userService.getUserByEmail(user.getEmail());
-            System.out.println(userFromDB.getPassword());
+
             if (userFromDB.getPassword().equals(oldPassword)){
                 userFromDB.setFirstName(firstName);
                 userFromDB.setLastName(lastName);

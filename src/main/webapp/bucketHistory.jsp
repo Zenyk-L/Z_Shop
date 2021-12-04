@@ -19,50 +19,61 @@
     <title>Bucket</title>
 </head>
 <body>
+<fmt:setLocale value = "${sessionScope.lang}"/>
+<fmt:setBundle basename = "resources"/>
 <jsp:include page="header.jsp"></jsp:include>
 
 
     <div class="container1 pb-5  mt-md-n3 pl-3">
         <div class="row">
             <div class="col-xl-9 col-md-8">
-                <h2 class="h6 d-flex flex-wrap justify-content-between align-items-center px-4 py-3 bg-secondary"><span>Products</span><a class="font-size-sm" style="color: #1a1a1a" href="/home"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left" style="width: 1rem; height: 1rem;"><polyline points="15 18 9 12 15 6"></polyline></svg>Continue shopping</a></h2>
-        <c:forEach items="${buckets}" var="bucket">
-    <c:set var="product"  value="${productMap[bucket.productId]}"/>
-                <!-- Item-->
-                <div class="d-sm-flex justify-content-between my-4 pb-4 border-bottom">
+                <h2 class="h6 d-flex flex-wrap justify-content-between align-items-center px-4 py-3 bg-primary text-white">
+                    <a class="font-size-sm" style="color:  #eeeeee" href="/bucket"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left" style="width: 1rem; height: 1rem;"><polyline points="15 18 9 12 15 6"></polyline></svg><fmt:message key="bucket.Bucket" /></a>
+
+                    <a class="font-size-sm" style="color:  #eeeeee" href="/home"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left" style="width: 1rem; height: 1rem;"><polyline points="15 18 9 12 15 6"></polyline></svg><fmt:message key="bucket.Continue_shopping" /></a>
+                </h2>
+                <c:forEach items="${buckets}" var="bucket">
+                    <c:set var="product"  value="${productMap[bucket.productId]}"/>
+                      <!-- Item-->
+                     <div class="d-sm-flex justify-content-between my-4 pb-4 border-bottom">
                     <div class="media d-block d-sm-flex text-center text-sm-left">
                         <a class="cart-item-thumb mx-auto mr-sm-4" href="#"><div style="background-image:url('${pageContext.request.contextPath}/image/${product.image}'); background-size:100% 100%; height: 150px; width: 150px"></div> </a>
                         <div class="media-body pt-3">
                             <h3 class="product-card-title font-weight-semibold border-0 pb-0"><a href="#"> ${product.category.translations[sessionScope.lang]}</a> <a href="#">${product.name}</a></h3>
-                            <div class="font-size-sm"><span class="text-muted mr-2">Size:</span>${product.scale}</div>
-                            <div class="font-size-sm"><span class="text-muted mr-2">Color:</span>${product.color}</div>
-                            <div class="font-size-lg text-primary pt-2"><b>Price: </b> ${product.price}</div>
+                            <div class="font-size-sm"><span class="text-muted mr-2"><fmt:message key="home.Scale" />:</span>${product.scale}</div>
+                            <div class="font-size-sm"><span class="text-muted mr-2"><fmt:message key="home.Color" />:</span>${product.color}</div>
+                            <div class="font-size-lg text-primary pt-2"><b><fmt:message key="home.Price" />: </b> ${product.price}</div>
                         </div>
                     </div>
                     <div class="media-body pt-5 ml-5">
-                        <div class="font-size-sm"><span class="text-muted mr-2">Description:</span></div>
+                        <div class="font-size-sm"><span class="text-muted mr-2"><fmt:message key="home.Description" />:</span></div>
                         <div class="font-size-sm"><span class="text-muted mr-2">${product.description}</span></div>
 
                     </div>
                     <div class="pt-2 pt-sm-0 pl-sm-3 mx-auto mx-sm-0 text-center text-sm-left" style="max-width: 10rem;">
                         <div class="form-group mb-2">
-                            <label >Quantity</label>
+                            <label ><fmt:message key="bucketHistory.Buy_quantity" /></label>
                             <p> ${bucket.quantity}</p>
                         </div>
                         <div class="form-group mb-2">
-                            <label >Buy date</label>
+                            <label ><fmt:message key="bucketHistory.Buy_date" /></label>
                             <p> ${bucket.purchaseDate}</p>
                         </div>
                     </div>
                 </div>
-        </c:forEach>
+                </c:forEach>
 
+                <h2 class="h6 d-flex flex-wrap justify-content-between align-items-center px-4 py-3 bg-primary text-white">
+                    <a class="font-size-sm" style="color: #eeeeee" href="/bucket"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left" style="width: 1rem; height: 1rem;"><polyline points="15 18 9 12 15 6"></polyline></svg><fmt:message key="bucket.Bucket" /></a>
+
+                    <a class="font-size-sm" style="color: #eeeeee" href="/home"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left" style="width: 1rem; height: 1rem;"><polyline points="15 18 9 12 15 6"></polyline></svg><fmt:message key="bucket.Continue_shopping" /></a>
+                </h2>
 
             </div>
         </div>
     </div>
 
-
+<jsp:include page="footer.jsp"/>
 <script src="js/bucket.js"></script>
 </body>
 </html>

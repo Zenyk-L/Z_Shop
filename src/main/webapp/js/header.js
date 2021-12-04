@@ -1,6 +1,6 @@
-// $(document).ready(
+
 document.addEventListener('DOMContentLoaded', function(){
-    // function startFunction() {
+
     var language = window.navigator.language;
 
 // set default language
@@ -41,7 +41,10 @@ document.addEventListener('DOMContentLoaded', function(){
                 sortByPrice: sortByPrice,
                 sortByName: sortByName
             }, function (response) {
-                $(".containerBody").html($($.parseHTML(response)).filter(".containerBody").html());
+                // $(".containerBody").html($($.parseHTML(response)).filter(".containerBody").html());
+                // $(".categoryLink").html($($.parseHTML(response)).find(".categoryLink").html());
+                location.reload();
+
             });
         }
     });

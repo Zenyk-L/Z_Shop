@@ -10,10 +10,9 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.annotation.WebInitParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 @WebFilter(urlPatterns = "/*", initParams = @WebInitParam(name = "encoding", value = "UTF-8"))
 public class UrlFilter implements Filter {
@@ -24,9 +23,8 @@ public class UrlFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         servletUrl = Arrays.asList("BucketServlet", "BucketShowServlet", "BuyAllProductServlet", "BuyHistoryServlet", "BuyProductServlet", "CreateProduct",
-                "DeleteProduct", "EditProduct", "EditUserServlet", "Home", "LoginServlet", "LogoutServlet", "RegistrationServlet", "RemoveFromBucketServlet", "default");
+                "DeleteProduct", "EditProduct", "EditUserServlet", "Home", "LoginServlet", "LogoutServlet", "RegistrationServlet", "RemoveFromBucketServlet", "ShowAllBucketsServlet","default");
         LOGGER.trace("URL filter init");
-
     }
 
     @Override

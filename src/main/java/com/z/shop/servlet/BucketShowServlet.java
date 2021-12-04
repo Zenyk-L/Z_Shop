@@ -67,9 +67,6 @@ public class BucketShowServlet extends HttpServlet {
 
                 bucket = buckets.stream().filter(b -> b.getProductId().equals(productId)).findFirst().get();
                 bucket.setQuantity(quantity);
-//                int newProductQuantity = product.getQuantity() - quantity;
-//                product.setQuantity(newProductQuantity);
-//                productService.update(product);
             }
         }
 

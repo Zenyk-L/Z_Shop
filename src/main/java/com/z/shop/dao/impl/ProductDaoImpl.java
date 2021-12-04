@@ -28,6 +28,9 @@ public class ProductDaoImpl implements ProductDao {
             "FROM product p " +
             "JOIN category c ON p.category_id = c.id WHERE p.deleted = false";
 
+    private static String READ_ALL_WITH_DELETED = "SELECT p.id, p.name, p.image, p.category_id, p.quantity, p.description, p.color, p.scale, p.price, p.adding_date, p.deleted " +
+            "FROM product p " +
+            "JOIN category c ON p.category_id = c.id";
 
     private static String READ_BY_ID = "SELECT p.id, p.name, p.image, p.category_id, p.quantity, p.description, p.color, p.scale, p.price, p.adding_date, p.deleted " +
             "FROM product p " +
@@ -164,6 +167,24 @@ public class ProductDaoImpl implements ProductDao {
         List<Product> productRecords = new ArrayList<>();
         try (Connection connection = dbManager.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(READ_ALL)) {
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+
+                Product product = getProductFromResultSet(resultSet);
+                productRecords.add(product);
+            }
+
+        } catch (SQLException e) {
+            LOGGER.error(e);
+        }
+
+        return productRecords;
+    }
+
+    public List<Product> readAllWithDeleted() {
+        List<Product> productRecords = new ArrayList<>();
+        try (Connection connection = dbManager.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(READ_ALL_WITH_DELETED)) {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
 

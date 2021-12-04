@@ -80,7 +80,7 @@
     <button class="btn btn-primary createProduct" onclick="alertOfSuccessShow()">Submit</button>
 
 </form>
-
+<jsp:include page="footer.jsp"/>
 <script>
     var form = document.getElementById('form');
 

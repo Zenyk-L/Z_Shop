@@ -156,6 +156,7 @@ from z_shop.user;
 
 select *
 from bucket;
+# where user_id = 4 and product_id = 3;
 
 
 INSERT INTO category value ();

@@ -36,9 +36,7 @@ public class BuyProductServlet extends HttpServlet {
             Integer bucketId = Integer.valueOf(request.getParameter("bucketId"));
             Bucket bucket = buckets.stream().filter(b -> b.getId().equals(bucketId)).findFirst().get();
             Product product = productService.read(bucket.getProductId());
-            System.out.println(product);
-            System.out.println(bucket);
-            if(product.getQuantity() >= bucket.getQuantity()) {
+            if(user.getId().equals(bucket.getUserId()) && product.getQuantity() >= bucket.getQuantity()) {
                 product.setQuantity(product.getQuantity()-bucket.getQuantity());
                 buckets.remove(bucket);
                 bucket.setStatus("paid");

@@ -27,15 +27,36 @@ public class RemoveFromBucketServlet extends HttpServlet {
         Integer productId = Integer.valueOf(request.getParameter("productId"));
         List<Bucket> buckets = (List<Bucket>) session.getAttribute("buckets");
 
-        buckets = buckets.stream().filter(bucket -> bucket.getProductId().intValue() != productId.intValue()).collect(Collectors.toList());
 
         User user = (User) session.getAttribute("user");
-        if (user != null){
-            Integer bucketId = Integer.valueOf(request.getParameter("bucketId"));
-            bucketService.delete(bucketId);
+        System.out.println(user);
+        String bucketIdFromRequest = request.getParameter("bucketId");
+        System.out.println(bucketIdFromRequest);
+        if(bucketIdFromRequest != null && !bucketIdFromRequest.isEmpty()){
+            System.out.println("inside == null");
+            Integer bucketId = Integer.valueOf(bucketIdFromRequest);
+            System.out.println( user.getRole().toString().equals("ADMIN"));
+            if (user != null && user.getRole().toString().equals("ADMIN")){
+                bucketService.delete(bucketId);
+                System.out.println("Admin bucket");
+                response.sendRedirect("/showAllBuckets");
+            }
+            if (user != null && user.getRole().toString().equals("USER")){
+                Bucket bucket = bucketService.read(bucketId);
+                if (bucket.getUserId().equals(user.getId())) {
+                    bucketService.delete(bucketId);
+                    buckets = buckets.stream().filter(buck -> buck.getId().intValue() != bucketId.intValue()).collect(Collectors.toList());
+                    session.setAttribute("buckets", buckets);
+                    response.sendRedirect("/bucket");
+                }
+            }
+
+        }else {
+            buckets = buckets.stream().filter(buck -> buck.getProductId().intValue() != productId.intValue()).collect(Collectors.toList());
+            session.setAttribute("buckets", buckets);
+            response.sendRedirect("/bucket");
         }
-        session.setAttribute("buckets", buckets);
-        response.sendRedirect("/bucket");
+
     }
 
     @Override

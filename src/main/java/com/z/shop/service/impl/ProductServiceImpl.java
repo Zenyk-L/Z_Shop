@@ -57,6 +57,11 @@ public class ProductServiceImpl implements ProductService {
         return readAll().stream().collect(Collectors.toMap(Product::getId, Function.identity()));
     }
 
+    @Override
+    public Map<Integer, Product> readAllMapWithDeleted() {
+        return readAllWithDeleted().stream().collect(Collectors.toMap(Product::getId, Function.identity()));
+    }
+
 //    @Override
 //    public List<Product> findByName(String searchingName) {
 //        return readAll().stream().filter(product -> product.getName().equalsIgnoreCase(searchingName)).collect(Collectors.toList());
@@ -64,5 +69,10 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Product> findByName(String searchingName) {
         return readAll().stream().filter(product -> product.getName().toLowerCase().matches("(.*)"+searchingName.toLowerCase()+"(.*)")).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Product> readAllWithDeleted(){
+        return productDao.readAllWithDeleted();
     }
 }

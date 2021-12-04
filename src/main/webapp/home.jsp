@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,15 +19,14 @@
     <title>Home</title>
 </head>
 <body>
-
+<fmt:setLocale value = "${sessionScope.lang}"/>
+<fmt:setBundle basename = "resources"/>
 
 <jsp:include page="header.jsp"/>
 
 <div class="containerBody overflow-hidden">
 
-
     <div class="row">
-
 
         <c:forEach items="${products}" var="product">
 
@@ -40,26 +40,27 @@
                 </div>
 
                 <div class="card-body">
-                    <h5 class="card-title">Name: ${product.name}</h5>
-                    <h6 class="card-title" hidden >Category: ${product.id}</h6>
-                    <h6 class="card-title" hidden>Category:${sessionScope.lang}</h6>
-                    <h6 class="card-title" id="categoryName" >Category : ${product.category.translations[sessionScope.lang]} </h6>
+                    <h5 class="card-title"><fmt:message key="home.Name" />: ${product.name}</h5>
+                    <h6 class="card-title" id="categoryName" ><fmt:message key="header.Category" /> : ${product.category.translations[sessionScope.lang]} </h6>
 
-                    <p class="card-text">Description: ${product.description} </p>
-                    <p class="card-text">Color: ${product.color}</p>
-                    <p class="card-text">Scale: ${product.scale}</p>
-                    <p class="card-text">Added: ${product.addingDate}</p>
-                    <span class="card-text">Quantity: ${product.quantity}</span>
+                    <p class="card-text"><fmt:message key="home.Description" />: ${product.description} </p>
+                    <p class="card-text"><fmt:message key="home.Color" />: ${product.color}</p>
+                    <p class="card-text"><fmt:message key="home.Scale" />: ${product.scale}</p>
+                    <p class="card-text"><fmt:message key="home.Added" />: ${product.addingDate}</p>
+                    <span class="card-text"><fmt:message key="home.Quantity" />: ${product.quantity}</span>
 
-                    <span class="card-text ml-3"><b>Price: ${product.price}</b></span>
+                    <span class="card-text ml-3"><b><fmt:message key="home.Price" />: ${product.price}</b></span>
                     <p class="card-text"></p>
                     <div class="d-flex">
-                        <c:if test="${sessionScope.user.role != 'ADMIN'}">
-                            <a href="/addToBucket?productId=${product.id}"  class="btn btn-primary"> + add to bucket</a>
+                        <c:if test="${product.quantity == 0}">
+                            <span class=" ml-3 btn bg-warning text-dark"><b><fmt:message key="home.Out_of_stock" /></b></span>
+                        </c:if>
+                        <c:if test="${sessionScope.user.role != 'ADMIN' && product.quantity > 0}">
+                            <a href="/addToBucket?productId=${product.id}"  class="btn btn-primary">+ <fmt:message key="home.add_to_bucket" /></a>
                         </c:if>
                         <c:if test="${sessionScope.user.role == 'ADMIN'}">
-                            <a href="/editProduct?productId=${product.id}"  class="btn btn-warning ms-auto">Edit</a>
-                            <a href="#" onclick="deleteProduct(${product.id}, '${product.name}' )" class="btn btn-danger ms-auto"> Delete </a>
+                            <a href="/editProduct?productId=${product.id}"  class="btn btn-info ms-auto"><fmt:message key="home.Edit" /></a>
+                            <a href="#" onclick="deleteProduct(${product.id}, '${product.name}' )" class="btn btn-danger ms-auto"><fmt:message key="home.Delete" />  </a>
                         </c:if>
                     </div>
                 </div>
@@ -76,10 +77,10 @@
         <c:if test="${totalPages > 1}">
             <c:choose>
                 <c:when test="${page  > 1}">
-                    <li class="page-item "><a class="page-link " onclick="getPage(${page-1})" href="#"<%--href="/home?page=${page-1}"--%>>Previous</a></li>
+                    <li class="page-item "><a class="page-link " onclick="getPage(${page-1})" href="#"<%--href="/home?page=${page-1}"--%>><fmt:message key="home.Previous" /></a></li>
                 </c:when>
                 <c:otherwise>
-                    <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+                    <li class="page-item disabled"><a class="page-link" href="#"><fmt:message key="home.Previous" /></a></li>
                 </c:otherwise>
             </c:choose>
 
@@ -97,10 +98,10 @@
 
             <c:choose>
                 <c:when test="${totalPages < page + 1 }">
-                    <li class="page-item disabled"><a class="page-link " href="#">Next</a></li>
+                    <li class="page-item disabled"><a class="page-link " href="#"><fmt:message key="home.Next" /></a></li>
                 </c:when>
                 <c:otherwise>
-                    <li class="page-item"><a class="page-link" onclick="getPage(${page+1})" href="#" <%--href="/home?page=${page+1}"--%>>Next</a></li>
+                    <li class="page-item"><a class="page-link" onclick="getPage(${page+1})" href="#" <%--href="/home?page=${page+1}"--%>><fmt:message key="home.Next" /></a></li>
                 </c:otherwise>
             </c:choose>
         </c:if>
@@ -110,7 +111,7 @@
 <br>
 
 
-
+<jsp:include page="footer.jsp"/>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="js/home.js"></script>

@@ -1,9 +1,12 @@
 package com.z.shop.servlet;
 
 import com.z.shop.entity.Bucket;
+import com.z.shop.entity.Product;
 import com.z.shop.entity.User;
 import com.z.shop.service.BucketService;
+import com.z.shop.service.ProductService;
 import com.z.shop.service.impl.BucketServiceImpl;
+import com.z.shop.service.impl.ProductServiceImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -22,7 +25,7 @@ import java.util.List;
 public class BuyAllProductServlet extends HttpServlet {
     private static final Logger LOGGER = LogManager.getLogger(BuyAllProductServlet.class);
     private BucketService bucketService = BucketServiceImpl.getBucketService();
-
+    private static ProductService productService = ProductServiceImpl.getProductService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -35,14 +38,18 @@ public class BuyAllProductServlet extends HttpServlet {
             Iterator<Bucket> iterator = buckets.iterator();
             while (iterator.hasNext()){
                 Bucket bucket = iterator.next();
-                bucket.setStatus("paid");
-                bucket.setPurchaseDate(new Date());
-                bucketService.update(bucket);
-                iterator.remove();
-
+                Product product = productService.read(bucket.getProductId());
+                if(user.getId().equals(bucket.getUserId()) && product.getQuantity() >= bucket.getQuantity()){
+                    product.setQuantity(product.getQuantity()-bucket.getQuantity());
+                    bucket.setStatus("paid");
+                    bucket.setPurchaseDate(new Date());
+                    bucketService.update(bucket);
+                    productService.update(product);
+                    iterator.remove();
+                }
             }
         }
-        response.sendRedirect("/home");
+        response.sendRedirect("/bucket");
 
     }
 

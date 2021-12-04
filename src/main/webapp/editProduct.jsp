@@ -81,7 +81,7 @@
     <button class="btn btn-primary createProduct" >Submit</button>
 
 </form>
-
+<jsp:include page="footer.jsp"/>
 <script>
     var form = document.getElementById('form');
 

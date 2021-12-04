@@ -33,7 +33,6 @@ public class AddToBucketServlet extends HttpServlet {
         if (buckets == null) {
             buckets = new ArrayList<Bucket>();
         }
-        System.out.println(buckets);
 
         Optional<Bucket> optionalBucket = buckets.stream().filter(b -> b.getProductId().equals(productId)).findFirst();
         Bucket bucket = null;
@@ -52,10 +51,8 @@ public class AddToBucketServlet extends HttpServlet {
             bucket.setStatus("reserved");
             buckets.add(bucket);
         }
-        System.out.println(bucket);
 
         User user = (User) session.getAttribute("user");
-        System.out.println(user);
         if(user != null){
             bucket.setUserId(user.getId());
             bucketService.create(bucket);

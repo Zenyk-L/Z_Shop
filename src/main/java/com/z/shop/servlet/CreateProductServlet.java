@@ -49,7 +49,6 @@ public class CreateProductServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String selectCategoryValue = request.getParameter("category");
-        System.out.println(selectCategoryValue);
 
         Product product = new Product();
         product.setName(request.getParameter("name"));

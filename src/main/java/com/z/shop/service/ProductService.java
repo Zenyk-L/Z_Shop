@@ -8,5 +8,7 @@ import java.util.Map;
 
 public interface ProductService extends AbstractCRUD<Product> {
     Map<Integer, Product> readAllMap();
+    Map<Integer, Product> readAllMapWithDeleted();
     List<Product> findByName(String searchingName) ;
+    List<Product> readAllWithDeleted();
 }
