@@ -31,7 +31,7 @@
             </div>
 
             <div class="form-group">
-                <label><fmt:message key="editUser.new"/> <fmt:message key="header.password" />"</label>
+                <label><fmt:message key="editUser.new"/> <fmt:message key="header.password" /></label>
                 <input type="password" name="newPassword" class="form-control" placeholder="<fmt:message key="editUser.Enter" /> <fmt:message key="editUser.new"/> <fmt:message key="header.password" />">
             </div>
 

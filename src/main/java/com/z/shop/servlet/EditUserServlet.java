@@ -36,18 +36,23 @@ public class EditUserServlet extends HttpServlet {
         if (!firstName.isEmpty() && !lastName.isEmpty() && !email.isEmpty() && !oldPassword.isEmpty()
                 && firstName != null && lastName != null && email != null && oldPassword != null) {
 
-            User userFromDB = userService.getUserByEmail(user.getEmail());
+            User userWithNewEmail = userService.getUserByEmail(email);
+            if(userWithNewEmail == null || user.getEmail().equals(email) ) {
+                User userFromDB = userService.getUserByEmail(user.getEmail());
 
-            if (userFromDB.getPassword().equals(oldPassword)){
-                userFromDB.setFirstName(firstName);
-                userFromDB.setLastName(lastName);
-                userFromDB.setEmail(email);
-                if(!newPassword.isEmpty() && !newPasswordConf.isEmpty() && newPassword != null && newPasswordConf != null && newPasswordConf.equals(newPassword)){
-                    userFromDB.setPassword(newPassword);
+                if (userFromDB.getPassword().equals(oldPassword)) {
+                    userFromDB.setFirstName(firstName);
+                    userFromDB.setLastName(lastName);
+                    userFromDB.setEmail(email);
+
+                    if (!newPassword.isEmpty() && !newPasswordConf.isEmpty() && newPassword != null && newPasswordConf != null && newPasswordConf.equals(newPassword)) {
+                        userFromDB.setPassword(newPassword);
+                    }
+
+                    userService.update(userFromDB);
+                    userFromDB.setPassword("");
+                    session.setAttribute("user", userFromDB);
                 }
-                userService.update(userFromDB);
-                userFromDB.setPassword("");
-                session.setAttribute("user", userFromDB);
             }
         }
 

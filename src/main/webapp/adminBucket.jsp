@@ -49,7 +49,11 @@
                             <div>
                                 <div class="font-size-sm"><span class="text-muted mr-2">Size:</span>${product.scale}</div>
                                 <div class="font-size-sm"><span class="text-muted mr-2">Color:</span>${product.color}</div>
-                                <div class="font-size-sm"><span class="text-muted mr-2">Available quantity:</span>${product.quantity}</div>
+                                <div class="font-size-sm"><span class="text-muted mr-2">Available quantity:</span>${product.quantity}
+                                    <c:if test="${product.quantity == 0}">
+                                        <span class=" ml-3 btn bg-warning text-dark"><b><fmt:message key="home.Out_of_stock" /></b></span>
+                                    </c:if>
+                                </div>
                                 <div class="font-size-lg text-primary pt-2"><b>Price: </b> ${product.price}</div>
                             </div>
                             <div class="ml-3 ">

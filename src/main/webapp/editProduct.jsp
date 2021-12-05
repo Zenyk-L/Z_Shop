@@ -24,6 +24,7 @@
 
 <form id="form" action="editProduct" method="POST" enctype="multipart/form-data" accept-charset="utf-8">
 
+    <input type="text" name="productId" value="${product.id}" hidden>
     <div class="form-group">
         <label>Product Name</label>
         <input type="text" name="name" class="form-control productName"

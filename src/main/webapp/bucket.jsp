@@ -60,12 +60,17 @@
 <%--&lt;%&ndash;                                <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>&ndash;%&gt;--%>
 <%--&lt;%&ndash;                            </svg>Update cart&ndash;%&gt;--%>
 
-                        <c:if test="${sessionScope.success == 'success' }">
+                        <c:if test="${product.quantity == 0}">
+                            <span class=" ml-3 btn bg-warning text-dark"><b><fmt:message key="home.Out_of_stock" /></b></span>
+                        </c:if>
+
+                        <c:if test="${sessionScope.user.role == 'USER' && product.quantity > 0 }">
                         <a class="btn btn-primary btn-block" id="buy${bucket.id}" href="/buyProduct?bucketId=${bucket.id}"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-credit-card mr-2">
                             <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
                             <line x1="1" y1="10" x2="23" y2="10"></line>
                         </svg><fmt:message key="bucket.Buy" /> </a>
                         </c:if>
+
                         <a  class="btn btn-outline-danger btn-sm btn-block mb-2" href="/removeFromBucket?productId=${product.id}&bucketId=${bucket.id}"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2 mr-1">
                             <polyline points="3 6 5 6 21 6"></polyline>
                             <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
@@ -84,7 +89,7 @@
                 <div class="h3 font-weight-semibold text-center py-3" id="subtotal">${subtotal}</div>
                 <hr>
                 <c:if test="${sessionScope.success != 'success' }">
-                    <span class="btn   btn-danger btn-block"><fmt:message key="bucket.You_need_to_login_to_buy" />You need to login to buy</span>
+                    <span class="btn   btn-danger btn-block"><fmt:message key="bucket.You_need_to_login_to_buy" /></span>
                 </c:if>
                 <c:if test="${sessionScope.success == 'success' }">
                     <a class="btn btn-primary btn-block" id="buyAll" href="/buyAllProduct">
@@ -94,7 +99,7 @@
                         </svg><fmt:message key="bucket.Buy" /> <fmt:message key="bucket.All" /></a>
 
                 <hr>
-                    <a class="btn btn-outline-secondary btn-block" href="/buyHistory"><fmt:message key="bucket.Buying_history" /> Buying history </a>
+                    <a class="btn btn-outline-secondary btn-block" href="/buyHistory"><fmt:message key="bucket.Buying_history" />  </a>
                 </c:if>
                 <hr>
 

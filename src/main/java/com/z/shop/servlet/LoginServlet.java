@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.List;
 
@@ -58,21 +59,24 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("user", user);
                 success = "success";
 
-                List<Bucket> userBuckets = (List<Bucket>) session.getAttribute("buckets");
+                if(user.getRole().toString().equals("USER")) {
+                    List<Bucket> userBuckets = (List<Bucket>) session.getAttribute("buckets");
 
-                if (userBuckets != null) {
-                    Iterator<Bucket> iterator = userBuckets.iterator();
-                    while (iterator.hasNext()) {
-                        Bucket bucket = iterator.next();
-                        bucket.setUserId(user.getId());
-                        bucketService.create(bucket);
+                    if (userBuckets != null) {
+                        Iterator<Bucket> iterator = userBuckets.iterator();
+                        while (iterator.hasNext()) {
+                            Bucket bucket = iterator.next();
+                            bucket.setUserId(user.getId());
+                            bucketService.create(bucket);
+                        }
                     }
-                }
 
-                userBuckets = bucketService.findByUserIdReserved(user.getId());
-                session.setAttribute("buckets", userBuckets);
+                    userBuckets = bucketService.findByUserIdReserved(user.getId());
+                    session.setAttribute("buckets", userBuckets);
+                }
             }else {
                 success = "user doesnt exist";
+//                success = "noUser";
             }
         } else {
             success = "invalid input";
@@ -80,7 +84,15 @@ public class LoginServlet extends HttpServlet {
 
         session.setAttribute("success", success);
         LOGGER.info("User " + email + " logged in");
-        response.sendRedirect("/home");
+        if(success != null && !success.equals("success")) {
+            PrintWriter out = response.getWriter();
+            out.println("<script type=\"text/javascript\">");
+            out.println("alert('Login fail:" + success +"');");
+            out.println("location='/home';");
+            out.println("</script>");
+        }else {
 
+            response.sendRedirect("/home");
+        }
     }
 }

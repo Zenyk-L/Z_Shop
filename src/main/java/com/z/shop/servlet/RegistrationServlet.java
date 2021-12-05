@@ -47,9 +47,8 @@ public class RegistrationServlet extends HttpServlet {
             user.setRole(UserRole.USER);
             user.setAmount(0.00);
 
-            System.out.println("User email" + user.getEmail());
             User userFromDB = userService.getUserByEmail(user.getEmail());
-            System.out.println(userFromDB);
+
             if (userFromDB == null) {
                 userService.create(user);
                 success = "registered";

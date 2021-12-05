@@ -18,22 +18,15 @@
 <body>
 <fmt:setLocale value = "${sessionScope.lang}"/>
 <fmt:setBundle basename = "resources"/>
-<%--<fmt:setLocale value = "${sessionScope.lang}"/>--%>
-<%--<fmt:setBundle basename = "resources"/>--%>
-<%--<h1>--%>
-<%--    <fmt:message key="hello" />--%>
-<%--    <fmt:message key="one" />--%>
-<%--    <fmt:message key="two" />--%>
 
-<%--</h1>--%>
 <header class="section-header">
     <section class="header-main border-bottom">
 
         <div class="d-flex justify-content-end">
 
-
-            <div id="userEmail" class="text-white mr-5">${sessionScope.user.email}</div>
-
+            <c:if test="${not empty sessionScope.user}">
+                 <div id="userEmail" class="text-white mr-5"><a <c:if test="${sessionScope.user.role == 'USER' }"> href="/buyHistory" </c:if>> <i class="fas fa fa-user-circle-o"></i></a>  ${sessionScope.user.email}</div>
+            </c:if>
             <fieldset>
                 <label style="color: white"> <fmt:message key="header.Language" /></label>
                 <select id="localesSession" style="color: #007bff" class="mr-5">
@@ -76,7 +69,7 @@
                                     <%--                                <i class="fas fa fa-shopping-cart"></i>--%>
                             </a>
                         </c:if>
-                        <c:if test="${sessionScope.user.role == 'ADMIN' || sessionScope.user.role == 'USER'}">
+                        <c:if test="${ sessionScope.user.role == 'USER'}">
                             <a class="text-white mr-5" href="/editUser"><i class="fas fa fa-user"></i> <fmt:message key="header.Profile_edit" /></a>
                         </c:if>
 
@@ -90,7 +83,7 @@
                                     <a class="dropdown-item text-white" href="/createProduct"><i class="fas fa fa-plus"></i>  <fmt:message key="header.Add_product" /></a>
                                     <a class="dropdown-item text-white" href="/showAllBuckets"><i class="fas fa fa-file-archive-o"></i> <fmt:message key="header.See_All" /></a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item text-white" href="#"><i class="fas fa fa-user"></i> <fmt:message key="header.Profile_edit" /></a>
+                                    <a class="dropdown-item text-white" href="/editUser"><i class="fas fa fa-user"></i> <fmt:message key="header.Profile_edit" /></a>
                                 </div>
                             </div>
 
@@ -113,10 +106,10 @@
             </div>
         </div>
     </section>
-    <nav class="navbar navbar-expand-md navbar-main border-bottom">
+    <nav class="navbar navbar-expand-md navbar-main border-bottom" <c:if test="${requestScope['javax.servlet.forward.request_uri'] != '/home'}">hidden</c:if>>
         <div class="container-fluid">
             <div class="navbar-collapse collapse" id="dropdown6" style="">
-                <ul class="navbar-nav mr-auto">
+                <ul class="navbar-nav mr-auto" >
                     <li class="nav-item"><p class="nav-link"> <fmt:message key="header.SORT_BY_CATEGORY" /></p></li>
                     <li class="nav-item dropdown">
 

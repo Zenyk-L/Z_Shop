@@ -57,7 +57,7 @@ public class EditProductServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String selectCategoryValue = request.getParameter("category");
-
+        System.out.println(request.getParameter("productId"));
         Integer productId = Integer.valueOf(request.getParameter("productId"));
         Product product = productService.read(productId);
         product.setName(request.getParameter("name"));
