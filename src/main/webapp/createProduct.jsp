@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,66 +19,68 @@
     <title>Create Product</title>
 </head>
 <body>
+<fmt:setLocale value = "${sessionScope.lang}"/>
+<fmt:setBundle basename = "resources"/>
 
 <jsp:include page="header.jsp"></jsp:include>
 
 
-<form id="form" action="createProduct" method="POST" enctype="multipart/form-data" accept-charset="utf-8">
+<form id="form" class="mb-3" action="createProduct" method="POST" enctype="multipart/form-data" accept-charset="utf-8">
 
     <div class="form-group">
-        <label>Product Name</label>
+        <label><fmt:message key="createProduct.Product" /> <fmt:message key="createProduct.name"/></label>
         <input type="text" name="name" class="form-control productName"
-               placeholder="Enter product name" required>
+               placeholder="<fmt:message key="createProduct.Enter" /> <fmt:message key="createProduct.product" /> <fmt:message key="createProduct.name"/>" required>
     </div>
     <div class="form-group">
-        <label>Image</label>
+        <label><fmt:message key="createProduct.Image" /></label>
         <input type="file" name="file" class="form-control productName"
                placeholder="Choose file" accept="image/*">
     </div>
 
     <div class="form-group">
-        <label>Category</label>
+        <label><fmt:message key="createProduct.Category"/></label>
         <select name="category" id="selectCat" class="form-control productName">
             <c:forEach items="${categories}" var="category">
                 <option value="${category.id}">${category.translations[sessionScope.lang]}</option>
             </c:forEach>
-            <option id="addCategory" value="add">+ add category</option>
+            <option id="addCategory" value="add">+ <fmt:message key="createProduct.add_category"/></option>
         </select>
 
         <c:forEach items="${languages}" var="language">
         <input type="text" name="newLanguage_${language.shortName}" class="form-control productName" style="display:none"
-               placeholder="Enter product category on ${language.fullName}"  value="${language.fullName}" required>
+               placeholder="<fmt:message key="createProduct.Enter" /> <fmt:message key="createProduct.product" /> <fmt:message key="createProduct.category"/> ${language.fullName}"  value="${language.fullName}" required>
         </c:forEach>
     </div>
     <div class="form-group">
-        <label>Quantity</label>
+        <label><fmt:message key="createProduct.Product" /> <fmt:message key="createProduct.quantity" /></label>
         <input type="number" name="quantity" class="form-control productName"
-               placeholder="Enter product quantity" min="0" required>
+               placeholder="<fmt:message key="createProduct.Enter" /> <fmt:message key="createProduct.product" /> <fmt:message key="createProduct.quantity"/>" min="0" required>
     </div>
     <div class="form-group">
-        <label>Product Description</label>
+        <label><fmt:message key="createProduct.Product" /> <fmt:message key="createProduct.description" /></label>
         <input type="text" name="description" class="form-control productDescription"
-               placeholder="Enter product description" required>
+               placeholder="<fmt:message key="createProduct.Enter" /> <fmt:message key="createProduct.product" /> <fmt:message key="createProduct.description" />" required>
     </div>
     <div class="form-group">
-        <label>Product color</label>
+        <label><fmt:message key="createProduct.Product" /> <fmt:message key="createProduct.color" /></label>
         <input type="text" name="color" class="form-control productName"
-               placeholder="Enter product color" required>
+               placeholder="<fmt:message key="createProduct.Enter" /> <fmt:message key="createProduct.product" /> <fmt:message key="createProduct.color" />" required>
     </div>
     <div class="form-group">
-        <label>Product scale</label>
+        <label><fmt:message key="createProduct.Product" /> <fmt:message key="createProduct.scale" /></label>
         <input type="text" name="scale" class="form-control productName"
-               placeholder="Enter product scale" required>
+               placeholder="<fmt:message key="createProduct.Enter" /> <fmt:message key="createProduct.product" /> <fmt:message key="createProduct.scale" />" required>
     </div>
 
     <div class="form-group">
-        <label>Product Price</label>
+        <label><fmt:message key="createProduct.Product" /> <fmt:message key="createProduct.price" /></label>
         <input type="number" step="0.01" min="0" name="price" class="form-control productPrice"
-               placeholder="Enter product price" required>
+               placeholder="<fmt:message key="createProduct.Enter" /> <fmt:message key="createProduct.product" /> <fmt:message key="createProduct.price" />" required>
     </div>
 
 
-    <button class="btn btn-primary createProduct" onclick="alertOfSuccessShow()">Submit</button>
+    <button class="btn btn-primary createProduct" onclick="alertOfSuccessShow()"><fmt:message key="createProduct.Submit" /></button>
 
 </form>
 <jsp:include page="footer.jsp"/>
@@ -86,7 +89,7 @@
 
     function alertOfSuccessShow() {
         if (form.checkValidity()) {
-            alert("Product added.");
+            alert("<fmt:message key="createProduct.Product" /> <fmt:message key="createProduct.added" />.");
         }
     }
 
@@ -94,7 +97,7 @@
         $('#selectCat').change(function () {
             console.log($('#selectCat option:selected').text());
             console.log($('#selectCat option:selected').val());
-            if($('#selectCat option:selected').text() == '+ add category'){
+            if($('#selectCat option:selected').val() == 'add'){
                 $("input[name^=newLanguage]").val('');
                 $("input[name^=newLanguage]").css("display", "block");
                 $("#selectCat").hide();

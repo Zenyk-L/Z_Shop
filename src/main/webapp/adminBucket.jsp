@@ -16,16 +16,19 @@
             integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
             crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style/bucket.css">
-    <title>Admin Bucket</title>
+    <fmt:setLocale value = "${sessionScope.lang}"/>
+    <fmt:setBundle basename = "resources"/>
+    <title><fmt:message key="header.See_All" /></title>
 </head>
 <body>
+
 <jsp:include page="header.jsp"></jsp:include>
 
     <div class="container1 pb-5  mt-md-n3 pl-3">
         <div class="row">
             <div class="col-xl-9 col-md-8">
-                <h2 class="h6 d-flex flex-wrap justify-content-between align-items-center px-4 py-3 bg-primary text-white"><span>Products</span>
-                    <a class="font-size-sm" style="color: #eeeeee" href="/home"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left" style="width: 1rem; height: 1rem;"><polyline points="15 18 9 12 15 6"></polyline></svg>To main page</a></h2>
+                <h2 class="h6 d-flex flex-wrap justify-content-between align-items-center px-4 py-3 bg-primary text-white"><span><fmt:message key="adminBucket.Products" /></span>
+                    <a class="font-size-sm" style="color: #eeeeee" href="/home"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left" style="width: 1rem; height: 1rem;"><polyline points="15 18 9 12 15 6"></polyline></svg><fmt:message key="adminBucket.To_main_page" /></a></h2>
             <c:forEach items="${buckets}" var="bucket">
                  <c:set var="product"  value="${productMap[bucket.productId]}"/>
                 <!-- Item-->
@@ -36,28 +39,28 @@
                             <h3 class="product-card-title font-weight-semibold border-0 pb-0">
                                 <a href="#"> ${product.category.translations[sessionScope.lang]}</a>
                                 <a href="#">${product.name}</a>
-                                <span class="text-muted text-md ml-5 "> Status:</span>
+                                <span class="text-muted text-md ml-5 "><fmt:message key="adminBucket.Status" />: </span>
                                 <c:if test="${bucket.status == 'paid'}">
-                                    <span class="fs-6 badge bg-danger"> ${bucket.status}</span>
+                                    <span class="fs-6 badge bg-danger"><fmt:message key="adminBucket.${bucket.status}" /> </span>
                                 </c:if>
                                 <c:if test="${bucket.status == 'reserved'}">
-                                    <span class="fs-6 badge bg-success"> ${bucket.status}</span>
+                                    <span class="fs-6 badge bg-success"><fmt:message key="adminBucket.${bucket.status}" /> </span>
                                 </c:if>
-                                <span class="ml-3">user: ${userMap[bucket.userId]}</span>
+                                <span class="ml-3"> <fmt:message key="adminBucket.user" />: ${userMap[bucket.userId]}</span>
                             </h3>
                             <div class="d-flex">
                             <div>
-                                <div class="font-size-sm"><span class="text-muted mr-2">Size:</span>${product.scale}</div>
-                                <div class="font-size-sm"><span class="text-muted mr-2">Color:</span>${product.color}</div>
-                                <div class="font-size-sm"><span class="text-muted mr-2">Available quantity:</span>${product.quantity}
+                                <div class="font-size-sm"><span class="text-muted mr-2"><fmt:message key="home.Scale" />:</span>${product.scale}</div>
+                                <div class="font-size-sm"><span class="text-muted mr-2"><fmt:message key="home.Color" />:</span>${product.color}</div>
+                                <div class="font-size-sm"><span class="text-muted mr-2"><fmt:message key="bucket.Available" /> <fmt:message key="home.Quantity" />:</span>${product.quantity}
                                     <c:if test="${product.quantity == 0}">
                                         <span class=" ml-3 btn bg-warning text-dark"><b><fmt:message key="home.Out_of_stock" /></b></span>
                                     </c:if>
                                 </div>
-                                <div class="font-size-lg text-primary pt-2"><b>Price: </b> ${product.price}</div>
+                                <div class="font-size-lg text-primary pt-2"><b><fmt:message key="home.Price" />: </b> ${product.price}</div>
                             </div>
                             <div class="ml-3 ">
-                                <div class="font-size-sm"><span class="text-muted mr-2">Description:</span></div>
+                                <div class="font-size-sm"><span class="text-muted mr-2"><fmt:message key="home.Description" />:</span></div>
                                 <div class="font-size-sm"><span class="text-muted mr-2">${product.description}</span></div>
                             </div>
                             </div>
@@ -66,11 +69,11 @@
 
                     <div class="pt-2 pt-sm-0 pl-sm-3 mx-auto mx-sm-0 text-center text-sm-left" style="max-width: 10rem;">
                         <div class="form-group mb-2">
-                            <label >Buy quantity</label>
+                            <label ><fmt:message key="adminBucket.Buy_quantity" /></label>
                             <p> ${bucket.quantity}</p>
                         </div>
                         <div class="form-group mb-2">
-                            <label >Buy date</label>
+                            <label ><fmt:message key="adminBucket.Buy_date" /></label>
                             <p> ${bucket.purchaseDate}</p>
                         </div>
 
@@ -87,7 +90,7 @@
                             <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
                             <line x1="10" y1="11" x2="10" y2="17"></line>
                             <line x1="14" y1="11" x2="14" y2="17"></line>
-                        </svg>Cancel</a>
+                        </svg><fmt:message key="adminBucket.Cancel" /></a>
                         </c:if>
                     </div>
                 </div>

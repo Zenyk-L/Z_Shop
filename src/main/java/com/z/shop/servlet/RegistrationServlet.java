@@ -26,6 +26,10 @@ public class RegistrationServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        /**
+         * Registration servlet is validating inputted data and check existing user with inputted email.
+         * Show result of registration in new window
+         * */
         String firstName = request.getParameter("firstName");
         String lastName = request.getParameter("lastName");
         String email = request.getParameter("email");
@@ -65,9 +69,6 @@ public class RegistrationServlet extends HttpServlet {
         request.setAttribute("success", success);
 
         LOGGER.info(email + " : " + success);
-
-//        response.sendRedirect("/home");
-
 
         out.println("location='/home';");
         out.println("</script>");

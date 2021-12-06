@@ -17,11 +17,12 @@
             integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
             crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style/bucket.css">
-    <title>Bucket</title>
+    <fmt:setLocale value = "${sessionScope.lang}"/>
+    <fmt:setBundle basename = "resources"/>
+    <title><fmt:message key="bucket.Bucket" /></title>
 </head>
 <body>
-<fmt:setLocale value = "${sessionScope.lang}"/>
-<fmt:setBundle basename = "resources"/>
+
 <jsp:include page="header.jsp"></jsp:include>
 
 <div class="container1 pb-5  mt-md-n3 pl-3">
@@ -51,7 +52,7 @@
                     <div class="pt-2 pt-sm-0 pl-sm-3 mx-auto mx-sm-0 text-center text-sm-left" style="max-width: 10rem;">
                         <div class="form-group mb-2">
                             <label for="quantity${product.id}"><fmt:message key="home.Quantity" /></label>
-                            <input class="form-control form-control-sm" type="number" min="0" max="${product.quantity}" id="quantity${product.id}" value="${bucket.quantity}" onchange="changeQuantity(${product.id}, ${bucket.id})">
+                            <input class="form-control form-control-sm" type="number" min="0" max="${product.quantity}" id="quantity${product.id}" value="${bucket.quantity}" onchange="changeQuantity(${product.id}, ${bucket.id})" on>
                         </div>
 
 <%--&lt;%&ndash;                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-refresh-cw mr-1">&ndash;%&gt;--%>
@@ -65,7 +66,7 @@
                         </c:if>
 
                         <c:if test="${sessionScope.user.role == 'USER' && product.quantity > 0 }">
-                        <a class="btn btn-primary btn-block" id="buy${bucket.id}" href="/buyProduct?bucketId=${bucket.id}"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-credit-card mr-2">
+                        <a class="btn btn-primary btn-block" id="buy${bucket.id}"  <c:if test="${product.quantity >= bucket.quantity}"> href="/buyProduct?bucketId=${bucket.id}"  </c:if>   ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-credit-card mr-2">
                             <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
                             <line x1="1" y1="10" x2="23" y2="10"></line>
                         </svg><fmt:message key="bucket.Buy" /> </a>

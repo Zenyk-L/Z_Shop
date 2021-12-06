@@ -46,12 +46,13 @@
                     <span class="logo">Z SHOP</span> </a></div>
                 <div class="col-lg-4 col-xl-5 col-sm-8 col-md-4 d-none d-md-block">
                     <form action="#" class="search-wrap">
-                        <div class="input-group w-100"><input type="text" id="searchNameInput"
+                        <div class="input-group w-100" style="<c:if test="${requestScope['javax.servlet.forward.request_uri'] != '/home'}">display:none</c:if>">
+                            <input type="text" id="searchNameInput"
                                                               class="form-control search-form" style="width:55%;"
                                                               placeholder="<fmt:message key="header.Search_by_name" />"
                                                               onkeyup="searchSortFunction()">
                             <div class="input-group-append">
-                                <button class="btn btn-primary search-button" type="submit"><i class="fa fa-search"></i>
+                                <button class="btn btn-primary search-button" type="reset"><i class="fa fa-times-circle <%--fa-search--%>"></i>
                                 </button>
                             </div>
                         </div>
@@ -106,6 +107,9 @@
             </div>
         </div>
     </section>
+    <c:if test="${requestScope['javax.servlet.forward.request_uri'] != '/home'}">
+      <div class="bg-white mr-auto" style="height: 68px"> </div>
+    </c:if>
     <nav class="navbar navbar-expand-md navbar-main border-bottom" <c:if test="${requestScope['javax.servlet.forward.request_uri'] != '/home'}">hidden</c:if>>
         <div class="container-fluid">
             <div class="navbar-collapse collapse" id="dropdown6" style="">

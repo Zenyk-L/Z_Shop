@@ -17,6 +17,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -31,15 +32,55 @@ public class BucketShowServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        /**
+         * synchronize session and DB buckets excluding doubling product for current user
+         * (delete from session bucket absent in DB bucket product and
+         * add from DB bucket to session bucket absent product)
+         * counting total price of all bucket
+         * */
+
         Map<Integer, Product> productMap = productService.readAllMap();
         request.setAttribute("productMap", productMap);
 
         HttpSession session = request.getSession();
-        List<Bucket> buckets = (List<Bucket>) session.getAttribute("buckets");
+        User user = (User) session.getAttribute("user");
+        List<Bucket> bucketsFromSession = (List<Bucket>) session.getAttribute("buckets");
+        if (user != null){
+            List<Bucket> bucketsFromDB = bucketService.findByUserIdReserved(user.getId());
+            if (bucketsFromDB == null || bucketsFromDB.isEmpty()) {
+                bucketsFromSession = new ArrayList<>();
+            }
+            if(!bucketsFromSession.isEmpty() && !bucketsFromDB.isEmpty()){
+
+                if(bucketsFromSession.size()> bucketsFromDB.size()) {
+                    Iterator<Bucket> iterator = bucketsFromSession.iterator();
+                    while (iterator.hasNext()) {
+                        Bucket bucketFromSession = iterator.next();
+                        if (!bucketsFromDB.contains(bucketFromSession)) {
+                            iterator.remove();
+                        }
+                    }
+                }
+
+                if(bucketsFromSession.size() <= bucketsFromDB.size()) {
+                    Iterator<Bucket> iterator = bucketsFromDB.iterator();
+                    while (iterator.hasNext()) {
+                        Bucket bucketFromDB = iterator.next();
+                        if(bucketsFromSession.contains(bucketFromDB)){
+                            bucketsFromSession.replaceAll(bucket -> bucket.getId().equals(bucketFromDB.getId())?bucketFromDB:bucket);
+                        }else{
+                            bucketsFromSession.add(bucketFromDB);
+                        }
+                    }
+                }
+
+            }
+        }
+
 
         Double subtotal = 0.0;
-        if (buckets != null) {
-            Iterator<Bucket> iterator = buckets.iterator();
+        if (bucketsFromSession != null) {
+            Iterator<Bucket> iterator = bucketsFromSession.iterator();
             while (iterator.hasNext()) {
                 Bucket bucket = iterator.next();
                 Double price = productMap.get(bucket.getProductId()).getPrice();
@@ -53,6 +94,10 @@ public class BucketShowServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        /**
+         * Change in bucket (in session and DB) ordered product quantity by product id
+         * */
 
         HttpSession session = request.getSession();
         List<Bucket> buckets = (List<Bucket>) session.getAttribute("buckets");

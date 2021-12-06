@@ -27,6 +27,13 @@ public class AddToBucketServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        /**
+         * Add to bucket by product ID :
+         * if not authorized - add product only to session bucket;
+         * if authorized - add product to user session bucket and DB bucket.
+         * If product already present in bucket increases ordered quantity.
+         * */
+
         HttpSession session = request.getSession();
         Integer productId = Integer.valueOf(request.getParameter("productId"));
         List<Bucket> buckets = (List<Bucket>) session.getAttribute("buckets");

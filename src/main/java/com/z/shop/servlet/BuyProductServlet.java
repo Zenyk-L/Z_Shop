@@ -27,7 +27,10 @@ public class BuyProductServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        // one bucket item to paid status
+        /**
+         * Buy product by bucket ID ( one bucket item change to paid status in DB and remove this item from session bucket) .
+         * Checking belongs the bucket to current user, and chek is enough product quantity.
+         * */
 
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
@@ -35,14 +38,19 @@ public class BuyProductServlet extends HttpServlet {
             List<Bucket> buckets = (List<Bucket>) session.getAttribute("buckets");
             Integer bucketId = Integer.valueOf(request.getParameter("bucketId"));
             Bucket bucket = buckets.stream().filter(b -> b.getId().equals(bucketId)).findFirst().get();
-            Product product = productService.read(bucket.getProductId());
-            if(user.getId().equals(bucket.getUserId()) && product.getQuantity() >= bucket.getQuantity()) {
-                product.setQuantity(product.getQuantity()-bucket.getQuantity());
+            Bucket bucketFromDB = bucketService.read(bucketId);
+            if (bucketFromDB != null) {
+                Product product = productService.read(bucket.getProductId());
+                if (user.getId().equals(bucket.getUserId()) && product.getQuantity() >= bucket.getQuantity()) {
+                    product.setQuantity(product.getQuantity() - bucket.getQuantity());
+                    buckets.remove(bucket);
+                    bucket.setStatus("paid");
+                    bucket.setPurchaseDate(new Date());
+                    bucketService.update(bucket);
+                    productService.update(product);
+                }
+            }else{
                 buckets.remove(bucket);
-                bucket.setStatus("paid");
-                bucket.setPurchaseDate(new Date());
-                bucketService.update(bucket);
-                productService.update(product);
             }
         }
         response.sendRedirect("/bucket");

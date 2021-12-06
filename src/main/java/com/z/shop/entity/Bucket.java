@@ -76,7 +76,9 @@ public class Bucket implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Bucket bucket = (Bucket) o;
-        return deleted == bucket.deleted && Objects.equals(id, bucket.id) && Objects.equals(userId, bucket.userId) && Objects.equals(productId, bucket.productId) && Objects.equals(quantity, bucket.quantity) && Objects.equals(purchaseDate, bucket.purchaseDate) && Objects.equals(status, bucket.status);
+//        return deleted == bucket.deleted && Objects.equals(id, bucket.id) && Objects.equals(userId, bucket.userId) && Objects.equals(productId, bucket.productId) && Objects.equals(quantity, bucket.quantity) && Objects.equals(purchaseDate, bucket.purchaseDate) && Objects.equals(status, bucket.status);
+                return Objects.equals(id, bucket.id) && Objects.equals(userId, bucket.userId) && Objects.equals(productId, bucket.productId) ;
+
     }
 
     @Override

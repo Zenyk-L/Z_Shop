@@ -22,7 +22,7 @@ public class BuyHistoryServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Map<Integer, Product> productMap = productService.readAllMap();
+        Map<Integer, Product> productMap = productService.readAllMapWithDeleted();
         request.setAttribute("productMap", productMap);
 
         HttpSession session = request.getSession();

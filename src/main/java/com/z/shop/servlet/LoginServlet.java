@@ -36,6 +36,11 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        /**
+         * Login servlet checking entered login and password.
+         * And synchronize bucket from DB and bucket from session.
+         * If some products was added before authorization they will be added to logged user bucket.
+         * */
         HttpSession session = request.getSession();
 
         String email = request.getParameter("email");
@@ -45,6 +50,9 @@ public class LoginServlet extends HttpServlet {
         if (!email.isEmpty() && email != null && !password.isEmpty() && password != null) {
             User user = userService.getUserByEmail(email);
 
+            if (user != null && !user.getPassword().equals(password)) {
+                success = "wrong password";
+            }else
             if (user != null && user.getPassword().equals(password)) {
                 user.setPassword("");
 
@@ -59,28 +67,46 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("user", user);
                 success = "success";
 
-                if(user.getRole().toString().equals("USER")) {
-                    List<Bucket> userBuckets = (List<Bucket>) session.getAttribute("buckets");
 
-                    if (userBuckets != null) {
-                        Iterator<Bucket> iterator = userBuckets.iterator();
+
+                if(user.getRole().toString().equals("USER")) {
+
+                    /**
+                     * If some products was added before authorization they will be added to logged user bucket.
+                     * if some product already present in user bucket them quantity will be increased.
+                     * */
+
+                    List<Bucket> userBucketsFromSession = (List<Bucket>) session.getAttribute("buckets");
+                    List<Bucket> userBucketsFromDB = bucketService.findByUserIdReserved(user.getId());
+                    if (userBucketsFromSession != null) {
+                        Iterator<Bucket> iterator = userBucketsFromSession.iterator();
                         while (iterator.hasNext()) {
                             Bucket bucket = iterator.next();
-                            bucket.setUserId(user.getId());
-                            bucketService.create(bucket);
+                            Bucket bucketFromDB = userBucketsFromDB.stream().filter(b -> b.getProductId().equals(bucket.getProductId())).findFirst().orElse(null);
+                            if(bucketFromDB == null) {
+                                bucket.setUserId(user.getId());
+                                bucketService.create(bucket);
+                            } else{
+                                int newQuantity = bucketFromDB.getQuantity() + bucket.getQuantity();
+                                bucketFromDB.setQuantity( newQuantity);
+                                bucketService.update(bucketFromDB);
+                            }
                         }
                     }
 
-                    userBuckets = bucketService.findByUserIdReserved(user.getId());
-                    session.setAttribute("buckets", userBuckets);
+                    userBucketsFromSession = bucketService.findByUserIdReserved(user.getId());
+                    session.setAttribute("buckets", userBucketsFromSession);
                 }
             }else {
                 success = "user doesnt exist";
-//                success = "noUser";
             }
         } else {
             success = "invalid input";
         }
+
+        /**
+         * showing alert with mistake in inputted data
+         * */
 
         session.setAttribute("success", success);
         LOGGER.info("User " + email + " logged in");

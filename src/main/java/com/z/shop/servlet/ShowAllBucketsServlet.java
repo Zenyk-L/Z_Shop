@@ -31,15 +31,19 @@ public class ShowAllBucketsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        /**
+         * Preparing data to show Admin all buckets of all users.
+         * */
+
         List<Bucket> buckets = bucketService.readAll();
         buckets = buckets.stream().sorted((b1,b2)-> b2.getStatus().compareTo(b1.getStatus())).collect(Collectors.toList());
         request.setAttribute("buckets", buckets);
         Map<Integer, Product> productMap = productService.readAllMapWithDeleted();
         request.setAttribute("productMap", productMap);
         Map<Integer, String> userMap = userService.readAll().stream().collect(Collectors.toMap(User::getId, User::getEmail));
-        System.out.println(userMap);
+
         request.setAttribute("userMap", userMap);
-//        response.sendRedirect("adminBucket.jsp");
+
         request.getRequestDispatcher("adminBucket.jsp").forward(request,response);
 
     }

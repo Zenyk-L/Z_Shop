@@ -1,12 +1,28 @@
-2021-12-06 00:00:18 INFO  GetAllProductsServlet:118 - All product getted from DB 
-2021-12-06 00:01:41 INFO  GetAllProductsServlet:118 - All product getted from DB 
-2021-12-06 00:01:49 INFO  GetAllProductsServlet:118 - All product getted from DB 
-2021-12-06 00:01:50 INFO  GetAllProductsServlet:118 - All product getted from DB 
-2021-12-06 00:01:53 INFO  GetAllProductsServlet:118 - All product getted from DB 
-2021-12-06 00:02:08 INFO  GetAllProductsServlet:118 - All product getted from DB 
-2021-12-06 00:02:29 INFO  GetAllProductsServlet:118 - All product getted from DB 
-2021-12-06 00:02:37 INFO  GetAllProductsServlet:118 - All product getted from DB 
-2021-12-06 00:02:48 INFO  GetAllProductsServlet:118 - All product getted from DB 
-2021-12-06 00:03:09 INFO  DeleteProductServlet:31 - Product id = 1 delete.
-2021-12-06 00:03:09 INFO  GetAllProductsServlet:118 - All product getted from DB 
-2021-12-06 00:03:12 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 00:00:14 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 00:00:17 INFO  AddToBucketServlet:64 - Product with id : 9 added to session bucket 
+2021-12-07 00:00:18 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 00:00:20 INFO  AddToBucketServlet:64 - Product with id : 11 added to session bucket 
+2021-12-07 00:00:20 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 00:00:21 INFO  AddToBucketServlet:64 - Product with id : 12 added to session bucket 
+2021-12-07 00:00:21 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 00:00:29 INFO  LoginServlet:112 - User user@mail.com logged in
+2021-12-07 00:00:29 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 00:07:14 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 00:07:18 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 00:07:20 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 00:15:09 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 00:15:46 ERROR UserDaoImpl:153 - java.sql.SQLException: Illegal operation on empty result set.
+2021-12-07 00:15:47 INFO  RegistrationServlet:71 - user9@gmail.com : registered
+2021-12-07 00:15:49 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 01:03:38 INFO  LoginServlet:112 - User petro@mail.com logged in
+2021-12-07 01:03:38 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 01:03:43 INFO  AddToBucketServlet:65 - Product with id : 9 added to DB bucket for user petro@mail.com
+2021-12-07 01:03:43 INFO  AddToBucketServlet:70 - Product with id : 9 added to session bucket 
+2021-12-07 01:03:43 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 01:03:52 INFO  AddToBucketServlet:66 - Product with id : 9 added to DB bucket for user petro@mail.com
+2021-12-07 01:03:52 INFO  AddToBucketServlet:71 - Product with id : 9 added to session bucket 
+2021-12-07 01:03:53 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 01:04:06 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 01:04:07 INFO  AddToBucketServlet:66 - Product with id : 9 added to DB bucket for user petro@mail.com
+2021-12-07 01:04:07 INFO  AddToBucketServlet:71 - Product with id : 9 added to session bucket 
+2021-12-07 01:04:08 INFO  GetAllProductsServlet:118 - All product getted from DB 
