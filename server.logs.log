@@ -26,3 +26,299 @@
 2021-12-07 01:04:07 INFO  AddToBucketServlet:66 - Product with id : 9 added to DB bucket for user petro@mail.com
 2021-12-07 01:04:07 INFO  AddToBucketServlet:71 - Product with id : 9 added to session bucket 
 2021-12-07 01:04:08 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 11:53:53 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 11:55:27 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 11:55:39 INFO  LoginServlet:112 - User petro@mail.com logged in
+2021-12-07 11:55:39 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 11:56:00 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 11:56:04 INFO  AddToBucketServlet:70 - Product with id : 9 added to DB bucket for user petro@mail.com
+2021-12-07 11:56:04 INFO  AddToBucketServlet:75 - Product with id : 9 added to session bucket 
+2021-12-07 11:56:05 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 11:56:07 INFO  AddToBucketServlet:70 - Product with id : 9 added to DB bucket for user petro@mail.com
+2021-12-07 11:56:07 INFO  AddToBucketServlet:75 - Product with id : 9 added to session bucket 
+2021-12-07 11:56:07 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 11:56:21 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 11:56:24 INFO  AddToBucketServlet:75 - Product with id : 9 added to session bucket 
+2021-12-07 11:56:24 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 11:56:30 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 11:56:31 INFO  AddToBucketServlet:75 - Product with id : 9 added to session bucket 
+2021-12-07 11:56:32 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 11:56:43 INFO  LoginServlet:112 - User petro@mail.com logged in
+2021-12-07 11:56:43 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 11:56:56 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 11:56:58 INFO  AddToBucketServlet:70 - Product with id : 9 added to DB bucket for user petro@mail.com
+2021-12-07 11:56:58 INFO  AddToBucketServlet:75 - Product with id : 9 added to session bucket 
+2021-12-07 11:56:59 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 11:57:04 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 11:57:06 INFO  AddToBucketServlet:70 - Product with id : 9 added to DB bucket for user petro@mail.com
+2021-12-07 11:57:06 INFO  AddToBucketServlet:75 - Product with id : 9 added to session bucket 
+2021-12-07 11:57:06 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 11:57:15 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 11:57:17 INFO  AddToBucketServlet:70 - Product with id : 9 added to DB bucket for user petro@mail.com
+2021-12-07 11:57:17 INFO  AddToBucketServlet:75 - Product with id : 9 added to session bucket 
+2021-12-07 11:57:17 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 11:57:18 INFO  AddToBucketServlet:70 - Product with id : 9 added to DB bucket for user petro@mail.com
+2021-12-07 11:57:18 INFO  AddToBucketServlet:75 - Product with id : 9 added to session bucket 
+2021-12-07 11:57:18 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 12:09:40 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 12:09:49 INFO  LoginServlet:112 - User admin@mail.com logged in
+2021-12-07 12:09:49 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 12:13:00 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 12:13:00 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 12:13:12 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 12:13:15 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 12:14:13 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 12:14:41 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 12:14:50 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 12:14:55 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 12:16:09 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 12:20:05 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 12:20:35 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 12:20:43 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 12:21:06 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 12:21:41 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 13:22:06 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 13:46:56 INFO  AddToBucketServlet:75 - Product with id : 9 added to session bucket 
+2021-12-07 13:46:57 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 13:47:27 INFO  LoginServlet:112 - User admin@mail.com logged in
+2021-12-07 13:47:27 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 13:48:12 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 13:48:15 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 13:48:17 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 13:50:09 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 13:51:43 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 13:51:45 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 13:51:48 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 13:52:16 INFO  LoginServlet:116 - User admin@mail.com logged in
+2021-12-07 13:52:16 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 13:52:21 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 13:52:24 INFO  AddToBucketServlet:75 - Product with id : 9 added to session bucket 
+2021-12-07 13:52:24 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 13:52:35 INFO  LoginServlet:116 - User admin@mail.com logged in
+2021-12-07 13:52:35 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 14:04:08 INFO  DeleteProductServlet:38 - Product id = 2 delete.
+2021-12-07 14:04:09 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 14:04:39 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 14:05:42 INFO  DeleteProductServlet:38 - Product id = 2 delete.
+2021-12-07 14:05:43 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 14:06:11 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 14:06:37 INFO  LoginServlet:121 - User user@mail.com logged in
+2021-12-07 14:06:37 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 14:09:35 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 14:09:44 INFO  LoginServlet:121 - User admin@mail.com logged in
+2021-12-07 14:09:44 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 14:09:52 INFO  DeleteProductServlet:38 - Product id = 2 delete.
+2021-12-07 14:09:53 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 14:10:09 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 14:10:12 INFO  LoginServlet:121 - User user@mail.com logged in
+2021-12-07 14:10:12 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 14:10:38 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 14:10:56 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 14:11:13 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 14:59:13 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 14:59:26 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 14:59:27 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 14:59:27 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 14:59:31 INFO  LoginServlet:121 - User user@mail.com logged in
+2021-12-07 14:59:32 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 14:59:47 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 15:00:26 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 15:00:42 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 15:11:12 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 15:11:23 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 15:11:24 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 15:11:26 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 15:16:06 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 15:16:11 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 15:16:13 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 15:19:17 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 15:19:21 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 15:19:27 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 15:19:40 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 15:20:09 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 15:21:31 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 15:21:49 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 15:21:49 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 15:21:51 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 15:21:53 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 15:21:55 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 15:21:57 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 15:21:59 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 15:22:12 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 15:22:43 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 15:23:12 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 15:25:52 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 15:25:54 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 15:25:55 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 15:25:57 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 15:26:14 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 15:26:35 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 15:27:30 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 16:34:13 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 16:34:13 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 16:34:14 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 16:34:16 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 16:34:16 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 16:34:16 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 16:34:22 INFO  LoginServlet:121 - User user@mail.com logged in
+2021-12-07 16:34:22 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 16:34:41 ERROR UserDaoImpl:153 - java.sql.SQLException: Illegal operation on empty result set.
+2021-12-07 16:34:44 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 16:35:16 ERROR UserDaoImpl:153 - java.sql.SQLException: Illegal operation on empty result set.
+2021-12-07 16:35:20 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 16:35:40 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 16:48:02 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 16:48:03 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 16:48:04 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 16:48:06 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 16:48:08 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 16:48:18 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 16:51:49 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 16:51:52 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 16:54:22 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 16:54:28 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 16:54:29 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 16:54:31 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 16:54:32 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 16:54:34 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 16:54:47 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 16:54:53 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 16:54:55 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 16:56:07 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 16:56:08 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 16:56:08 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 16:56:09 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 16:56:09 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 16:56:09 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 16:56:10 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 16:56:10 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 16:56:10 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 16:56:11 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 16:56:12 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 16:56:13 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 16:56:13 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 16:56:14 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 16:56:14 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 16:56:21 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 16:56:23 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 16:56:37 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 16:56:39 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 16:56:50 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 16:56:51 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 16:56:52 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 16:56:52 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 16:56:52 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 16:56:53 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 16:56:53 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 16:56:53 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 16:56:54 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 16:56:55 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 16:56:57 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 16:57:42 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 16:57:55 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 16:57:57 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 16:57:58 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 16:57:59 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 16:58:16 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 17:00:11 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 17:00:17 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 17:00:19 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 17:01:32 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 17:02:50 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 17:02:54 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 17:02:56 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 17:02:57 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 17:03:05 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 17:03:07 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 17:05:11 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 17:05:30 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 17:06:57 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 17:07:03 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 17:07:04 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 17:07:05 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 17:07:06 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 17:07:12 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 17:07:21 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 17:07:21 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 17:07:42 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 17:08:20 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 17:08:20 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 17:08:33 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 17:08:34 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 17:10:41 INFO  GetAllProductsServlet:118 - All product getted from DB 
+2021-12-07 17:15:52 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:15:59 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:16:03 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:16:06 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:16:11 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:16:12 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:16:16 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:16:16 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:16:27 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:16:32 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:16:32 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:16:39 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:16:39 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:16:43 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:16:43 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:16:47 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:16:47 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:18:16 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:18:22 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:18:24 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:18:26 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:18:27 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:18:28 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:18:29 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:18:35 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:18:35 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:18:40 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:18:41 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:18:43 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:18:43 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:27:11 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:27:19 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:27:20 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:27:21 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:27:22 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:27:22 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:27:28 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:27:28 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:27:36 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:27:36 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:27:42 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:27:42 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:27:46 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:27:46 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:27:49 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:27:50 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:28:04 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:28:05 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:29:39 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:29:50 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:29:52 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:29:53 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:29:54 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:29:55 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:29:58 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:29:59 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:30:02 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:30:02 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:30:07 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:30:11 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:30:21 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:31:12 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:31:21 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:32:48 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:35:01 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:35:01 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:35:13 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:35:13 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:35:31 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:37:20 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:37:23 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:37:25 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:37:25 INFO  GetAllProductsServlet:120 - All product getted from DB 
+2021-12-07 17:40:02 INFO  GetAllProductsServlet:123 - All product getted from DB 
+2021-12-07 17:40:06 INFO  GetAllProductsServlet:123 - All product getted from DB 
+2021-12-07 17:40:09 INFO  GetAllProductsServlet:123 - All product getted from DB 

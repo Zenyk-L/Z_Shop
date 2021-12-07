@@ -34,6 +34,13 @@ public class GetAllProductsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        /**
+         * Creating data for main page.
+         * Set localization language.
+         * Search products by name, if no matches return all products.
+         * Sort by category, name, price.
+         * Split data to pages, not more than 8 product on page.
+         * */
         String lang = request.getParameter("lang");
         HttpSession session = request.getSession();
         if(session.getAttribute("lang") == null){
@@ -42,11 +49,16 @@ public class GetAllProductsServlet extends HttpServlet {
 
         if (lang != null){
             session.setAttribute("lang", lang);
+            request.setAttribute("javax.servlet.jsp.jstl.fmt.fallbackLocale.session", lang);
         }
+
         LOGGER.trace("servlet session lang after settings = " + session.getAttribute("lang"));
 
         List<Product> products = null;
-//        searching products by name, if no matches return all products
+        /**
+         * searching products by name, if no matches return all products
+         * */
+
         String searchingText = request.getParameter("searchText");
         if ( searchingText == null){
             products = productService.readAll();
@@ -57,7 +69,9 @@ public class GetAllProductsServlet extends HttpServlet {
                 products = productService.readAll();
             }
         }
-//        sort by category
+      /**
+       *  sort by category
+      */
         String sortByCategory = request.getParameter("sortByCategory");
 
         if(sortByCategory != null && !"default".equals(sortByCategory) ) {
@@ -74,7 +88,10 @@ public class GetAllProductsServlet extends HttpServlet {
             products = products.stream().sorted((product1,product2)->product2.getName().toLowerCase().compareTo(product1.getName().toLowerCase())).collect(Collectors.toList());
         }
 
-        //        sort by price
+        /**
+         * sort by price
+         * */
+
         String sortByPrice = request.getParameter("sortByPrice");
         if("UP".equals(sortByPrice)) {
             products = products.stream().sorted((product1,product2)->product1.getPrice().compareTo(product2.getPrice())).collect(Collectors.toList());
@@ -92,8 +109,10 @@ public class GetAllProductsServlet extends HttpServlet {
         List<Language> languages = languageService.readAll();
         session.setAttribute("languages", languages);
         request.setAttribute("categories", categories);
-
-
+        
+        /**
+         * pagination
+         * */
         Integer totalProducts = products.size();
         int totalPages = totalProducts /8 ;
         if(totalProducts % 8 != 0){

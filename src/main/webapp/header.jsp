@@ -16,8 +16,8 @@
 
 </head>
 <body>
-<fmt:setLocale value = "${sessionScope.lang}"/>
-<fmt:setBundle basename = "resources"/>
+<fmt:setLocale value = "${sessionScope.lang}" scope="session"/>
+<fmt:setBundle basename = "resources" scope="session"/>
 
 <header class="section-header">
     <section class="header-main border-bottom">
@@ -25,7 +25,7 @@
         <div class="d-flex justify-content-end">
 
             <c:if test="${not empty sessionScope.user}">
-                 <div id="userEmail" class="text-white mr-5"><a <c:if test="${sessionScope.user.role == 'USER' }"> href="/buyHistory" </c:if>> <i class="fas fa fa-user-circle-o"></i></a>  ${sessionScope.user.email}</div>
+                 <div id="userEmail" class="text-white mr-5"> <span title="<fmt:message key="header.First_name" />: ${sessionScope.user.firstName}&#10;<fmt:message key="header.Last_name" />: ${sessionScope.user.lastName}"><i class="fas fa fa-user-circle-o"></i> ${sessionScope.user.email} </span> <c:if test="${sessionScope.user.role == 'USER' }">  <a  title="<fmt:message key="bucket.Buying_history" />" class="ml-2" href="/buyHistory" > <i class="fas fa fa-history"></i></a></c:if></div>
             </c:if>
             <fieldset>
                 <label style="color: white"> <fmt:message key="header.Language" /></label>

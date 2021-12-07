@@ -4,8 +4,7 @@
 
 <html>
 <head>
-    <fmt:setLocale value = "${sessionScope.lang}"/>
-    <fmt:setBundle basename = "resources"/>
+
     <title><fmt:message key="error.Title" /></title>
 
 </head>

@@ -191,3 +191,5 @@
 22:05:42.990 [http-nio-8080-exec-44] ERROR - java.sql.SQLException: Illegal operation on empty result set.
 23:55:17.195 [http-nio-8080-exec-152] ERROR - java.sql.SQLException: Illegal operation on empty result set.
 00:15:46.944 [http-nio-8080-exec-161] ERROR - java.sql.SQLException: Illegal operation on empty result set.
+16:34:41.907 [http-nio-8080-exec-224] ERROR - java.sql.SQLException: Illegal operation on empty result set.
+16:35:16.337 [http-nio-8080-exec-225] ERROR - java.sql.SQLException: Illegal operation on empty result set.

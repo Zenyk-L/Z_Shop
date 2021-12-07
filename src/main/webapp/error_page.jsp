@@ -3,14 +3,14 @@
 
 <html>
 <head>
-    <title>error page</title>
-    <c:set var="title" value="Error" scope="page" />
+
+    <title><fmt:message key="error.Title" /></title>
 </head>
 <body>
 <table id="main-container">
 
 
-
+    <h1><a href="/home"> <fmt:message key="adminBucket.To_main_page" /> </a></h1>
     <tr >
         <td class="content">
             <%-- CONTENT --%>

@@ -31,7 +31,7 @@ public class AddToBucketServlet extends HttpServlet {
          * Add to bucket by product ID :
          * if not authorized - add product only to session bucket;
          * if authorized - add product to user session bucket and DB bucket.
-         * If product already present in bucket increases ordered quantity.
+         * If product already present in bucket, increases ordered quantity.
          * */
 
         HttpSession session = request.getSession();
@@ -62,7 +62,11 @@ public class AddToBucketServlet extends HttpServlet {
         User user = (User) session.getAttribute("user");
         if(user != null){
             bucket.setUserId(user.getId());
-            bucketService.create(bucket);
+            if(bucket.getId() == null) {
+                bucketService.create(bucket);
+            }else{
+                bucketService.update(bucket);
+            }
             LOGGER.info("Product with id : " + productId + " added to DB bucket for user " + user.getEmail());
 
         }

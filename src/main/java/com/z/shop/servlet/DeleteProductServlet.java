@@ -23,12 +23,21 @@ public class DeleteProductServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        /**
+         * Delete product by ID.
+         * Delete from all bucket records in DB where this product is present as "reserved".
+         * But for buying history product will be available.
+         * */
+
         String productId = request.getParameter("productId");
-        productService.delete(Integer.valueOf(productId));
-        List<Bucket> collect = bucketService.readAll().stream().filter(bucket -> bucket.getProductId().equals(Integer.valueOf(productId)) && bucket.getStatus().equals("reserved")).collect(Collectors.toList());
-        System.out.println(collect);
-        collect.stream().forEach(b -> bucketService.delete(b.getId()));
-        LOGGER.info("Product id = " + productId + " delete.");
+        if(productId != null) {
+            productService.delete(Integer.valueOf(productId));
+            List<Bucket> collect = bucketService.readAll().stream().filter(bucket -> bucket.getProductId().equals(Integer.valueOf(productId)) && bucket.getStatus().equals("reserved")).collect(Collectors.toList());
+
+            collect.stream().forEach(b -> bucketService.delete(b.getId()));
+            LOGGER.info("Product id = " + productId + " delete.");
+        }
         response.sendRedirect("/home");
     }
 

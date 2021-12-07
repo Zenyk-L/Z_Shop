@@ -3,11 +3,11 @@
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
-    <title>Edit User</title>
+
+    <title><fmt:message key="editUser.Edit_user" /></title>
 </head>
 <body>
-<fmt:setLocale value = "${sessionScope.lang}"/>
-<fmt:setBundle basename = "resources"/>
+
 <jsp:include page="header.jsp"></jsp:include>
 
 

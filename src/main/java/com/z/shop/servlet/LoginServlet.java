@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -40,6 +41,8 @@ public class LoginServlet extends HttpServlet {
          * Login servlet checking entered login and password.
          * And synchronize bucket from DB and bucket from session.
          * If some products was added before authorization they will be added to logged user bucket.
+         * Admin couldn't have product bucket.
+         * If without authorization in session bucket are present products, with admin login bucket will be cleared.
          * */
         HttpSession session = request.getSession();
 
@@ -96,6 +99,12 @@ public class LoginServlet extends HttpServlet {
 
                     userBucketsFromSession = bucketService.findByUserIdReserved(user.getId());
                     session.setAttribute("buckets", userBucketsFromSession);
+                }else {
+                    /**
+                     * Clearing session bucket for admin
+                     * */
+                    List<Bucket> cleanBucketForAdmin = new ArrayList<>();
+                    session.setAttribute("buckets", cleanBucketForAdmin);
                 }
             }else {
                 success = "user doesnt exist";

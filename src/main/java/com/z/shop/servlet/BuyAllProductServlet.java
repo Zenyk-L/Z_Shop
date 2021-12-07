@@ -30,7 +30,12 @@ public class BuyAllProductServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        // all bucket item to paid status
+        /**
+         * User can buy only from own bucket all selected products, but in quantity not more than present.
+         * If product quantity not enough item stay in bucket without any changes.
+         * From session bucket products are removed. In DB bucket for all item's status changing to "paid".
+         * */
+
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
         if (user != null){

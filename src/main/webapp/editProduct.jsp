@@ -16,11 +16,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
             integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
             crossorigin="anonymous"></script>
-    <title>Edit Product</title>
+
+    <title><fmt:message key="home.Edit"/> <fmt:message key="createProduct.product"/></title>
 </head>
 <body>
-<fmt:setLocale value = "${sessionScope.lang}"/>
-<fmt:setBundle basename = "resources"/>
+
 
 <jsp:include page="header.jsp"></jsp:include>
 

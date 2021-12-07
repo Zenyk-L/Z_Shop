@@ -22,6 +22,12 @@ public class BuyHistoryServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        /**
+         * For user show him own list of purchased products.
+         * Get from DB for current user all bucket records with status "paid"
+         * */
+
         Map<Integer, Product> productMap = productService.readAllMapWithDeleted();
         request.setAttribute("productMap", productMap);
 

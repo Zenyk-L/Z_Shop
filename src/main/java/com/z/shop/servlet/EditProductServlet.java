@@ -39,6 +39,10 @@ public class EditProductServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        /**
+         * Getting from DB needed product data by ID. Preparing needed data for jsp form.
+         * */
+
         Product product = new Product();
         String productId = request.getParameter("productId");
         if (!productId.isEmpty()){
@@ -56,8 +60,17 @@ public class EditProductServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        /**
+         * Update product entity. Fill all product data from jsp form.
+         * Product category is localized in DB. If to product filled category doesn't exist, she will be created
+         * on all available languages and saved to DB.
+         * Product have image visualisation. If not uploaded new image it will keep old product image in BD.
+         * Uploaded image from jsp form is saved to server folder "webapp/image"
+         * with unique name, which is saved to DB. Unique image name is created from upload date to milliseconds.
+         * */
+
         String selectCategoryValue = request.getParameter("category");
-        System.out.println(request.getParameter("productId"));
+
         Integer productId = Integer.valueOf(request.getParameter("productId"));
         Product product = productService.read(productId);
         product.setName(request.getParameter("name"));
@@ -98,7 +111,9 @@ public class EditProductServlet extends HttpServlet {
         response.sendRedirect("/home");
     }
 
-// saving image file from form to local directory witch is set in   DBManager.URL_TO_IMAGE_FOLDER and return file name
+    /**
+     * saving image file from form to local directory witch is set in   DBManager.URL_TO_IMAGE_FOLDER and return file name
+     * */
 
     protected String processRequest(HttpServletRequest request,
                                     HttpServletResponse response)
@@ -161,7 +176,9 @@ public class EditProductServlet extends HttpServlet {
         return fileName;
     }
 
-//    extract from part file type of file, and return generated unique file name with type original file
+    /**
+     * extract from part file type of file, and return generated unique file name with type original file
+     * */
 
     private String getUniqueFileName(final Part part) {
         final String partHeader = part.getHeader("content-disposition");
