@@ -1,9 +1,10 @@
 
 document.addEventListener('DOMContentLoaded', function(){
 
+    /**
+     * On start session set default language getted from browser default
+     * */
     var language = window.navigator.language;
-
-// set default language
     var selItem =  document.getElementById('sessionLanguage').value;
     if (selItem == "") {
         selItem = language.split('-')[1].toLowerCase();
@@ -11,7 +12,8 @@ document.addEventListener('DOMContentLoaded', function(){
         var sortByCategory = $('#sortByCategory').val();
         var sortByPrice = $('#sortByPrice').val();
         var sortByName = $('#sortByName').val();
-        $.get("home", {
+        // $.get("home", {
+        $.get("languageSwitcherServlet", {
             lang: selItem,
             searchText: searchText,
             sortByCategory: sortByCategory,
@@ -19,12 +21,15 @@ document.addEventListener('DOMContentLoaded', function(){
             sortByName: sortByName
         }, function (response) {
             // $(".containerBody").html($($.parseHTML(response)).filter(".containerBody").html());
-            $(document.body).html(response);
+            // $(document.body).html(response);
+            location.reload();
         });
     }
 
 
-    // localStorage.getItem("localesSession");
+/**
+ * switch session according to language selector
+ * */
     $("#localesSession").val(selItem);
     $("#localesSession").change(function () {
         var selectedOption = $("#localesSession").val()
@@ -34,7 +39,8 @@ document.addEventListener('DOMContentLoaded', function(){
             var sortByCategory = $('#sortByCategory').val();
             var sortByPrice = $('#sortByPrice').val();
             var sortByName = $('#sortByName').val();
-            $.get("home", {
+            // $.get("home", {
+            $.get("languageSwitcherServlet", {
                 lang: selectedOption,
                 searchText: searchText,
                 sortByCategory: sortByCategory,
@@ -52,8 +58,9 @@ document.addEventListener('DOMContentLoaded', function(){
 );
 
 
-/*function searching by name, sorting by category, by name, by price from db */
-/* with caching parameters */
+/** Function searching by name, sorting by category, by name, by price from db
+* with caching parameters
+ * */
 function searchSortFunction() {
     var searchText = $('#searchNameInput').val();
 

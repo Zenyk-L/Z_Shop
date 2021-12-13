@@ -10,7 +10,8 @@
 </head>
 <body style="display: flex; flex-direction: column; align-items: center;  justify-content: center;">
 
-<img src="image/error_404.jpg">
+<%--<img src="image/error_404.jpg">--%>
+<img src="img/error_404.jpg">
 <br>
 <h1><a href="/home"> <fmt:message key="adminBucket.To_main_page" /> </a></h1>
 

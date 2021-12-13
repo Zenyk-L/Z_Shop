@@ -17,7 +17,6 @@
 </head>
 <body>
 <fmt:setLocale value = "${sessionScope.lang}" scope="session"/>
-<fmt:setBundle basename = "resources" scope="session"/>
 
 <header class="section-header">
     <section class="header-main border-bottom">
@@ -66,7 +65,7 @@
                             <a class="text-white mr-5" style=" position: relative;" href="/bucket">
                                 <span class="number"
                                       style=" position: absolute; right: 6px">${sessionScope.buckets.size()}</span>
-                                <img class="img-fluid" src="/image/cart.png" alt="cart"/>
+                                <img class="img-fluid" src="img/cart.png" alt="cart"/>
                                     <%--                                <i class="fas fa fa-shopping-cart"></i>--%>
                             </a>
                         </c:if>

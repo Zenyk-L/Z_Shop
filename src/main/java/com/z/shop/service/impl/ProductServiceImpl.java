@@ -62,10 +62,6 @@ public class ProductServiceImpl implements ProductService {
         return readAllWithDeleted().stream().collect(Collectors.toMap(Product::getId, Function.identity()));
     }
 
-//    @Override
-//    public List<Product> findByName(String searchingName) {
-//        return readAll().stream().filter(product -> product.getName().equalsIgnoreCase(searchingName)).collect(Collectors.toList());
-//    }
     @Override
     public List<Product> findByName(String searchingName) {
         return readAll().stream().filter(product -> product.getName().toLowerCase().matches("(.*)"+searchingName.toLowerCase()+"(.*)")).collect(Collectors.toList());
@@ -75,4 +71,29 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> readAllWithDeleted(){
         return productDao.readAllWithDeleted();
     }
+
+    public  static List<Product> filterByCategory(List<Product> productList, String categoryName){
+        return productList.stream().filter(product -> product.getCategory().getId().equals(Integer.valueOf(categoryName))).collect(Collectors.toList());
+    }
+
+    public  static List<Product> sortByName(List<Product> productList, String sortMarker){
+        if("UP".equals(sortMarker)) {
+            productList = productList.stream().sorted((product1,product2)->product1.getName().toLowerCase().compareTo(product2.getName().toLowerCase())).collect(Collectors.toList());
+        }
+        if("DOWN".equals(sortMarker)) {
+            productList = productList.stream().sorted((product1,product2)->product2.getName().toLowerCase().compareTo(product1.getName().toLowerCase())).collect(Collectors.toList());
+        }
+    return productList;
+    }
+
+    public  static List<Product> sortByPrice(List<Product> productList, String sortMarker){
+        if("UP".equals(sortMarker)) {
+            return productList.stream().sorted((product1,product2)->product1.getPrice().compareTo(product2.getPrice())).collect(Collectors.toList());
+        }
+        if("DOWN".equals(sortMarker)) {
+            return productList.stream().sorted((product1,product2)->product2.getPrice().compareTo(product1.getPrice())).collect(Collectors.toList());
+        }
+        return productList;
+    }
+
 }

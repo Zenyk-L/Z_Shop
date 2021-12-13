@@ -1,7 +1,6 @@
 package com.z.shop.filter;
 
 
-import com.sun.accessibility.internal.resources.accessibility;
 import com.z.shop.entity.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -13,29 +12,37 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @WebFilter(urlPatterns = "/*", initParams = @WebInitParam(name = "encoding", value = "UTF-8"))
 public class UrlAccessFilter implements Filter {
 
+    /**
+     * Filter access by servlet names according to roles
+     * */
+
     private static final Logger LOGGER = LogManager.getLogger(UrlAccessFilter.class);
-    private List<String> servletNameAccessAdmin;
-    private List<String> servletNameAccessUser;
-    private List<String> servletUrlAccessDefault;
+
     Map<String, List<String>> accessMap = new HashMap<>();
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
 
-        servletNameAccessAdmin = Arrays.asList("CreateProduct", "DeleteProduct", "EditProduct", "EditUserServlet",
+        /**
+         * Create map <role, access servlet name>
+         * */
+        List<String>  servletNameAccessAdmin = Arrays.asList("LanguageSwitcherServlet","CreateProduct", "DeleteProduct", "EditProduct", "EditUserServlet",
                 "Home", "LogoutServlet" , "RemoveFromBucketServlet", "ShowAllBucketsServlet","default");
 
-        servletNameAccessUser = Arrays.asList("BucketServlet", "BucketShowServlet", "BuyAllProductServlet", "BuyHistoryServlet", "BuyProductServlet", "EditUserServlet",
+        List<String>  servletNameAccessUser = Arrays.asList("LanguageSwitcherServlet","BucketServlet", "BucketShowServlet", "BuyAllProductServlet", "BuyHistoryServlet", "BuyProductServlet", "EditUserServlet",
                 "Home", "LogoutServlet", "RemoveFromBucketServlet", "default");
 
-        servletUrlAccessDefault = Arrays.asList("BucketServlet", "BucketShowServlet", "Home", "LoginServlet", "RegistrationServlet", "RemoveFromBucketServlet","default");
+        List<String>  servletUrlAccessDefault = Arrays.asList("LanguageSwitcherServlet","BucketServlet", "BucketShowServlet", "Home", "LoginServlet", "RegistrationServlet", "RemoveFromBucketServlet","default");
 
-        accessMap.put(null,servletUrlAccessDefault);
+        accessMap.put("DEFAULT",servletUrlAccessDefault);
         accessMap.put("USER",servletNameAccessUser);
         accessMap.put("ADMIN",servletNameAccessAdmin);
 
@@ -51,8 +58,9 @@ public class UrlAccessFilter implements Filter {
         String requestURI = request.getHttpServletMapping().getServletName();
 
         HttpSession session = request.getSession();
+
         User user = (User) session.getAttribute("user");
-        String roleToAccess = null;
+        String roleToAccess = "DEFAULT";
         if (user != null){
             roleToAccess = user.getRole().toString();
         }
@@ -62,8 +70,6 @@ public class UrlAccessFilter implements Filter {
         }else {
             response.sendRedirect("/home");
         }
-
-
 
     }
 

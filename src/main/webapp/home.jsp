@@ -1,6 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,7 +18,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
             integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
             crossorigin="anonymous"></script>
-
     <title><fmt:message key="home.Title" /></title>
 </head>
 <body>
@@ -31,24 +32,12 @@
 
             <div class="card col-3 mt-3" >
 
-
-                <div style="width: 100%; height: 200px; background-image: url('https://kaverisias.com/wp-content/uploads/2018/01/catalog-default-img.gif'); background-size: 100% 100%">
-                       <div style="width:100%; height:100%; background-image:url('${pageContext.request.contextPath}/image/${product.image}'); background-size:contain; background-repeat: no-repeat; background-position: center">
-
-                    </div>
-                </div>
+                <tags:product_image file_name="${product.image}"></tags:product_image>
 
                 <div class="card-body">
-                    <h5 class="card-title"><fmt:message key="home.Name" />: ${product.name}</h5>
-                    <h6 class="card-title" id="categoryName" ><fmt:message key="header.Category" /> : ${product.category.translations[sessionScope.lang]} </h6>
 
-                    <p class="card-text"><fmt:message key="home.Description" />: ${product.description} </p>
-                    <p class="card-text"><fmt:message key="home.Color" />: ${product.color}</p>
-                    <p class="card-text"><fmt:message key="home.Scale" />: ${product.scale}</p>
-                    <p class="card-text"><fmt:message key="home.Added" />: ${product.addingDate}</p>
-                    <span class="card-text"><fmt:message key="home.Quantity" />: ${product.quantity}</span>
+                    <tags:product_card product="${product}"></tags:product_card>
 
-                    <span class="card-text ml-3"><b><fmt:message key="home.Price" />: ${product.price}</b></span>
                     <p class="card-text"></p>
                     <div class="d-flex">
                         <c:if test="${product.quantity == 0}">

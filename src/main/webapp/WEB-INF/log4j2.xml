@@ -9,7 +9,7 @@
         </Console>
         <File name="File" fileName="D:\\Zenyk\\EPAM\\Final_Project\\Z_Shop\\server.error.log" append="true"><!--${sys:logFile}-->
             <PatternLayout>
-                <Pattern>%d{HH:mm:ss.SSS} [%t] %-5level - %msg%n</Pattern>
+                <Pattern>%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level - %msg%n</Pattern>
             </PatternLayout>
         </File>
         <RollingFile name="rollingFile"

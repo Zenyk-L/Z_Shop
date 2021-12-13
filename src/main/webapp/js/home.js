@@ -1,3 +1,6 @@
+/**
+ * Confirm message before delete product
+ * */
 function deleteProduct(productId, productName){
 
     if (window.confirm("Do you really want to delete "+ productName + " ?")) {
@@ -6,6 +9,9 @@ function deleteProduct(productId, productName){
 
 }
 
+/**
+ * Pagination function
+ * */
 function getPage(getPageNumber) {
     var searchText = $('#searchNameInput').val();
 
